@@ -2,6 +2,14 @@
  Changelog
 ===========
 
+0.0.5 - Investigators and Staff
+-------------------------------
+
+The "Site" view within the DMCC RDF database now provides primary
+investigators, co-investigators, and other staff members at each site.  This
+release updates the Site RDF_ generation to include such details.
+
+
 0.0.4 - Database Correction
 ---------------------------
 
