@@ -235,6 +235,9 @@ details. They can be added to RDF Folders only::
     >>> browser.getControl(name='titleURI').value = u'http://purl.org/dc/terms/title'
     >>> browser.getControl(name='abbrevNameURI').value = u'http://edrn/rdf/rdfs/site.rdf#abbrevName'
     >>> browser.getControl(name='assocMemberSponsorURI').value = u'http://edrn/rdf/rdfs/site.rdf#assocMemberSponsorURI'
+    >>> browser.getControl(name='piURI').value = 'http://edrn/rdf/rdfs/site.rdf#pi'
+    >>> browser.getControl(name='coIURI').value = 'http://edrn/rdf/rdfs/site.rdf#coi'
+    >>> browser.getControl(name='staffURI').value = 'http://edrn/rdf/rdfs/site.rdf#staff'
     >>> browser.getControl(name='fundingDateStartURI').value = u'http://edrn/rdf/rdfs/site.rdf#fundingDateStart'
     >>> browser.getControl(name='fundingDateFinishURI').value = u'http://edrn/rdf/rdfs/site.rdf#fundingDateFinish'
     >>> browser.getControl(name='fwaNumberURI').value = u'http://edrn/rdf/rdfs/site.rdf#fwaNumber'
@@ -278,6 +281,12 @@ details. They can be added to RDF Folders only::
     'http://edrn/rdf/rdfs/site.rdf#abbrevName'
     >>> site.assocMemberSponsorURI
     'http://edrn/rdf/rdfs/site.rdf#assocMemberSponsorURI'
+    >>> site.piURI
+    'http://edrn/rdf/rdfs/site.rdf#pi'
+    >>> site.coIURI
+    'http://edrn/rdf/rdfs/site.rdf#coi'
+    >>> site.staffURI
+    'http://edrn/rdf/rdfs/site.rdf#staff'
     >>> site.fundingDateStartURI
     'http://edrn/rdf/rdfs/site.rdf#fundingDateStart'
     >>> site.fundingDateFinishURI
@@ -329,22 +338,9 @@ details. They can be added to RDF Folders only::
     >>> site.histNotesURI
     'http://edrn/rdf/rdfs/site.rdf#histNotes'
 
-And now for some RDF::
-    
-    >>> browser.open(portalURL + '/my-rdf-folder/my-site/rdf')
-    >>> browser.isHtml
-    False
-    >>> browser.headers['content-type']
-    'application/rdf+xml'
-    >>> c = ConjunctiveGraph()
-    >>> c.parse(StringIO(browser.contents))
-    <Graph...
-    >>> len(c)
-    187
-    >>> for i in c.query('SELECT ?title WHERE { <http://edrn/sites/87> <http://purl.org/dc/terms/title> ?title . }'):
-    ...     print i[0]
-    National Cancer Institute
-    
+We'll save RDF generation for later since it depends on a People RDF source
+being present.
+
 
 Publications
 ~~~~~~~~~~~~
@@ -421,7 +417,7 @@ A Publication object provides RDF of course::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    1926
+    1916
     >>> for i in c.query('SELECT ?title WHERE { <http://edrn/pubs/303> <http://purl.org/dc/terms/title> ?title . }'):
     ...     print i[0]
     Data reduction using discrete wavelet transform in discriminant analysis of very high dimension
@@ -696,5 +692,31 @@ RDF generation? You got it::
     >>> for i in c.query('SELECT ?givenname WHERE { <http://edrn/registered-person/34> <http://xmlns.com/foaf/0.1/givenname> ?givenname . }'):
     ...     print i[0]
     Matt
+    
+
+New Site Fields: Investigators and Staff
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Recently, fields were added to the Site view in the RDF database that linked
+to people, identifying the PI, Co-Is, and other staff.  RDF generation for
+sites should contain rdf:resource links to those people.  Checking::
+    
+    >>> browser.open(portalURL + '/my-rdf-folder/my-site/rdf')
+    >>> browser.isHtml
+    False
+    >>> browser.headers['content-type']
+    'application/rdf+xml'
+    >>> c = ConjunctiveGraph()
+    >>> c.parse(StringIO(browser.contents))
+    <Graph...
+    >>> len(c)
+    724
+    >>> for i in c.query('SELECT ?title WHERE { <http://edrn/sites/87> <http://purl.org/dc/terms/title> ?title . }'):
+    ...     print i[0]
+    National Cancer Institute
+    >>> for i in c.query('SELECT ?pi WHERE { <http://edrn/sites/87> <http://edrn/rdf/rdfs/site.rdf#pi> ?pi . }'):
+    ...     print i[0]
+    http://edrn/registered-person/1015
+
 
 That's it.
