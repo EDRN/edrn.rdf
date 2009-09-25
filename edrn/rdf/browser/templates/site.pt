@@ -1,0 +1,166 @@
+<html xmlns='http://www.w3.org/1999/xhtml'
+    xml:lang='en'
+    lang='en'
+    xmlns:tal='http://xml.zope.org/namespaces/tal'
+    xmlns:metal='http://xml.zope.org/namespaces/metal'
+    xmlns:i18n='http://xml.zope.org/namespaces/i18n'
+    metal:use-macro='context/main_template/macros/master'
+    i18n:domain='edrn.rdf'>
+    <head>
+        <title>site</title>
+    </head>
+    <body>
+        <metal:main fill-slot='main'>
+            <tal:main-macro metal:define-macro='main'>
+                <div tal:replace='structure provider:plone.abovecontenttitle' />
+                <h1 class='documentFirstHeading'> 
+                    <metal:field use-macro='python:context.widget("title", mode="view")'>
+                        Title
+                    </metal:field>
+                </h1>
+                <div tal:replace='structure provider:plone.belowcontenttitle' />
+                <div class="documentDescription">
+                    <span metal:use-macro="python:context.widget('description', mode='view')" />
+                </div>
+                <div tal:replace='structure provider:plone.abovecontentbody' />
+                <div metal:use-macro='context/@@standardRDFAttributes/macros/attrs'>Standard attributes.</div>
+                <div>
+                    <label for='parent-fieldname-titleURI' i18n:translate='label_titleURI'>Title URI</label>
+                    <metal:field use-macro='python:context.widget("titleURI", mode="view")'>
+                        http://purl.org/dc/terms/title
+                    </metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-abbrevNameURI' i18n:translate='label_abbrevNameURI'>Abbreviation URI</label>
+                    <metal:field use-macro='python:context.widget("abbrevNameURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-assocMemberSponsorURI' i18n:translate='label_assocMemberSponsorURI'>
+                        Sponsor Member URI
+                    </label>
+                    <metal:field use-macro='python:context.widget("assocMemberSponsorURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-fundingDateStartURI' i18n:translate='label_fundingDateStartURI'>
+                        Funding Start Date URI
+                    </label>
+                    <metal:field use-macro='python:context.widget("fundingDateStartURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-fundingDateFinishURI' i18n:translate='label_fundingDateFinishURI'>
+                        Funding End Date URI
+                    </label>
+                    <metal:field use-macro='python:context.widget("fundingDateFinishURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-fwaNumberURI' i18n:translate='label_fwaNumberURI'>FWA Number URI</label>
+                    <metal:field use-macro='python:context.widget("fwaNumberURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-mailAddr1URI' i18n:translate='label_mailAddr1URI'>Mailing Address Line 1 URI</label>
+                    <metal:field use-macro='python:context.widget("mailAddr1URI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-mailAddr2URI' i18n:translate='label_mailAddr2URI'>Mailing Address Line 2 URI</label>
+                    <metal:field use-macro='python:context.widget("mailAddr2URI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-mailAddrCityURI' i18n:translate='label_mailAddrCityURI'>Mailing Address City URI</label>
+                    <metal:field use-macro='python:context.widget("mailAddrCityURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-mailAddrStateURI' i18n:translate='label_mailAddrStateURI'>
+                        Mailing Address State URI
+                    </label>
+                    <metal:field use-macro='python:context.widget("mailAddrStateURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-mailAddrZipURI' i18n:translate='label_mailAddrZipURI'>Mailing Address Zip URI</label>
+                    <metal:field use-macro='python:context.widget("mailAddrZipURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-mailAddrCountryURI' i18n:translate='label_mailAddrCountryURI'>
+                        Mailing Address Country URI
+                    </label>
+                    <metal:field use-macro='python:context.widget("mailAddrCountryURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-physAddr1URI' i18n:translate='label_physAddr1URI'>Physical Address Line 1 URI</label>
+                    <metal:field use-macro='python:context.widget("physAddr1URI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-physAddr2URI' i18n:translate='label_physAddr2URI'>Physical Address Line 2 URI</label>
+                    <metal:field use-macro='python:context.widget("physAddr2URI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-physAddrCityURI' i18n:translate='label_physAddrCityURI'>Physical Address City URI</label>
+                    <metal:field use-macro='python:context.widget("physAddrCityURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-physAddrStateURI' i18n:translate='label_physAddrStateURI'>
+                        Physical Address State URI
+                    </label>
+                    <metal:field use-macro='python:context.widget("physAddrStateURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-physAddrZipURI' i18n:translate='label_physAddrZipURI'>Physical Address Zip URI</label>
+                    <metal:field use-macro='python:context.widget("physAddrZipURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-physAddrCountryURI' i18n:translate='label_physAddrCountryURI'>
+                        Physical Address Country URI
+                    </label>
+                    <metal:field use-macro='python:context.widget("physAddrCountryURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-shipAddr1URI' i18n:translate='label_shipAddr1URI'>Shipping Address Line 1 URI</label>
+                    <metal:field use-macro='python:context.widget("shipAddr1URI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-shipAddr2URI' i18n:translate='label_shipAddr2URI'>Shipping Address Line 2 URI</label>
+                    <metal:field use-macro='python:context.widget("shipAddr2URI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-shipAddrCityURI' i18n:translate='label_shipAddrCityURI'>Shipping Address City URI</label>
+                    <metal:field use-macro='python:context.widget("shipAddrCityURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-shipAddrStateURI' i18n:translate='label_shipAddrStateURI'>
+                        Shipping Address State URI
+                    </label>
+                    <metal:field use-macro='python:context.widget("shipAddrStateURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-shipAddrZipURI' i18n:translate='label_shipAddrZipURI'>Shipping Address Zip URI</label>
+                    <metal:field use-macro='python:context.widget("shipAddrZipURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-shipAddrCountryURI' i18n:translate='label_shipAddrCountryURI'>
+                        Shipping Address Country URI
+                    </label>
+                    <metal:field use-macro='python:context.widget("shipAddrCountryURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-specialityURI' i18n:translate='label_specialityURI'>Speciality URI</label>
+                    <metal:field use-macro='python:context.widget("specialityURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-urlURI' i18n:translate='label_urlURI'>URL to Homepage URI</label>
+                    <metal:field use-macro='python:context.widget("urlURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-memberTypeURI' i18n:translate='label_memberTypeURI'>Member Type URI</label>
+                    <metal:field use-macro='python:context.widget("memberTypeURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-histNotesURI' i18n:translate='label_histNotesURI'>Historical Notes URI</label>
+                    <metal:field use-macro='python:context.widget("histNotesURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div metal:use-macro='context/document_relateditems/macros/relatedItems'>
+                    Any related items
+                </div>
+                <div tal:replace='structure provider:plone.belowcontentbody' />
+            </tal:main-macro>
+        </metal:main>
+    </body>
+</html>

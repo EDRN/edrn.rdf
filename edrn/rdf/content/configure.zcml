@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+Copyright 2008 California Institute of Technology. ALL RIGHTS
+RESERVED. U.S. Government Sponsorship acknowledged.
+-->
+<configure xmlns='http://namespaces.zope.org/zope'
+    i18n_domain='edrn.rdf'>
+    
+    <class class='.rdffolder.RDFFolder'>
+        <require permission='zope2.View' interface='..interfaces.IRDFFolder'/>
+        <require permission='cmf.ModifyPortalContent' set_schema='..interfaces.IRDFFolder'/>
+    </class>
+    <class class='.bodysystem.BodySystem'>
+        <require permission='zope2.View' interface='..interfaces.IBodySystem'/>
+        <require permission='cmf.ModifyPortalContent' set_schema='..interfaces.IBodySystem'/>
+    </class>
+    <class class='.disease.Disease'>
+        <require permission='zope2.View' interface='..interfaces.IDisease'/>
+        <require permission='cmf.ModifyPortalContent' set_schema='..interfaces.IDisease'/>
+    </class>
+    <class class='.site.Site'>
+        <require permission='zope2.View' interface='..interfaces.ISite'/>
+        <require permission='cmf.ModifyPortalContent' set_schema='..interfaces.ISite'/>
+    </class>
+    <class class='.publication.Publication'>
+        <require permission='zope2.View' interface='..interfaces.IPublication'/>
+        <require permission='cmf.ModifyPortalContent' set_schema='..interfaces.IPublication'/>
+    </class>
+    <class class='.protocol.Protocol'>
+        <require permission='zope2.View' interface='..interfaces.IProtocol'/>
+        <require permission='cmf.ModifyPortalContent' set_schema='..interfaces.IProtocol'/>
+    </class>
+    <class class='.registeredperson.RegisteredPerson'>
+        <require permission='zope2.View' interface='..interfaces.IRegisteredPerson'/>
+        <require permission='cmf.ModifyPortalContent' set_schema='..interfaces.IRegisteredPerson'/>
+    </class>
+</configure>

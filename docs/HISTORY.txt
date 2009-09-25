@@ -1,0 +1,64 @@
+===========
+ Changelog
+===========
+
+0.0.4 - Database Correction
+---------------------------
+
+Release 0.0.3 got away with a test database setting still set.  This release
+corrects that and uses the correct source of RDF data.
+
+
+0.0.3 - Registered People
+-------------------------
+
+This release of EDRN_ RDF_ Server provides a new data source: registered
+people.  Registered people are people known to EDRN.  This data source
+provides RDF descriptions of EDRN people.  In addition, it also fixes the
+following issues:
+
+* CA-296: Site-Specific URI Prefix missing on Protocol control panel.  Added
+  it in r4905.
+* CA-285: Numeric fields of research replaced with actual names; r4906.
+* CA-264: Export registered people; r4907.
+
+In addition, we've reduced the amount of test data and made the unit tests run
+a lot faster.
+
+
+0.0.2 - New DB Structure
+------------------------
+
+This release of the EDRN_  RDF_  Server accommodates the new DMCC database
+structure, particularly for diseases and protocols.  Specifically, it
+addresses these issues:
+
+* CA-252: http://ginger.fhcrc.org/dmcc/rdf-data/diseases/rdf produces error
+* CA-253: http://ginger.fhcrc.org/dmcc/rdf-data/protocols/rdf produces error
+
+In addition, it updates the functional tests' test database.
+
+0.0.1 - Protocols
+-----------------
+
+This release of the EDRN_  RDF_  Server includes implementation of RDF service
+for EDRN Protocols and Studies as tracked by the Data Management and
+Coordinating Center (DMCC).
+
+In addition, this release contains:
+
+* Fixes to the layout of control panel pages for Body Systems, Diseases,
+  Publications, and Site RDF sources.
+* Addition of a download URL to the PyPI package data.
+* Updates to the functional tests' test database.
+
+
+0.0.0 - Unreleased
+------------------
+
+* Initial release
+
+
+.. References:
+.. _EDRN: http://edrn.nci.nih.gov/
+.. _RDF: http://w3.org/RDF/

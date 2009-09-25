@@ -1,0 +1,59 @@
+<html xmlns='http://www.w3.org/1999/xhtml'
+    xml:lang='en'
+    lang='en'
+    xmlns:tal='http://xml.zope.org/namespaces/tal'
+    xmlns:metal='http://xml.zope.org/namespaces/metal'
+    xmlns:i18n='http://xml.zope.org/namespaces/i18n'
+    metal:use-macro='context/main_template/macros/master'
+    i18n:domain='edrn.rdf'>
+    <head>
+        <title>registeredperson</title>
+    </head>
+    <body>
+        <metal:main fill-slot='main'>
+            <tal:main-macro metal:define-macro='main'>
+                <div tal:replace='structure provider:plone.abovecontenttitle' />
+                <h1 class='documentFirstHeading'> 
+                    <metal:field use-macro='python:context.widget("title", mode="view")'>
+                        Title
+                    </metal:field>
+                </h1>
+                <div tal:replace='structure provider:plone.belowcontenttitle' />
+                <div class="documentDescription">
+                    <span metal:use-macro="python:context.widget('description', mode='view')" />
+                </div>
+                <div tal:replace='structure provider:plone.abovecontentbody' />
+                <div metal:use-macro='context/@@standardRDFAttributes/macros/attrs'>Standard attributes.</div>
+
+                <div>
+                    <label for='parent-fieldname-firstNameURI' i18n:translate='label_firstNameURI'>First Name URI:</label>
+                    <metal:field use-macro='python:context.widget("firstNameURI", mode="view")'>http://get.bent/</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-middleNameURI' i18n:translate='label_middleNameURI'>Middle Name URI:</label>
+                    <metal:field use-macro='python:context.widget("middleNameURI", mode="view")'>http://get.bent/</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-lastNameURI' i18n:translate='label_lastNameURI'>Last Name URI:</label>
+                    <metal:field use-macro='python:context.widget("lastNameURI", mode="view")'>http://get.bent/</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-phoneURI' i18n:translate='label_phoneURI'>Phone URI:</label>
+                    <metal:field use-macro='python:context.widget("phoneURI", mode="view")'>http://get.bent/</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-emailURI' i18n:translate='label_emailURI'>Email URI:</label>
+                    <metal:field use-macro='python:context.widget("emailURI", mode="view")'>http://get.bent/</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-siteURI' i18n:translate='label_siteURI'>Site URI:</label>
+                    <metal:field use-macro='python:context.widget("siteURI", mode="view")'>http://get.bent/</metal:field>
+                </div>
+                <div metal:use-macro='context/document_relateditems/macros/relatedItems'>
+                    Any related items
+                </div>
+                <div tal:replace='structure provider:plone.belowcontentbody' />
+            </tal:main-macro>
+        </metal:main>
+    </body>
+</html>

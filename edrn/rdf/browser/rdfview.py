@@ -1,0 +1,407 @@
+# encoding: utf-8
+# Copyright 2008 California Institute of Technology. ALL RIGHTS
+# RESERVED. U.S. Government Sponsorship acknowledged.
+'''
+EDRN RDF Service: body system UI.
+'''
+
+from Acquisition import aq_inner
+from edrn.rdf.interfaces import IRDFDatabase, IBodySystem, ISite, IPublication
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
+from rdflib import ConjunctiveGraph, URIRef, Literal, RDF
+from zope.component import getUtility
+
+# Courtesy Greg Warnick:
+_siteRoles = {
+    '1':                  'Funding Source',
+    '2':                  'Discovery',
+    '3':                  'Reference',
+    '4':                  'Coordinating Site',
+    '5':                  'Specimen Contributing Site',
+    '6':                  'Specimen Storage',
+    '7':                  'Analysis Lab',
+    '8':                  'Statistical Services',
+    '9':                  'Consultant',
+    '97':                 'Other, Specify',
+}
+
+# Courtesy Greg Warnick:
+_reportingStages = {
+    '1':                   'Development Stage',
+    '2':                   'Funding Stage',
+    '3':                   'Protocol Development Stage',
+    '4':                   'Procedure Development Stage',
+    '5':                   'Retrospective Sample Identification Stage',
+    '6':                   'Recruitment Stage',
+    '7':                   'Lab Processing Stage',
+    '8':                   'Blinding Stage',
+    '9':                   'Lab Analysis Stage',
+    '10':                  'Publication Stage',
+    '11':                  'Statistical Analysis Stage',
+    '12':                  'Completed',
+    '97':                  'Other, specify',
+}
+
+# Courtesy Greg Warnick:
+_fieldsOfResearch = {
+    '1': 'Genomics',
+    '2': 'Epigenomics',
+    '3': 'Proteomics',
+    '4': 'Glycomics',
+    '5': 'Nanotechnology',
+    '6': 'Metabolomics',
+    '7': 'Hypermethylation',
+    '9': 'Other, Specify',
+}
+
+# These relationships correspond to the distinct values currently appearing in
+# the Protocol_relationship_type column of the Protocol_protocol_relationship
+# table. Should any new types appear that don't appear in this mapping as a
+# key, the "Other, specify" key is used as a default.
+_relationships = {
+    'contributes specimens to': 'contributesSpecimensURI',
+    'is a pilot for':           'isAPilotForURI',
+    'obtains data from':        'obtainsDataFromURI',
+    'obtains specimens from':   'obtainsSpecimensFromURI',
+    'Other, specify':           'hasOtherRelationshipURI',
+    'provides data to':         'providesDataToURI',
+}
+
+def toLiteral(text):
+    '''The database seems to be using cp1252 (aka windows-1252) encoding.'''
+    return Literal(unicode(text, 'cp1252'))
+    
+
+class BodySystemMissingError(Exception):
+    '''Error indicating that no Body System object is available.'''
+
+class SiteMissingError(Exception):
+    '''Error indicating that no Site object is available.'''
+
+class PublicationMissingError(Exception):
+    '''Error indicating that no Publication object is available.'''
+
+class SourceGenerator(BrowserView):
+    '''Abstract RDF generator. Template-method design pattern.'''
+    def __call__(self):
+        connection = None
+        try:
+            db = getUtility(IRDFDatabase)
+            connection = db.connect()
+            graph = ConjunctiveGraph()
+            self.populate(graph, connection, aq_inner(self.context))
+            self.request.response.setHeader('Content-type', 'application/rdf+xml')
+            return graph.serialize()
+        finally:
+            try:
+                connection.close()
+            except:
+                pass
+    def populate(self, graph, connection):
+        '''Yield an appropriate conjunctive graph.'''
+        raise NotImplementedError('Override me')
+        
+
+class BodySystemGenerator(SourceGenerator):
+    '''Generates RDF for body systems.'''
+    def populate(self, graph, connection, context):
+        cursor = connection.cursor()
+        titleURI, descURI = URIRef(context.titleURI), URIRef(context.descURI)
+        cursor.execute('select Identifier, Title, Description from Body_System')
+        for identifier, title, desc in cursor.fetchall():
+            subjectURI = URIRef(context.uriPrefix + unicode(identifier))
+            graph.add((subjectURI, RDF.type, URIRef(context.typeURI)))
+            graph.add((subjectURI, titleURI, toLiteral(title)))
+            if desc:
+                graph.add((subjectURI, descURI, toLiteral(desc)))
+    
+    
+class DiseaseGenerator(SourceGenerator):
+    '''Generates RDF for diseases.'''
+    def populate(self, graph, connection, context):
+        catalog = getToolByName(context, 'portal_catalog')
+        results = catalog(object_provides=IBodySystem.__identifier__)
+        if len(results) == 0:
+            raise BodySystemMissingError('No BodySystem object found')
+        bodySysPrefix = results[0].getObject().uriPrefix
+        cursor = connection.cursor()
+        titleURI, descURI, bodySysURI = URIRef(context.titleURI), URIRef(context.descURI), URIRef(context.bodySysURI)
+        icd9URI, icd10URI = URIRef(context.icd9URI), URIRef(context.icd10URI)
+        cursor.execute('select Identifier, Title, Description, ICD9, ICD10, Body_System from Disease')
+        for identifier, title, desc, icd9, icd10, bodySystems in cursor.fetchall():
+            if not title:
+                continue
+            subjectURI = URIRef(context.uriPrefix + unicode(identifier))
+            graph.add((subjectURI, RDF.type, URIRef(context.typeURI)))
+            graph.add((subjectURI, titleURI, toLiteral(title)))
+            if desc:
+                graph.add((subjectURI, descURI, toLiteral(desc)))
+            if icd9:
+                graph.add((subjectURI, icd9URI, toLiteral(icd9)))
+            if icd10:
+                graph.add((subjectURI, icd10URI, toLiteral(icd10)))
+            for bodySys in bodySystems.split(', '):
+                graph.add((subjectURI, bodySysURI, URIRef(bodySysPrefix + bodySys)))
+    
+    
+class SiteGenerator(SourceGenerator):
+    '''Generates RDF for sites.'''
+    def populate(self, graph, connection, context):
+        cursor = connection.cursor()
+        cursor.execute('select Identifier, Title, Associate_Members_Sponsor, ' \
+            + 'EDRN_Funding_Date_Start, EDRN_Funding_Date_Finish, FWA_Number, ' \
+            + 'Institution_Name_Abbrev, Institution_Mailing_Address1, Institution_Mailing_Address2, ' \
+            + 'Institution_Mailing_City, Institution_Mailing_State, Institution_Mailing_Zip, ' \
+            + 'Institution_Mailing_Country, Institution_Physical_Address1, Institution_Physical_Address2, ' \
+            + 'Institution_Physical_City, Institution_Physical_State, Institution_Physical_Zip, ' \
+            + 'Institution_Physical_Country, Institution_Shipping_Address1, Institution_Shipping_Address2, ' \
+            + 'Institution_Shipping_City, Institution_Shipping_State, Institution_Shipping_Zip, ' \
+            + 'Institution_Shipping_Country, Site_Specialty_Description, Institution_URL, Member_Type, ' \
+            + 'Member_Type_Historical_Notes from Site')
+        for i, title, assocMemberSponsor, fundingDateStart, fundingDateFinish, fwaNumber, abbrevName, mailAddr1, mailAddr2, \
+            mailAddrCity, mailAddrState, mailAddrZip, mailAddrCountry, physAddr1, physAddr2, physAddrCity, physAddrState, \
+            physAddrZip, physAddrCountry, shipAddr1, shipAddr2, shipAddrCity, shipAddrState, shipAddrZip, shipAddrCountry, \
+            speciality, url, memberType, histNotes in cursor.fetchall():
+            if not title:
+                continue
+            subjectURI = URIRef(context.uriPrefix + unicode(i))
+            graph.add((subjectURI, RDF.type, URIRef(context.typeURI)))
+            graph.add((subjectURI, URIRef(context.titleURI), toLiteral(title)))
+            if assocMemberSponsor:
+                graph.add((subjectURI, URIRef(context.assocMemberSponsorURI),
+                    URIRef(context.uriPrefix + unicode(assocMemberSponsor))))
+            if fundingDateStart:
+                graph.add((subjectURI, URIRef(context.fundingDateStartURI), Literal(fundingDateStart)))
+            if fundingDateFinish:
+                graph.add((subjectURI, URIRef(context.fundingDateFinishURI), Literal(fundingDateFinish)))
+            if fwaNumber:
+                graph.add((subjectURI, URIRef(context.fwaNumberURI), toLiteral(fwaNumber)))
+            if abbrevName:
+                graph.add((subjectURI, URIRef(context.abbrevNameURI), toLiteral(abbrevName)))
+            if mailAddr1:
+                graph.add((subjectURI, URIRef(context.mailAddr1URI), toLiteral(mailAddr1)))
+            if mailAddr2:
+                graph.add((subjectURI, URIRef(context.mailAddr2URI), toLiteral(mailAddr2)))
+            if mailAddrCity:
+                graph.add((subjectURI, URIRef(context.mailAddrCityURI), toLiteral(mailAddrCity)))
+            if mailAddrState:
+                graph.add((subjectURI, URIRef(context.mailAddrStateURI), toLiteral(mailAddrState)))
+            if mailAddrZip:
+                graph.add((subjectURI, URIRef(context.mailAddrZipURI), toLiteral(mailAddrZip)))
+            if mailAddrCountry:
+                graph.add((subjectURI, URIRef(context.mailAddrCountryURI), toLiteral(mailAddrCountry)))
+            if physAddr1:
+                graph.add((subjectURI, URIRef(context.physAddr1URI), toLiteral(physAddr1)))
+            if physAddr2:
+                graph.add((subjectURI, URIRef(context.physAddr2URI), toLiteral(physAddr2)))
+            if physAddrCity:
+                graph.add((subjectURI, URIRef(context.physAddrCityURI), toLiteral(physAddrCity)))
+            if physAddrState:
+                graph.add((subjectURI, URIRef(context.physAddrStateURI), toLiteral(physAddrState)))
+            if physAddrZip:
+                graph.add((subjectURI, URIRef(context.physAddrZipURI), toLiteral(physAddrZip)))
+            if physAddrCountry:
+                graph.add((subjectURI, URIRef(context.physAddrCountryURI), toLiteral(physAddrCountry)))
+            if shipAddr1:
+                graph.add((subjectURI, URIRef(context.shipAddr1URI), toLiteral(shipAddr1)))
+            if shipAddr2:
+                graph.add((subjectURI, URIRef(context.shipAddr2URI), toLiteral(shipAddr2)))
+            if shipAddrCity:
+                graph.add((subjectURI, URIRef(context.shipAddrCityURI), toLiteral(shipAddrCity)))
+            if shipAddrState:
+                graph.add((subjectURI, URIRef(context.shipAddrStateURI), toLiteral(shipAddrState)))
+            if shipAddrZip:
+                graph.add((subjectURI, URIRef(context.shipAddrZipURI), toLiteral(shipAddrZip)))
+            if shipAddrCountry:
+                graph.add((subjectURI, URIRef(context.shipAddrCountryURI), toLiteral(shipAddrCountry)))
+            if speciality:
+                graph.add((subjectURI, URIRef(context.specialityURI), toLiteral(speciality)))
+            if url:
+                graph.add((subjectURI, URIRef(context.urlURI), toLiteral(url)))
+            if memberType:
+                graph.add((subjectURI, URIRef(context.memberTypeURI), toLiteral(memberType)))
+            if histNotes:
+                graph.add((subjectURI, URIRef(context.histNotesURI), toLiteral(histNotes)))
+                
+
+class PublicationGenerator(SourceGenerator):
+    '''Generates RDF for publications.'''
+    def populate(self, graph, connection, context):
+        cursor = connection.cursor()
+        cursor.execute('select Identifier, Abstract, Author, Description, Issue, Journal, PMID, Publication_URL, Title, Volume,' \
+            + 'Year from Publication')
+        for identifier, abstract, author, description, issue, journal, pmID, pubURL, title, volume, year in cursor.fetchall():
+            subjectURI = URIRef(context.uriPrefix + unicode(identifier))
+            graph.add((subjectURI, RDF.type, URIRef(context.typeURI)))
+            graph.add((subjectURI, URIRef(context.titleURI), toLiteral(title)))
+            if abstract:
+                graph.add((subjectURI, URIRef(context.abstractURI), toLiteral(abstract)))
+            if description:
+                graph.add((subjectURI, URIRef(context.descURI), toLiteral(description)))
+            if issue:
+                graph.add((subjectURI, URIRef(context.issueURI), toLiteral(issue)))
+            if journal:
+                graph.add((subjectURI, URIRef(context.journalURI), toLiteral(journal)))
+            if pmID:
+                graph.add((subjectURI, URIRef(context.pmidURI), toLiteral(pmID)))
+            if pubURL:
+                graph.add((subjectURI, URIRef(context.pubURLURI), toLiteral(pubURL)))
+            if volume:
+                graph.add((subjectURI, URIRef(context.volumeURI), toLiteral(volume)))
+            if year:
+                graph.add((subjectURI, URIRef(context.yearURI), Literal(year)))
+
+
+_slots = {
+    'BiomarkerName':                        ('bmNameURI', toLiteral),
+    'Protocol_5_Phase_Status':              ('phasedStatusURI', Literal),
+    'Protocol_Aims':                        ('aimsURI', toLiteral),
+    'Protocol_Analytic_Method':             ('analyticMethodURI', toLiteral),
+    'Protocol_Blinding':                    ('blindingURI', toLiteral),
+    'Protocol_Cancer_Type':                 ('cancerTypeURI', toLiteral),
+    'Protocol_Collaborative_Group':         ('collaborativeGroupTextURI', toLiteral),
+    'Protocol_Comments':                    ('commentsURI', toLiteral),
+    'Protocol_Data_Sharing_Plan':           ('dataSharingPlanURI', toLiteral),
+    'Protocol_Data_Sharing_Plan_In_Place':  ('inSituDataSharingPlanURI', toLiteral),
+    'Protocol_Date_Finish':                 ('finishDateURI', Literal),
+    'Protocol_Date_Finish_Estimate':        ('estimatedFinishDateURI', Literal),
+    'Protocol_Date_Start':                  ('startDateURI', Literal),
+    'Protocol_Design':                      ('designURI', toLiteral),
+    'Protocol_Name_Abbrev':                 ('abbreviatedNameURI', toLiteral),
+    'Protocol_Objective':                   ('objectiveURI', toLiteral),
+    'Protocol_or_Project_Flag':             ('projectFlagURI', toLiteral),
+    'Protocol_Results_Outcome':             ('outcomeURI', toLiteral),
+    'Protocol_Results_Outcome_Secure_Site': ('secureOutcomeURI', toLiteral),
+    'Sample_Size_Final':                    ('finalSampleSizeURI', toLiteral),
+    'Sample_Size_Planned':                  ('plannedSampleSizeURI', toLiteral),
+    # TODO: what "slot" name is used for protocol type? It isn't reflected in current RDF DB.
+    # 'Protocol_Type???':                   ('protocolTypeURI', toLiteral),
+}
+
+class ProtocolGenerator(SourceGenerator):
+    '''Generates RDF for protocols.'''
+    def populate(self, graph, connection, context):
+        catalog = getToolByName(context, 'portal_catalog')
+        results = catalog(object_provides=ISite.__identifier__)
+        if len(results) == 0:
+            raise SiteMissingError('No Site object found')
+        sitePrefix = results[0].getObject().uriPrefix
+        results = catalog(object_provides=IPublication.__identifier__)
+        if len(results) == 0:
+            raise PublicationMissingError('No Publication object found')
+        publicationPrefix = results[0].getObject().uriPrefix
+        cursor = connection.cursor()
+        cursor.execute('select ' \
+            + 'Protocol_or_study.Identifier, ' \
+            + 'Protocol_or_study.Slot, ' \
+            + 'Protocol_or_study.Value, ' \
+            + 'EDRN_Protocol.Slot, ' \
+            + 'EDRN_Protocol.Value ' \
+            + 'from Protocol_or_study, EDRN_Protocol ' \
+            + 'where Protocol_or_study.Identifier = EDRN_Protocol.Identifier')
+        for identifier, studySlot, studyValue, protoSlot, protoValue in cursor.fetchall():
+            subjectURI = URIRef(context.uriPrefix + unicode(identifier))
+            graph.add((subjectURI, RDF.type, URIRef(context.typeURI)))
+            if studySlot == 'Protocol_Abstract' and studyValue:
+                graph.add((subjectURI, URIRef(context.abstractURI), toLiteral(studyValue)))
+            elif studySlot == 'Title' and studyValue:
+                graph.add((subjectURI, URIRef(context.titleURI), toLiteral(studyValue)))
+            if not protoValue:
+                continue
+            if protoSlot == 'Involved_Investigator_Site_ID':
+                for siteID in protoValue.split(', '):
+                    siteID = int(siteID)
+                    siteSpecCursor = connection.cursor()
+                    siteSpecCursor.execute('select ' \
+                        + 'Animal_Subject_Training_Received, ' \
+                        + 'Human_Subject_Training_Recieved, ' \
+                        + 'IRB_Approval_Needed, ' \
+                        + 'IRB_Date_Current_Approval_Date, ' \
+                        + 'IRB_Date_Original_Approval_Date, ' \
+                        + 'IRB_Expiration_Date, ' \
+                        + 'IRB_General_Notes, ' \
+                        + 'IRB_Number, ' \
+                        + 'Protocol_Site_Roles, ' \
+                        + 'Reporting_Stages ' \
+                        + 'from Protocol_site_specifics where Protocol_ID = %d and Site_ID = %d' % (identifier, siteID))
+                    if siteSpecCursor.rowcount != 1:
+                        continue
+                    animalSubjectTrainingReceived, humanSubjectTrainingReceived, irbApprovalNeeded, currentIRBApprovalDate, \
+                    originalIRBApprovalDate, irbExpirationDate, generalIRBNotes, irbNumber, siteRoles, reportingStages = siteSpecCursor.fetchone()
+                    siteSpecSubject = URIRef(context.siteSpecURIPrefix + unicode(identifier) + u'-' + unicode(siteID))
+                    if animalSubjectTrainingReceived:
+                        graph.add((siteSpecSubject, URIRef(context.animalSubjectTrainingReceivedURI), toLiteral(animalSubjectTrainingReceived)))
+                    if humanSubjectTrainingReceived:
+                        graph.add((siteSpecSubject, URIRef(context.humanSubjectTrainingReceivedURI), toLiteral(humanSubjectTrainingReceived)))
+                    if irbApprovalNeeded:
+                        graph.add((siteSpecSubject, URIRef(context.irbApprovalNeededURI), toLiteral(irbApprovalNeeded)))
+                    if currentIRBApprovalDate:
+                        graph.add((siteSpecSubject, URIRef(context.currentIRBApprovalDateURI), Literal(currentIRBApprovalDate)))
+                    if originalIRBApprovalDate:
+                        graph.add((siteSpecSubject, URIRef(context.originalIRBApprovalDateURI), Literal(originalIRBApprovalDate)))
+                    if irbExpirationDate:
+                        graph.add((siteSpecSubject, URIRef(context.irbExpirationDateURI), Literal(irbExpirationDate)))
+                    if generalIRBNotes:
+                        graph.add((siteSpecSubject, URIRef(context.generalIRBNotesURI), toLiteral(generalIRBNotes)))
+                    if irbNumber:
+                        graph.add((siteSpecSubject, URIRef(context.irbNumberURI), toLiteral(irbNumber)))
+                    if siteRoles:
+                        for siteRole in siteRoles.split(', '):
+                            graph.add((siteSpecSubject, URIRef(context.siteRoleURI), Literal(_siteRoles.get(siteRole, u'UNKNOWN'))))
+                    if reportingStages:
+                        for rs in reportingStages.split(', '):
+                            graph.add((siteSpecSubject, URIRef(context.reportingStageURI), Literal(_reportingStages.get(rs, u'UNKNOWN'))))
+            elif protoSlot == 'Protocol_Publications':
+                for protoID in protoValue.split(', '):
+                    graph.add((subjectURI, URIRef(context.publicationsURI), URIRef(publicationPrefix + protoID)))
+            elif protoSlot == 'Coordinating_Investigator_Site_ID':
+                graph.add((subjectURI, URIRef(context.coordinateInvestigatorSiteURI), URIRef(sitePrefix + unicode(protoValue))))
+            elif protoSlot == 'Lead_Investigator_Site_ID':
+                graph.add((subjectURI, URIRef(context.leadInvestigatorSiteURI), URIRef(sitePrefix + unicode(protoValue))))
+            elif protoSlot == 'Protocol_Field_of_Research':
+                for fieldID in protoValue.split(', '):
+                    graph.add((subjectURI, URIRef(context.fieldOfResearchURI), Literal(_fieldsOfResearch.get(fieldID, u'UNKNOWN'))))
+            else:
+                uriFieldName, converterFunc = _slots[protoSlot]
+                predicateURIAccessor = context.getField(uriFieldName).getAccessor(context)
+                predicateURI = URIRef(predicateURIAccessor())
+                graph.add((subjectURI, predicateURI, converterFunc(protoValue)))
+            relationCursor = connection.cursor()
+            relationCursor.execute('select Protocol_2_Identifier, Protocol_relationship_type from Protocol_protocol_relationship' \
+                + ' where Protocol_1_Identifier = %d' % identifier)
+            for protoID, relType in relationCursor.fetchall():
+                fieldName = _relationships.get(relType.strip(), 'hasOtherRelationshipURI')
+                fieldValue = getattr(context, fieldName, None)
+                if not fieldValue:
+                    continue
+                graph.add((subjectURI, URIRef(fieldValue), URIRef(context.uriPrefix + unicode(protoID))))
+        
+
+class RegisteredPersonGenerator(SourceGenerator):
+    '''Generates RDF for registered people.'''
+    def populate(self, graph, connection, context):
+        catalog = getToolByName(context, 'portal_catalog')
+        results = catalog(object_provides=ISite.__identifier__)
+        if len(results) == 0:
+            raise SiteMissingError('No Site object found')
+        sitePrefix = results[0].getObject().uriPrefix
+        cursor = connection.cursor()
+        firstNameURI, middleNameURI, lastNameURI = URIRef(context.firstNameURI), URIRef(context.middleNameURI), URIRef(context.lastNameURI)
+        phoneURI, emailURI, siteURI = URIRef(context.phoneURI), URIRef(context.emailURI), URIRef(context.siteURI)
+        cursor.execute('select Identifier, Name_First, Name_Middle, Name_Last, Site_Identifier, Phone, Email from Registered_Person')
+        for identifier, first, middle, last, siteID, phone, email in cursor.fetchall():
+            subjectURI = URIRef(context.uriPrefix + unicode(identifier))
+            graph.add((subjectURI, RDF.type, URIRef(context.typeURI)))
+            if first and first.strip():
+                graph.add((subjectURI, firstNameURI, toLiteral(first)))
+            if middle and middle.strip():
+                graph.add((subjectURI, middleNameURI, toLiteral(middle)))
+            if last and last.strip():
+                graph.add((subjectURI, lastNameURI, toLiteral(last)))
+            if phone:
+                graph.add((subjectURI, phoneURI, toLiteral(phone)))
+            if email:
+                graph.add((subjectURI, emailURI, toLiteral('mailto:' + email)))
+            if siteID:
+                graph.add((subjectURI, siteURI, URIRef(sitePrefix + unicode(siteID))))
