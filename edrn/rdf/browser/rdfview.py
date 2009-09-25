@@ -6,7 +6,7 @@ EDRN RDF Service: body system UI.
 '''
 
 from Acquisition import aq_inner
-from edrn.rdf.interfaces import IRDFDatabase, IBodySystem, ISite, IPublication
+from edrn.rdf.interfaces import IRDFDatabase, IBodySystem, ISite, IPublication, IRegisteredPerson
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from rdflib import ConjunctiveGraph, URIRef, Literal, RDF
@@ -82,6 +82,9 @@ class SiteMissingError(Exception):
 class PublicationMissingError(Exception):
     '''Error indicating that no Publication object is available.'''
 
+class RegisteredPersonMissingError(Exception):
+    '''Error indicating that no RegisteredPerson object is available.'''
+
 class SourceGenerator(BrowserView):
     '''Abstract RDF generator. Template-method design pattern.'''
     def __call__(self):
@@ -148,9 +151,15 @@ class DiseaseGenerator(SourceGenerator):
 class SiteGenerator(SourceGenerator):
     '''Generates RDF for sites.'''
     def populate(self, graph, connection, context):
+        catalog = getToolByName(context, 'portal_catalog')
+        results = catalog(object_provides=IRegisteredPerson.__identifier__)
+        if len(results) == 0:
+            raise RegisteredPersonMissingError('No RegisteredPerson object found')
+        personPrefix = results[0].getObject().uriPrefix
         cursor = connection.cursor()
         cursor.execute('select Identifier, Title, Associate_Members_Sponsor, ' \
             + 'EDRN_Funding_Date_Start, EDRN_Funding_Date_Finish, FWA_Number, ' \
+            + 'ID_for_Principal_Investigator, IDs_for_CoInvestigators, IDs_for_Staff, ' \
             + 'Institution_Name_Abbrev, Institution_Mailing_Address1, Institution_Mailing_Address2, ' \
             + 'Institution_Mailing_City, Institution_Mailing_State, Institution_Mailing_Zip, ' \
             + 'Institution_Mailing_Country, Institution_Physical_Address1, Institution_Physical_Address2, ' \
@@ -159,7 +168,9 @@ class SiteGenerator(SourceGenerator):
             + 'Institution_Shipping_City, Institution_Shipping_State, Institution_Shipping_Zip, ' \
             + 'Institution_Shipping_Country, Site_Specialty_Description, Institution_URL, Member_Type, ' \
             + 'Member_Type_Historical_Notes from Site')
-        for i, title, assocMemberSponsor, fundingDateStart, fundingDateFinish, fwaNumber, abbrevName, mailAddr1, mailAddr2, \
+        for i, title, assocMemberSponsor, fundingDateStart, fundingDateFinish, fwaNumber, \
+            pi, coi, staff, \
+            abbrevName, mailAddr1, mailAddr2, \
             mailAddrCity, mailAddrState, mailAddrZip, mailAddrCountry, physAddr1, physAddr2, physAddrCity, physAddrState, \
             physAddrZip, physAddrCountry, shipAddr1, shipAddr2, shipAddrCity, shipAddrState, shipAddrZip, shipAddrCountry, \
             speciality, url, memberType, histNotes in cursor.fetchall():
@@ -168,6 +179,14 @@ class SiteGenerator(SourceGenerator):
             subjectURI = URIRef(context.uriPrefix + unicode(i))
             graph.add((subjectURI, RDF.type, URIRef(context.typeURI)))
             graph.add((subjectURI, URIRef(context.titleURI), toLiteral(title)))
+            if pi:
+                graph.add((subjectURI, URIRef(context.piURI), URIRef(personPrefix + str(pi))))
+            if coi:
+                for coID in coi.split(', '):
+                    graph.add((subjectURI, URIRef(context.coIURI), URIRef(personPrefix + coID)))
+            if staff:
+                for staffID in staff.split(', '):
+                    graph.add((subjectURI, URIRef(context.staffURI), URIRef(personPrefix + staffID)))
             if assocMemberSponsor:
                 graph.add((subjectURI, URIRef(context.assocMemberSponsorURI),
                     URIRef(context.uriPrefix + unicode(assocMemberSponsor))))

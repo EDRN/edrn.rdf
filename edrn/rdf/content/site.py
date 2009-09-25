@@ -70,6 +70,33 @@ SiteSchema = base.SourceSchema.copy() + atapi.Schema((
         ),
     ),
     atapi.StringField(
+        'piURI',
+        required=True,
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u'PI URI'),
+            description=_(u'Uniform Resource Identifier for the Primary Investigator predicate.'),
+        ),
+    ),
+    atapi.StringField(
+        'coIURI',
+        required=True,
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u'Co-I URI'),
+            description=_(u'Uniform Resource Identifier for the Co-Investigator predicate.'),
+        ),
+    ),
+    atapi.StringField(
+        'staffURI',
+        required=True,
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u'Staff URI'),
+            description=_(u'Uniform Resource Identifier for the staff predicate.'),
+        ),
+    ),
+    atapi.StringField(
         'mailAddr1URI',
         required=True,
         storage=atapi.AnnotationStorage(),
@@ -283,6 +310,9 @@ class Site(base.Source):
     fundingDateStartURI       = atapi.ATFieldProperty('fundingDateStartURI')
     fundingDateFinishURI      = atapi.ATFieldProperty('fundingDateFinishURI')
     fwaNumberURI              = atapi.ATFieldProperty('fwaNumberURI')
+    piURI                     = atapi.ATFieldProperty('piURI')
+    coIURI                    = atapi.ATFieldProperty('coIURI')
+    staffURI                  = atapi.ATFieldProperty('staffURI')
     mailAddr1URI              = atapi.ATFieldProperty('mailAddr1URI')
     mailAddr2URI              = atapi.ATFieldProperty('mailAddr2URI')
     mailAddrCityURI           = atapi.ATFieldProperty('mailAddrCityURI')

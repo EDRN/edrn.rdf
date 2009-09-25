@@ -57,6 +57,18 @@
                     <metal:field use-macro='python:context.widget("fwaNumberURI", mode="view")'>http://x.com/y</metal:field>
                 </div>
                 <div>
+                    <label for='parent-fieldname-piURI' i18n:translate='label_piURI'>PI URI</label>
+                    <metal:field use-macro='python:context.widget("piURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-coIURI' i18n:translate='label_coIURI'>Co-I URI</label>
+                    <metal:field use-macro='python:context.widget("coIURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-staffURI' i18n:translate='label_staffURI'>Staff URI</label>
+                    <metal:field use-macro='python:context.widget("staffURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
                     <label for='parent-fieldname-mailAddr1URI' i18n:translate='label_mailAddr1URI'>Mailing Address Line 1 URI</label>
                     <metal:field use-macro='python:context.widget("mailAddr1URI", mode="view")'>http://x.com/y</metal:field>
                 </div>

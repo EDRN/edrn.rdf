@@ -61,6 +61,12 @@ class ISite(ISource):
         description=_(u'Uniform Resource Identifier for the predicate that identifies the date funding ended for the site.'))
     fwaNumberURI = schema.TextLine(title=_(u'FWA Number URI'),
         description=_(u'Uniform Resource Identifier for the FWA number predicate.'))
+    piURI = schema.TextLine(title=_(u'PI URI'),
+        description=_(u'Uniform Resource Identifier for the Primary Investigator predicate.'))
+    coIURI = schema.TextLine(title=_(u'Co-I URI'),
+        description=_(u'Uniform Resource Identifier for the Co-Investigator predicate.'))
+    staffURI = schema.TextLine(title=_(u'Staff URI'),
+        description=_(u'Uniform Resource Identifier for the staff predicate.'))
     mailAddr1URI = schema.TextLine(title=_(u'Mailing Address Line 1 URI'),
         description=_(u'Uniform Resource Identifier for line 1 of the mailing address.'))
     mailAddr2URI = schema.TextLine(title=_(u'Mailing Address Line 2 URI'),
