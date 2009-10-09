@@ -1,6 +1,27 @@
-===========
- Changelog
-===========
+Changelog
+=========
+
+0.0.6 - Investigators and Staff Strike Back
+-------------------------------------------
+
+The "Site" view within the DMCC RDF database has gotten tons of action
+recently.  It's changed as follows:
+
+* ``Site_Specialty_Description`` is now called ``Site_Program_Description``
+* New field: ``IDs_for_Investigators``
+* New field: ``IDs_for_CoInvestigators``
+* New field: ``IDs_for_CoPrincipalInvestigator``
+
+In addition, the ``Registered_Person`` view gained four new fields:
+
+* ``Fax``
+* ``Specialty``
+* ``Photo``
+* ``EDRN_Title``
+
+Therefore, this release of the EDRN_ RDF_ Server accommodates these updates.
+In addition, it also updates its battery of tests and test data.
+
 
 0.0.5 - Investigators and Staff
 -------------------------------
