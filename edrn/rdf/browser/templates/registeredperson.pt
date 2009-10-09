@@ -45,6 +45,24 @@
                     <label for='parent-fieldname-emailURI' i18n:translate='label_emailURI'>Email URI:</label>
                     <metal:field use-macro='python:context.widget("emailURI", mode="view")'>http://get.bent/</metal:field>
                 </div>
+				<div>
+				    <label for='parent-fieldname-faxURI' i18n:translate='label_faxURI'>Fax URI:</label>
+				    <metal:field use-macro='python:context.widget("faxURI", mode="view")'>http://get.bent/</metal:field>
+				</div>
+				<div>
+				    <label for='parent-fieldname-specialtyURI' i18n:translate='label_specialtyURI'>Specialty URI:</label>
+				    <metal:field use-macro='python:context.widget("specialtyURI", mode="view")'>http://get.bent/</metal:field>
+				</div>
+				<div>
+				    <label for='parent-fieldname-photoURI' i18n:translate='label_photoURI'>Photo URI:</label>
+				    <metal:field use-macro='python:context.widget("photoURI", mode="view")'>http://get.bent/</metal:field>
+				</div>
+				<div>
+				    <label for='parent-fieldname-edrnTitleURI' i18n:translate='label_edrnTitleURI'>
+				    	EDRN Title URI:
+				    </label>
+				    <metal:field use-macro='python:context.widget("edrnTitleURI", mode="view")'>http://get.bent/</metal:field>
+				</div>
                 <div>
                     <label for='parent-fieldname-siteURI' i18n:translate='label_siteURI'>Site URI:</label>
                     <metal:field use-macro='python:context.widget("siteURI", mode="view")'>http://get.bent/</metal:field>

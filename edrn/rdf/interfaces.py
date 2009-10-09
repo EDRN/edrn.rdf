@@ -63,8 +63,12 @@ class ISite(ISource):
         description=_(u'Uniform Resource Identifier for the FWA number predicate.'))
     piURI = schema.TextLine(title=_(u'PI URI'),
         description=_(u'Uniform Resource Identifier for the Primary Investigator predicate.'))
+    coPIURI = schema.TextLine(title=_(u'Co-PI URI'),
+        description=_(u'Uniform Resource Investigator for the Co-Primary Investigator predicate.'))
     coIURI = schema.TextLine(title=_(u'Co-I URI'),
         description=_(u'Uniform Resource Identifier for the Co-Investigator predicate.'))
+    investigatorURI = schema.TextLine(title=_(u'Investigator URI'),
+        description=_(u'Uniform Resource Identifier for the Investigator predicate.'))
     staffURI = schema.TextLine(title=_(u'Staff URI'),
         description=_(u'Uniform Resource Identifier for the staff predicate.'))
     mailAddr1URI = schema.TextLine(title=_(u'Mailing Address Line 1 URI'),
@@ -103,8 +107,8 @@ class ISite(ISource):
 		description=_(u'Uniform Resource Identifier for the post code (zip code) of the shipping address predicate.'))
     shipAddrCountryURI = schema.TextLine(title=_(u'Shipping Address Country URI'),
         description=_(u'Uniform Resource Identifier for the country of the shipping address predicate.'))
-    specialityURI = schema.TextLine(title=_(u'Speciality URI'),
-		description=_(u'Uniform Resource Identifier for predicate identifying the site speciality.'))
+    programURI = schema.TextLine(title=_(u'Program URI'),
+		description=_(u'Uniform Resource Identifier for predicate identifying the program description.'))
     urlURI = schema.TextLine(title=_(u'URL URI'),
 		description=_(u'Uniform Resource Identifier for the predicate identifying the site home page.'))
     memberTypeURI = schema.TextLine(title=_(u'Member Type URI'),
@@ -387,6 +391,26 @@ class IRegisteredPerson(ISource):
     emailURI = schema.TextLine(
         title=_(u'Email URI'),
         description=_(u'Uniform Resource Identifier for the email predicate.'),
+        required=True,
+    )
+    faxURI = schema.TextLine(
+        title=_(u'Fax URI'),
+        description=_(u'Uniform Resource Identifier for the fax predicate.'),
+        required=True,
+    )
+    specialtyURI = schema.TextLine(
+        title=_(u'Specialty URI'),
+        description=_(u'Uniform Resource Identifier for the speciality predicate.'),
+        required=True,
+    )
+    photoURI = schema.TextLine(
+        title=_(u'Photo URI'),
+        description=_(u'Uniform Resource Identifier for the photograph predicate.'),
+        required=True,
+    )
+    edrnTitleURI = schema.TextLine(
+        title=_(u'EDRN Title URI'),
+        description=_(u'Uniform Resource Identifier for the EDRN title predicate.'),
         required=True,
     )
     siteURI = schema.TextLine(

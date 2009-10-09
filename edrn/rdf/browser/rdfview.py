@@ -12,6 +12,8 @@ from Products.Five.browser import BrowserView
 from rdflib import ConjunctiveGraph, URIRef, Literal, RDF
 from zope.component import getUtility
 
+PIC_PREFIX = 'http://ginger.fhcrc.org/dmcc/staff-photographs/'
+
 # Courtesy Greg Warnick:
 _siteRoles = {
     '1':                  'Funding Source',
@@ -159,21 +161,22 @@ class SiteGenerator(SourceGenerator):
         cursor = connection.cursor()
         cursor.execute('select Identifier, Title, Associate_Members_Sponsor, ' \
             + 'EDRN_Funding_Date_Start, EDRN_Funding_Date_Finish, FWA_Number, ' \
-            + 'ID_for_Principal_Investigator, IDs_for_CoInvestigators, IDs_for_Staff, ' \
+            + 'ID_for_Principal_Investigator, IDs_for_CoPrincipalInvestigators, ' \
+            + 'IDs_for_CoInvestigators, IDs_for_Investigators, IDs_for_Staff, ' \
             + 'Institution_Name_Abbrev, Institution_Mailing_Address1, Institution_Mailing_Address2, ' \
             + 'Institution_Mailing_City, Institution_Mailing_State, Institution_Mailing_Zip, ' \
             + 'Institution_Mailing_Country, Institution_Physical_Address1, Institution_Physical_Address2, ' \
             + 'Institution_Physical_City, Institution_Physical_State, Institution_Physical_Zip, ' \
             + 'Institution_Physical_Country, Institution_Shipping_Address1, Institution_Shipping_Address2, ' \
             + 'Institution_Shipping_City, Institution_Shipping_State, Institution_Shipping_Zip, ' \
-            + 'Institution_Shipping_Country, Site_Specialty_Description, Institution_URL, Member_Type, ' \
+            + 'Institution_Shipping_Country, Site_Program_Description, Institution_URL, Member_Type, ' \
             + 'Member_Type_Historical_Notes from Site')
         for i, title, assocMemberSponsor, fundingDateStart, fundingDateFinish, fwaNumber, \
-            pi, coi, staff, \
+            pi, coPI, coi, investigators, staff, \
             abbrevName, mailAddr1, mailAddr2, \
             mailAddrCity, mailAddrState, mailAddrZip, mailAddrCountry, physAddr1, physAddr2, physAddrCity, physAddrState, \
             physAddrZip, physAddrCountry, shipAddr1, shipAddr2, shipAddrCity, shipAddrState, shipAddrZip, shipAddrCountry, \
-            speciality, url, memberType, histNotes in cursor.fetchall():
+            program, url, memberType, histNotes in cursor.fetchall():
             if not title:
                 continue
             subjectURI = URIRef(context.uriPrefix + unicode(i))
@@ -181,9 +184,15 @@ class SiteGenerator(SourceGenerator):
             graph.add((subjectURI, URIRef(context.titleURI), toLiteral(title)))
             if pi:
                 graph.add((subjectURI, URIRef(context.piURI), URIRef(personPrefix + str(pi))))
+            if coPI:
+                for coPIID in coPI.split(', '):
+                    graph.add((subjectURI, URIRef(context.coPIURI), URIRef(personPrefix + str(coPIID))))
             if coi:
                 for coID in coi.split(', '):
                     graph.add((subjectURI, URIRef(context.coIURI), URIRef(personPrefix + coID)))
+            if investigators:
+                for investigatorID in investigators.split(', '):
+                    graph.add((subjectURI, URIRef(context.investigatorURI), URIRef(personPrefix + investigatorID)))
             if staff:
                 for staffID in staff.split(', '):
                     graph.add((subjectURI, URIRef(context.staffURI), URIRef(personPrefix + staffID)))
@@ -234,8 +243,8 @@ class SiteGenerator(SourceGenerator):
                 graph.add((subjectURI, URIRef(context.shipAddrZipURI), toLiteral(shipAddrZip)))
             if shipAddrCountry:
                 graph.add((subjectURI, URIRef(context.shipAddrCountryURI), toLiteral(shipAddrCountry)))
-            if speciality:
-                graph.add((subjectURI, URIRef(context.specialityURI), toLiteral(speciality)))
+            if program:
+                graph.add((subjectURI, URIRef(context.programURI), toLiteral(program)))
             if url:
                 graph.add((subjectURI, URIRef(context.urlURI), toLiteral(url)))
             if memberType:
@@ -406,10 +415,14 @@ class RegisteredPersonGenerator(SourceGenerator):
             raise SiteMissingError('No Site object found')
         sitePrefix = results[0].getObject().uriPrefix
         cursor = connection.cursor()
-        firstNameURI, middleNameURI, lastNameURI = URIRef(context.firstNameURI), URIRef(context.middleNameURI), URIRef(context.lastNameURI)
+        firstNameURI, middleNameURI, lastNameURI = \
+            URIRef(context.firstNameURI), URIRef(context.middleNameURI), URIRef(context.lastNameURI)
         phoneURI, emailURI, siteURI = URIRef(context.phoneURI), URIRef(context.emailURI), URIRef(context.siteURI)
-        cursor.execute('select Identifier, Name_First, Name_Middle, Name_Last, Site_Identifier, Phone, Email from Registered_Person')
-        for identifier, first, middle, last, siteID, phone, email in cursor.fetchall():
+        faxURI, specialtyURI = URIRef(context.faxURI), URIRef(context.specialtyURI)
+        photoURI, edrnTitleURI = URIRef(context.photoURI), URIRef(context.edrnTitleURI)
+        cursor.execute('select Identifier, Name_First, Name_Middle, Name_Last, Site_Identifier, Phone, Email, Fax, Specialty,' \
+            + 'Photo, EDRN_Title from Registered_Person')
+        for identifier, first, middle, last, siteID, phone, email, fax, specialty, photo, edrnTitle in cursor.fetchall():
             subjectURI = URIRef(context.uriPrefix + unicode(identifier))
             graph.add((subjectURI, RDF.type, URIRef(context.typeURI)))
             if first and first.strip():
@@ -424,3 +437,11 @@ class RegisteredPersonGenerator(SourceGenerator):
                 graph.add((subjectURI, emailURI, toLiteral('mailto:' + email)))
             if siteID:
                 graph.add((subjectURI, siteURI, URIRef(sitePrefix + unicode(siteID))))
+            if fax:
+                graph.add((subjectURI, faxURI, toLiteral(fax)))
+            if specialty:
+                graph.add((subjectURI, specialtyURI, toLiteral(specialty)))
+            if photo:
+                graph.add((subjectURI, photoURI, URIRef(PIC_PREFIX + unicode(photo))))
+            if edrnTitle:
+                graph.add((subjectURI, edrnTitleURI, toLiteral(edrnTitle)))

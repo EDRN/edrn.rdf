@@ -60,10 +60,20 @@
                     <label for='parent-fieldname-piURI' i18n:translate='label_piURI'>PI URI</label>
                     <metal:field use-macro='python:context.widget("piURI", mode="view")'>http://x.com/y</metal:field>
                 </div>
+				<div>
+				    <label for='parent-fieldname-coPIURI' i18n:translate='label_coPIURI'>Co-PI URI</label>
+				    <metal:field use-macro='python:context.widget("coPIURI", mode="view")'>http://x.com/y</metal:field>
+				</div>
                 <div>
                     <label for='parent-fieldname-coIURI' i18n:translate='label_coIURI'>Co-I URI</label>
                     <metal:field use-macro='python:context.widget("coIURI", mode="view")'>http://x.com/y</metal:field>
                 </div>
+				<div>
+				    <label for='parent-fieldname-investigatorURI' i18n:translate='label_investigatorURI'>
+				    	Investigator URI
+				    </label>
+				    <metal:field use-macro='python:context.widget("investigatorURI", mode="view")'>http://x.com/y</metal:field>
+				</div>
                 <div>
                     <label for='parent-fieldname-staffURI' i18n:translate='label_staffURI'>Staff URI</label>
                     <metal:field use-macro='python:context.widget("staffURI", mode="view")'>http://x.com/y</metal:field>
@@ -152,10 +162,10 @@
                     </label>
                     <metal:field use-macro='python:context.widget("shipAddrCountryURI", mode="view")'>http://x.com/y</metal:field>
                 </div>
-                <div>
-                    <label for='parent-fieldname-specialityURI' i18n:translate='label_specialityURI'>Speciality URI</label>
-                    <metal:field use-macro='python:context.widget("specialityURI", mode="view")'>http://x.com/y</metal:field>
-                </div>
+				<div>
+				    <label for='parent-fieldname-programURI' i18n:translate='label_programURI'>Program URI:</label>
+				    <metal:field use-macro='python:context.widget("programURI", mode="view")'>http://x.com/y</metal:field>
+				</div>
                 <div>
                     <label for='parent-fieldname-urlURI' i18n:translate='label_urlURI'>URL to Homepage URI</label>
                     <metal:field use-macro='python:context.widget("urlURI", mode="view")'>http://x.com/y</metal:field>

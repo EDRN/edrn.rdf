@@ -61,6 +61,42 @@ RegisteredPersonSchema = base.SourceSchema.copy() + atapi.Schema((
         ),
     ),
     atapi.StringField(
+        'faxURI',
+        required=True,
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u'Fax URI'),
+            description=_(u'Uniform Resource Identifier for the fax predicate.'),
+        ),
+    ),
+    atapi.StringField(
+        'specialtyURI',
+        required=True,
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u'Specialty URI'),
+            description=_(u'Uniform Resource Identifier for the specialty predicate.'),
+        ),
+    ),
+    atapi.StringField(
+        'photoURI',
+        required=True,
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u'Photo URI'),
+            description=_(u'Uniform Resource Identifier for the photograph predicate.'),
+        ),
+    ),
+    atapi.StringField(
+        'edrnTitleURI',
+        required=True,
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u'EDRN Title URI'),
+            description=_(u'Uniform Resource Identifier for the EDRN title predicate.'),
+        ),
+    ),
+    atapi.StringField(
         'siteURI',
         required=True,
         storage=atapi.AnnotationStorage(),
@@ -84,6 +120,10 @@ class RegisteredPerson(base.Source):
     lastNameURI               = atapi.ATFieldProperty('lastNameURI')
     phoneURI                  = atapi.ATFieldProperty('phoneURI')
     emailURI                  = atapi.ATFieldProperty('emailURI')
+    faxURI                    = atapi.ATFieldProperty('faxURI')
+    specialtyURI              = atapi.ATFieldProperty('specialtyURI')
+    photoURI                  = atapi.ATFieldProperty('photoURI')
+    edrnTitleURI              = atapi.ATFieldProperty('edrnTitleURI')
     siteURI                   = atapi.ATFieldProperty('siteURI')
 
 atapi.registerType(RegisteredPerson, PROJECTNAME)

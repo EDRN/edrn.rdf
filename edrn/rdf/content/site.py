@@ -79,12 +79,30 @@ SiteSchema = base.SourceSchema.copy() + atapi.Schema((
         ),
     ),
     atapi.StringField(
+        'coPIURI',
+        required=True,
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u'Co-PI URI'),
+            description=_(u'Uniform Resource Identifier for the Co-PI predicate.'),
+        ),
+    ),
+    atapi.StringField(
         'coIURI',
         required=True,
         storage=atapi.AnnotationStorage(),
         widget=atapi.StringWidget(
             label=_(u'Co-I URI'),
             description=_(u'Uniform Resource Identifier for the Co-Investigator predicate.'),
+        ),
+    ),
+    atapi.StringField(
+        'investigatorURI',
+        required=True,
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u'Investigator URI'),
+            description=_(u'Uniform Resource Identifier for the Investigator predicate.'),
         ),
     ),
     atapi.StringField(
@@ -259,12 +277,12 @@ SiteSchema = base.SourceSchema.copy() + atapi.Schema((
         ),
     ),
     atapi.StringField(
-        'specialityURI',
+        'programURI',
         required=True,
         storage=atapi.AnnotationStorage(),
         widget=atapi.StringWidget(
-            label=_(u'Speciality URI'),
-            description=_(u'Uniform Resource Identifier for predicate identifying the site speciality.'),
+            label=_(u'Program URI'),
+            description=_(u'Uniform Resource Identifier for predicate identifying the site program description.'),
         ),
     ),
     atapi.StringField(
@@ -311,7 +329,9 @@ class Site(base.Source):
     fundingDateFinishURI      = atapi.ATFieldProperty('fundingDateFinishURI')
     fwaNumberURI              = atapi.ATFieldProperty('fwaNumberURI')
     piURI                     = atapi.ATFieldProperty('piURI')
+    coPIURI                   = atapi.ATFieldProperty('coPIURI')
     coIURI                    = atapi.ATFieldProperty('coIURI')
+    investigatorURI           = atapi.ATFieldProperty('investigatorURI')
     staffURI                  = atapi.ATFieldProperty('staffURI')
     mailAddr1URI              = atapi.ATFieldProperty('mailAddr1URI')
     mailAddr2URI              = atapi.ATFieldProperty('mailAddr2URI')
@@ -331,7 +351,7 @@ class Site(base.Source):
     shipAddrStateURI          = atapi.ATFieldProperty('shipAddrStateURI')
     shipAddrZipURI            = atapi.ATFieldProperty('shipAddrZipURI')
     shipAddrCountryURI        = atapi.ATFieldProperty('shipAddrCountryURI')
-    specialityURI             = atapi.ATFieldProperty('specialityURI')
+    programURI                = atapi.ATFieldProperty('programURI')
     urlURI                    = atapi.ATFieldProperty('urlURI')
     memberTypeURI             = atapi.ATFieldProperty('memberTypeURI')
     histNotesURI              = atapi.ATFieldProperty('histNotesURI')
