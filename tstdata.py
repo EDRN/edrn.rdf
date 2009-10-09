@@ -2,6 +2,28 @@
 # encoding: utf-8
 '''
 Test data setter upper.
+
+To use this, establish an ssh tunnel to ssc@snail.fhcrc.org, directing port
+1433 to pongo.fhcrc.org's port 1433::
+
+    ssh -L 1433:pongo.fhcrc.org:1433 ssc@snail.fhcrc.org
+    
+Then run this script::
+
+    python tstdata.py
+
+You'll then have a ``testdata`` directory filled with all sorts of juicy test
+data.  So, blow away the old test data::
+
+    rm edrn/rdf/tests/testdata/*
+
+Move in the new, and commit::
+
+    mv testdata/* edrn/rdf/tests/testdata
+    svn commit edrn/rdf/tests/testdata
+    rmdir testdata
+
+Done.
 '''
 
 _user, _passwd, _host, _dbname = 'ekeuser', 'Hello999', 'localhost:1433', 'dbEKE'
@@ -36,38 +58,41 @@ def main():
         drop(destCur, 'Site')
         destCur.execute('create table Site (Identifier Integer, Title String, Associate_Members_Sponsor Integer, ' \
             + 'EDRN_Funding_Date_Start DateTime, EDRN_Funding_Date_Finish DateTime, FWA_Number String, ' \
-            + 'ID_for_Principal_Investigator Integer, IDs_for_CoInvestigators String, IDs_for_Staff String, ' \
+            + 'ID_for_Principal_Investigator Integer, IDs_for_CoPrincipalInvestigators String, ' \
+            + 'IDs_for_CoInvestigators String, IDs_for_Investigators String, IDs_for_Staff String, ' \
             + 'Institution_Name_Abbrev String, Institution_Mailing_Address1 String, Institution_Mailing_Address2 String, ' \
             + 'Institution_Mailing_City String, Institution_Mailing_State String, Institution_Mailing_Zip String, ' \
             + 'Institution_Mailing_Country String, Institution_Physical_Address1 String, Institution_Physical_Address2 String, ' \
             + 'Institution_Physical_City String, Institution_Physical_State String, Institution_Physical_Zip String, ' \
             + 'Institution_Physical_Country String, Institution_Shipping_Address1 String, Institution_Shipping_Address2 String, ' \
             + 'Institution_Shipping_City String, Institution_Shipping_State String, Institution_Shipping_Zip String, ' \
-            + 'Institution_Shipping_Country String, Site_Specialty_Description Text, Institution_URL String, Member_Type String, ' \
+            + 'Institution_Shipping_Country String, Site_Program_Description Text, Institution_URL String, Member_Type String, ' \
             + 'Member_Type_Historical_Notes Text)')
         sourceCur.execute('select Identifier, Title, Associate_Members_Sponsor, ' \
             + 'EDRN_Funding_Date_Start, EDRN_Funding_Date_Finish, FWA_Number, ' \
-            + 'ID_for_Principal_Investigator, IDs_for_CoInvestigators, IDs_for_Staff, ' \
+            + 'ID_for_Principal_Investigator, IDs_for_CoPrincipalInvestigators, ' \
+            + 'IDs_for_CoInvestigators, IDs_for_Investigators, IDs_for_Staff, ' \
             + 'Institution_Name_Abbrev, Institution_Mailing_Address1, Institution_Mailing_Address2, ' \
             + 'Institution_Mailing_City, Institution_Mailing_State, Institution_Mailing_Zip, ' \
             + 'Institution_Mailing_Country, Institution_Physical_Address1, Institution_Physical_Address2, ' \
             + 'Institution_Physical_City, Institution_Physical_State, Institution_Physical_Zip, ' \
             + 'Institution_Physical_Country, Institution_Shipping_Address1, Institution_Shipping_Address2, ' \
             + 'Institution_Shipping_City, Institution_Shipping_State, Institution_Shipping_Zip, ' \
-            + 'Institution_Shipping_Country, Site_Specialty_Description, Institution_URL, Member_Type, ' \
+            + 'Institution_Shipping_Country, Site_Program_Description, Institution_URL, Member_Type, ' \
             + 'Member_Type_Historical_Notes from Site where Identifier < 100')
         destCur.executemany('insert into Site (Identifier, Title, Associate_Members_Sponsor, ' \
             + 'EDRN_Funding_Date_Start, EDRN_Funding_Date_Finish, FWA_Number, ' \
-            + 'ID_for_Principal_Investigator, IDs_for_CoInvestigators, IDs_for_Staff, ' \
+            + 'ID_for_Principal_Investigator, IDs_for_CoPrincipalInvestigators, ' \
+            + 'IDs_for_CoInvestigators, IDs_for_Investigators, IDs_for_Staff, ' \
             + 'Institution_Name_Abbrev, Institution_Mailing_Address1, Institution_Mailing_Address2, ' \
             + 'Institution_Mailing_City, Institution_Mailing_State, Institution_Mailing_Zip, ' \
             + 'Institution_Mailing_Country, Institution_Physical_Address1, Institution_Physical_Address2, ' \
             + 'Institution_Physical_City, Institution_Physical_State, Institution_Physical_Zip, ' \
             + 'Institution_Physical_Country, Institution_Shipping_Address1, Institution_Shipping_Address2, ' \
             + 'Institution_Shipping_City, Institution_Shipping_State, Institution_Shipping_Zip, ' \
-            + 'Institution_Shipping_Country, Site_Specialty_Description, Institution_URL, Member_Type, ' \
+            + 'Institution_Shipping_Country, Site_Program_Description, Institution_URL, Member_Type, ' \
             + 'Member_Type_Historical_Notes) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ' \
-            + '?, ?, ?, ?, ?, ?, ?)', sourceCur.fetchall())
+            + '?, ?, ?, ?, ?, ?, ?, ?, ?)', sourceCur.fetchall())
             
         drop(destCur, 'Publication')
         destCur.execute('create table Publication (Identifier Integer, Abstract Text, Author Text, Description Text, Issue String,'\
@@ -183,7 +208,11 @@ def main():
             + 'Name_Middle String, ' \
             + 'Site_Identifier Integer, ' \
             + 'Phone String, ' \
-            + 'Email String)')
+            + 'Email String, ' \
+            + 'Fax String, ' \
+            + 'Specialty String, ' \
+            + 'Photo String, ' \
+            + 'EDRN_Title String)')
         sourceCur.execute('select ' \
             + 'Identifier, ' \
             + 'Name_First, ' \
@@ -191,7 +220,11 @@ def main():
             + 'Name_Middle, ' \
             + 'Site_Identifier, ' \
             + 'Phone, ' \
-            + 'Email from Registered_Person where Identifier < 100')
+            + 'Email, ' \
+            + 'Fax, ' \
+            + 'Specialty, ' \
+            + 'Photo, ' \
+            + 'EDRN_Title from Registered_Person where Identifier < 100')
         destCur.executemany('insert into Registered_Person (' \
             + 'Identifier, ' \
             + 'Name_First, ' \
@@ -199,7 +232,15 @@ def main():
             + 'Name_Middle, ' \
             + 'Site_Identifier, ' \
             + 'Phone, ' \
-            + 'Email) values (' \
+            + 'Email, ' \
+            + 'Fax, ' \
+            + 'Specialty, ' \
+            + 'Photo, ' \
+            + 'EDRN_Title) values (' \
+            + '?, ' \
+            + '?, ' \
+            + '?, ' \
+            + '?, ' \
             + '?, ' \
             + '?, ' \
             + '?, ' \

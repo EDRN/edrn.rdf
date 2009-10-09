@@ -1,7 +1,3 @@
-==============
- Introduction
-==============
-
 This package provides an RDF-based web service that describes the knowledge
 assets of the Early Detection Research Network (EDRN).
 
@@ -236,7 +232,9 @@ details. They can be added to RDF Folders only::
     >>> browser.getControl(name='abbrevNameURI').value = u'http://edrn/rdf/rdfs/site.rdf#abbrevName'
     >>> browser.getControl(name='assocMemberSponsorURI').value = u'http://edrn/rdf/rdfs/site.rdf#assocMemberSponsorURI'
     >>> browser.getControl(name='piURI').value = 'http://edrn/rdf/rdfs/site.rdf#pi'
+	>>> browser.getControl(name='coPIURI').value = 'http://edrn/rdf/rdfs/site.rdf#copi'
     >>> browser.getControl(name='coIURI').value = 'http://edrn/rdf/rdfs/site.rdf#coi'
+	>>> browser.getControl(name='investigatorURI').value = 'http://edrn/rdf/rdfs/site.rdf#investigator'
     >>> browser.getControl(name='staffURI').value = 'http://edrn/rdf/rdfs/site.rdf#staff'
     >>> browser.getControl(name='fundingDateStartURI').value = u'http://edrn/rdf/rdfs/site.rdf#fundingDateStart'
     >>> browser.getControl(name='fundingDateFinishURI').value = u'http://edrn/rdf/rdfs/site.rdf#fundingDateFinish'
@@ -259,7 +257,7 @@ details. They can be added to RDF Folders only::
     >>> browser.getControl(name='shipAddrStateURI').value = u'http://edrn/rdf/rdfs/site.rdf#shipAddrState'
     >>> browser.getControl(name='shipAddrZipURI').value = u'http://edrn/rdf/rdfs/site.rdf#shipAddrZip'
     >>> browser.getControl(name='shipAddrCountryURI').value = u'http://edrn/rdf/rdfs/site.rdf#shipAddrCountry'
-    >>> browser.getControl(name='specialityURI').value = u'http://edrn/rdf/rdfs/site.rdf#speciality'
+    >>> browser.getControl(name='programURI').value = u'http://edrn/rdf/rdfs/site.rdf#program'
     >>> browser.getControl(name='urlURI').value = u'http://edrn/rdf/rdfs/site.rdf#url'
     >>> browser.getControl(name='memberTypeURI').value = u'http://edrn/rdf/rdfs/site.rdf#memberType'
     >>> browser.getControl(name='histNotesURI').value = u'http://edrn/rdf/rdfs/site.rdf#histNotes'
@@ -283,8 +281,12 @@ details. They can be added to RDF Folders only::
     'http://edrn/rdf/rdfs/site.rdf#assocMemberSponsorURI'
     >>> site.piURI
     'http://edrn/rdf/rdfs/site.rdf#pi'
+	>>> site.coPIURI
+	'http://edrn/rdf/rdfs/site.rdf#copi'
     >>> site.coIURI
     'http://edrn/rdf/rdfs/site.rdf#coi'
+	>>> site.investigatorURI
+	'http://edrn/rdf/rdfs/site.rdf#investigator'
     >>> site.staffURI
     'http://edrn/rdf/rdfs/site.rdf#staff'
     >>> site.fundingDateStartURI
@@ -329,8 +331,8 @@ details. They can be added to RDF Folders only::
     'http://edrn/rdf/rdfs/site.rdf#shipAddrZip'
     >>> site.shipAddrCountryURI
     'http://edrn/rdf/rdfs/site.rdf#shipAddrCountry'
-    >>> site.specialityURI
-    'http://edrn/rdf/rdfs/site.rdf#speciality'
+    >>> site.programURI
+    'http://edrn/rdf/rdfs/site.rdf#program'
     >>> site.urlURI
     'http://edrn/rdf/rdfs/site.rdf#url'
     >>> site.memberTypeURI
@@ -651,6 +653,10 @@ solely to RDF folders::
     >>> browser.getControl(name='lastNameURI').value = 'http://xmlns.com/foaf/0.1/surname'
     >>> browser.getControl(name='phoneURI').value = 'http://xmlns.com/foaf/0.1/phone'
     >>> browser.getControl(name='emailURI').value = 'http://xmlns.com/foaf/0.1/mbox'
+	>>> browser.getControl(name='faxURI').value = 'http://www.w3.org/2001/vcard-rdf/3.0#fax'
+	>>> browser.getControl(name='specialtyURI').value = 'http://edrn.rdf/rdfs/people.rdf#specialty'
+	>>> browser.getControl(name='photoURI').value = 'http://xmlns.com/foaf/0.1/img'
+	>>> browser.getControl(name='edrnTitleURI').value = 'http://edrn.rdf/rdfs/people.rdf#edrnTitle'
     >>> browser.getControl(name='siteURI').value = 'http://edrn.rdf/rdfs/people.rdf#site'
     >>> browser.getControl(name='form_submit').click()
     >>> 'my-registered-person-generator' in rdfFolder.objectIds()
@@ -674,6 +680,14 @@ solely to RDF folders::
     'http://xmlns.com/foaf/0.1/phone'
     >>> mrpg.emailURI
     'http://xmlns.com/foaf/0.1/mbox'
+	>>> mrpg.faxURI
+	'http://www.w3.org/2001/vcard-rdf/3.0#fax'
+	>>> mrpg.specialtyURI
+	'http://edrn.rdf/rdfs/people.rdf#specialty'
+	>>> mrpg.photoURI
+	'http://xmlns.com/foaf/0.1/img'
+	>>> mrpg.edrnTitleURI
+	'http://edrn.rdf/rdfs/people.rdf#edrnTitle'
     >>> mrpg.siteURI
     'http://edrn.rdf/rdfs/people.rdf#site'
 
@@ -688,7 +702,7 @@ RDF generation? You got it::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    43
+    47
     >>> for i in c.query('SELECT ?givenname WHERE { <http://edrn/registered-person/34> <http://xmlns.com/foaf/0.1/givenname> ?givenname . }'):
     ...     print i[0]
     Matt
@@ -710,7 +724,7 @@ sites should contain rdf:resource links to those people.  Checking::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    724
+    716
     >>> for i in c.query('SELECT ?title WHERE { <http://edrn/sites/87> <http://purl.org/dc/terms/title> ?title . }'):
     ...     print i[0]
     National Cancer Institute
