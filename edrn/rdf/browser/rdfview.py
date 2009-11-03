@@ -339,6 +339,7 @@ class ProtocolGenerator(SourceGenerator):
                 continue
             if protoSlot == 'Involved_Investigator_Site_ID':
                 for siteID in protoValue.split(', '):
+                    graph.add((subjectURI, URIRef(context.involvedInvestigatorSiteURI), URIRef(sitePrefix + unicode(siteID))))
                     siteID = int(siteID)
                     siteSpecCursor = connection.cursor()
                     siteSpecCursor.execute('select ' \
