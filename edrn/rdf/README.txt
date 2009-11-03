@@ -232,9 +232,9 @@ details. They can be added to RDF Folders only::
     >>> browser.getControl(name='abbrevNameURI').value = u'http://edrn/rdf/rdfs/site.rdf#abbrevName'
     >>> browser.getControl(name='assocMemberSponsorURI').value = u'http://edrn/rdf/rdfs/site.rdf#assocMemberSponsorURI'
     >>> browser.getControl(name='piURI').value = 'http://edrn/rdf/rdfs/site.rdf#pi'
-	>>> browser.getControl(name='coPIURI').value = 'http://edrn/rdf/rdfs/site.rdf#copi'
+    >>> browser.getControl(name='coPIURI').value = 'http://edrn/rdf/rdfs/site.rdf#copi'
     >>> browser.getControl(name='coIURI').value = 'http://edrn/rdf/rdfs/site.rdf#coi'
-	>>> browser.getControl(name='investigatorURI').value = 'http://edrn/rdf/rdfs/site.rdf#investigator'
+    >>> browser.getControl(name='investigatorURI').value = 'http://edrn/rdf/rdfs/site.rdf#investigator'
     >>> browser.getControl(name='staffURI').value = 'http://edrn/rdf/rdfs/site.rdf#staff'
     >>> browser.getControl(name='fundingDateStartURI').value = u'http://edrn/rdf/rdfs/site.rdf#fundingDateStart'
     >>> browser.getControl(name='fundingDateFinishURI').value = u'http://edrn/rdf/rdfs/site.rdf#fundingDateFinish'
@@ -281,12 +281,12 @@ details. They can be added to RDF Folders only::
     'http://edrn/rdf/rdfs/site.rdf#assocMemberSponsorURI'
     >>> site.piURI
     'http://edrn/rdf/rdfs/site.rdf#pi'
-	>>> site.coPIURI
-	'http://edrn/rdf/rdfs/site.rdf#copi'
+    >>> site.coPIURI
+    'http://edrn/rdf/rdfs/site.rdf#copi'
     >>> site.coIURI
     'http://edrn/rdf/rdfs/site.rdf#coi'
-	>>> site.investigatorURI
-	'http://edrn/rdf/rdfs/site.rdf#investigator'
+    >>> site.investigatorURI
+    'http://edrn/rdf/rdfs/site.rdf#investigator'
     >>> site.staffURI
     'http://edrn/rdf/rdfs/site.rdf#staff'
     >>> site.fundingDateStartURI
@@ -608,7 +608,7 @@ A Protocol also provides RDF, as a matter of course::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    637
+    716
     >>> for i in c.query('SELECT ?title WHERE { <http://edrn/protocols/36> <http://purl.org/dc/terms/title> ?title . }'):
     ...     print i[0]
     Preliminary Clinical Characterization of Serum Biomarkers for Colorectal Neoplasms
@@ -625,7 +625,15 @@ names for the fields of research in a protocol.  Checking::
     >>> results
     ['Genomics', 'Proteomics']
 
-See? All better!
+See? All better!  But what about involved investigator sites?
+
+    >>> browser.open(portalURL + '/my-rdf-folder/my-protocol/rdf')
+    >>> xxx = open('/tmp/log.html', 'w'); xxx.write(browser.contents); xxx.close()
+    >>> for i in c.query('SELECT ?involvedInvestigatorSite WHERE { <http://edrn/protocols/99> <http://edrn/rdf/rdfs/protocols.rdf#involvedInvestigatorSite> ?involvedInvestigatorSite . }'):
+    ...     print i[0]
+    http://edrn/sites/66
+    http://edrn/sites/67
+
 
 People
 ~~~~~~
@@ -653,10 +661,10 @@ solely to RDF folders::
     >>> browser.getControl(name='lastNameURI').value = 'http://xmlns.com/foaf/0.1/surname'
     >>> browser.getControl(name='phoneURI').value = 'http://xmlns.com/foaf/0.1/phone'
     >>> browser.getControl(name='emailURI').value = 'http://xmlns.com/foaf/0.1/mbox'
-	>>> browser.getControl(name='faxURI').value = 'http://www.w3.org/2001/vcard-rdf/3.0#fax'
-	>>> browser.getControl(name='specialtyURI').value = 'http://edrn.rdf/rdfs/people.rdf#specialty'
-	>>> browser.getControl(name='photoURI').value = 'http://xmlns.com/foaf/0.1/img'
-	>>> browser.getControl(name='edrnTitleURI').value = 'http://edrn.rdf/rdfs/people.rdf#edrnTitle'
+    >>> browser.getControl(name='faxURI').value = 'http://www.w3.org/2001/vcard-rdf/3.0#fax'
+    >>> browser.getControl(name='specialtyURI').value = 'http://edrn.rdf/rdfs/people.rdf#specialty'
+    >>> browser.getControl(name='photoURI').value = 'http://xmlns.com/foaf/0.1/img'
+    >>> browser.getControl(name='edrnTitleURI').value = 'http://edrn.rdf/rdfs/people.rdf#edrnTitle'
     >>> browser.getControl(name='siteURI').value = 'http://edrn.rdf/rdfs/people.rdf#site'
     >>> browser.getControl(name='form_submit').click()
     >>> 'my-registered-person-generator' in rdfFolder.objectIds()
@@ -680,14 +688,14 @@ solely to RDF folders::
     'http://xmlns.com/foaf/0.1/phone'
     >>> mrpg.emailURI
     'http://xmlns.com/foaf/0.1/mbox'
-	>>> mrpg.faxURI
-	'http://www.w3.org/2001/vcard-rdf/3.0#fax'
-	>>> mrpg.specialtyURI
-	'http://edrn.rdf/rdfs/people.rdf#specialty'
-	>>> mrpg.photoURI
-	'http://xmlns.com/foaf/0.1/img'
-	>>> mrpg.edrnTitleURI
-	'http://edrn.rdf/rdfs/people.rdf#edrnTitle'
+    >>> mrpg.faxURI
+    'http://www.w3.org/2001/vcard-rdf/3.0#fax'
+    >>> mrpg.specialtyURI
+    'http://edrn.rdf/rdfs/people.rdf#specialty'
+    >>> mrpg.photoURI
+    'http://xmlns.com/foaf/0.1/img'
+    >>> mrpg.edrnTitleURI
+    'http://edrn.rdf/rdfs/people.rdf#edrnTitle'
     >>> mrpg.siteURI
     'http://edrn.rdf/rdfs/people.rdf#site'
 
