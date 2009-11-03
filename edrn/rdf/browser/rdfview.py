@@ -356,12 +356,15 @@ class ProtocolGenerator(SourceGenerator):
                     if siteSpecCursor.rowcount != 1:
                         continue
                     animalSubjectTrainingReceived, humanSubjectTrainingReceived, irbApprovalNeeded, currentIRBApprovalDate, \
-                    originalIRBApprovalDate, irbExpirationDate, generalIRBNotes, irbNumber, siteRoles, reportingStages = siteSpecCursor.fetchone()
+                    originalIRBApprovalDate, irbExpirationDate, generalIRBNotes, irbNumber, siteRoles, reportingStages \
+                        = siteSpecCursor.fetchone()
                     siteSpecSubject = URIRef(context.siteSpecURIPrefix + unicode(identifier) + u'-' + unicode(siteID))
                     if animalSubjectTrainingReceived:
-                        graph.add((siteSpecSubject, URIRef(context.animalSubjectTrainingReceivedURI), toLiteral(animalSubjectTrainingReceived)))
+                        graph.add((siteSpecSubject, URIRef(context.animalSubjectTrainingReceivedURI),
+                            toLiteral(animalSubjectTrainingReceived)))
                     if humanSubjectTrainingReceived:
-                        graph.add((siteSpecSubject, URIRef(context.humanSubjectTrainingReceivedURI), toLiteral(humanSubjectTrainingReceived)))
+                        graph.add((siteSpecSubject, URIRef(context.humanSubjectTrainingReceivedURI),
+                            toLiteral(humanSubjectTrainingReceived)))
                     if irbApprovalNeeded:
                         graph.add((siteSpecSubject, URIRef(context.irbApprovalNeededURI), toLiteral(irbApprovalNeeded)))
                     if currentIRBApprovalDate:
@@ -379,7 +382,8 @@ class ProtocolGenerator(SourceGenerator):
                             graph.add((siteSpecSubject, URIRef(context.siteRoleURI), Literal(_siteRoles.get(siteRole, u'UNKNOWN'))))
                     if reportingStages:
                         for rs in reportingStages.split(', '):
-                            graph.add((siteSpecSubject, URIRef(context.reportingStageURI), Literal(_reportingStages.get(rs, u'UNKNOWN'))))
+                            graph.add((siteSpecSubject, URIRef(context.reportingStageURI),
+                                Literal(_reportingStages.get(rs, u'UNKNOWN'))))
             elif protoSlot == 'Protocol_Publications':
                 for protoID in protoValue.split(', '):
                     graph.add((subjectURI, URIRef(context.publicationsURI), URIRef(publicationPrefix + protoID)))
