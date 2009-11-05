@@ -1,6 +1,19 @@
 Changelog
 =========
 
+0.0.7 - Protocol Types and Eligibility Criteria
+-----------------------------------------------
+
+Greg Warnick has added additional data to the DMCC RDF database, comprising
+the two following new slots:
+
+* ``Elibility_critera`` describing eligibility criteria of a protocol
+* ``Protocol_type``, what we thought was once long lost, is back!
+
+This release of the RDF_ Server provides these two additional fields.
+Additionally, it updates its test data and function test battery.
+
+
 0.0.6 - Investigators and Staff Strike Back
 -------------------------------------------
 
