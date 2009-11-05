@@ -365,6 +365,12 @@ class IProtocol(ISource):
         description=_(u'Uniform Resource Identifier for the predicate that names the stages of reporting.'),
         required=True,
     )
+    eligibilityCriteriaURI = schema.TextLine(
+        title=_(u'Eligibility Criteria URI'),
+        description=_(u'Uniform Resource Identifier for the predicate that identifies the eligibility criteria.'),
+        required=True,
+    )
+    
 
 class IRegisteredPerson(ISource):
     '''Registered person.'''

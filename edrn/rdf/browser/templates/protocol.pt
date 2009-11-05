@@ -249,7 +249,13 @@
                     <label for='parent-fieldname-reportingStageURI' i18n:translate='label_reportingStageURI'>
                         Report Stage URI
                     </label>
-                    <metal:field use-macro='python:context.widget("reportingStageURI", mode="view")'>http://rdf.com/rdf</metal:field>
+                    <metal:field use-macro='python:context.widget("reportingStageURI", mode="view")'>http://rdf</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-eligibilityCriteriaURI' i18n:translate='label_eligibilityCriteriaURI'>
+                        Eligibility Criteria URI:
+                    </label>
+                    <metal:field use-macro='python:context.widget("eligibilityCriteriaURI", mode="view")'>http://rdf/</metal:field>
                 </div>
                 <div metal:use-macro='context/document_relateditems/macros/relatedItems'>
                     Any related items

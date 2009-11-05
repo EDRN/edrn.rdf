@@ -283,6 +283,7 @@ class PublicationGenerator(SourceGenerator):
 
 _slots = {
     'BiomarkerName':                        ('bmNameURI', toLiteral),
+    'Eligibility_criteria':                 ('eligibilityCriteriaURI', toLiteral),
     'Protocol_5_Phase_Status':              ('phasedStatusURI', Literal),
     'Protocol_Aims':                        ('aimsURI', toLiteral),
     'Protocol_Analytic_Method':             ('analyticMethodURI', toLiteral),
@@ -301,10 +302,9 @@ _slots = {
     'Protocol_or_Project_Flag':             ('projectFlagURI', toLiteral),
     'Protocol_Results_Outcome':             ('outcomeURI', toLiteral),
     'Protocol_Results_Outcome_Secure_Site': ('secureOutcomeURI', toLiteral),
+    'Protocol_Type':                        ('protocolTypeURI', toLiteral),
     'Sample_Size_Final':                    ('finalSampleSizeURI', toLiteral),
     'Sample_Size_Planned':                  ('plannedSampleSizeURI', toLiteral),
-    # TODO: what "slot" name is used for protocol type? It isn't reflected in current RDF DB.
-    # 'Protocol_Type???':                   ('protocolTypeURI', toLiteral),
 }
 
 class ProtocolGenerator(SourceGenerator):

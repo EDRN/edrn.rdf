@@ -429,6 +429,15 @@ ProtocolSchema = base.SourceSchema.copy() + atapi.Schema((
             description=_(u'Uniform Resource Identifier for the predicate that names the stages of reporting.'),
         ),
     ),
+    atapi.StringField(
+        'eligibilityCriteriaURI',
+        required=True,
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u'Eligibility Criteria URI'),
+            description=_(u'Uniform Resource Identifier for the predicate that identifies the eligibility criteria.'),
+        ),
+    ),
 ))
 
 finalizeATCTSchema(ProtocolSchema, folderish=False, moveDiscussion=True)
@@ -485,5 +494,6 @@ class Protocol(base.Source):
     irbNumberURI                     = atapi.ATFieldProperty('irbNumberURI')
     siteRoleURI                      = atapi.ATFieldProperty('siteRoleURI')
     reportingStageURI                = atapi.ATFieldProperty('reportingStageURI')
+    eligibilityCriteriaURI           = atapi.ATFieldProperty('eligibilityCriteriaURI')
 
 atapi.registerType(Protocol, PROJECTNAME)
