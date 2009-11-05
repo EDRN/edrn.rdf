@@ -419,7 +419,7 @@ A Publication object provides RDF of course::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    1916
+    1998
     >>> for i in c.query('SELECT ?title WHERE { <http://edrn/pubs/303> <http://purl.org/dc/terms/title> ?title . }'):
     ...     print i[0]
     Data reduction using discrete wavelet transform in discriminant analysis of very high dimension
@@ -492,6 +492,7 @@ they can be added only to RDF folders::
     >>> browser.getControl(name='irbNumberURI').value = 'http://edrn/rdf/rdfs/protocols.rdf#irbNumber'
     >>> browser.getControl(name='siteRoleURI').value = 'http://edrn/rdf/rdfs/protocols.rdf#siteRole'
     >>> browser.getControl(name='reportingStageURI').value = 'http://edrn/rdf/rdfs/protocols.rdf#reportingStage'
+    >>> browser.getControl(name='eligibilityCriteriaURI').value = 'http://edrn/rdf/rdfs/protocols.rdf#eligibilityCriteria'
     >>> browser.getControl(name='form_submit').click()
     >>> 'my-protocol' in rdfFolder.objectIds()
     True
@@ -596,6 +597,8 @@ they can be added only to RDF folders::
     'http://edrn/rdf/rdfs/protocols.rdf#siteRole'
     >>> proto.reportingStageURI
     'http://edrn/rdf/rdfs/protocols.rdf#reportingStage'
+    >>> proto.eligibilityCriteriaURI
+    'http://edrn/rdf/rdfs/protocols.rdf#eligibilityCriteria'
 
 A Protocol also provides RDF, as a matter of course::
 
@@ -608,7 +611,7 @@ A Protocol also provides RDF, as a matter of course::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    716
+    764
     >>> for i in c.query('SELECT ?title WHERE { <http://edrn/protocols/36> <http://purl.org/dc/terms/title> ?title . }'):
     ...     print i[0]
     Preliminary Clinical Characterization of Serum Biomarkers for Colorectal Neoplasms
@@ -628,11 +631,10 @@ names for the fields of research in a protocol.  Checking::
 See? All better!  But what about involved investigator sites?
 
     >>> browser.open(portalURL + '/my-rdf-folder/my-protocol/rdf')
-    >>> xxx = open('/tmp/log.html', 'w'); xxx.write(browser.contents); xxx.close()
-    >>> for i in c.query('SELECT ?involvedInvestigatorSite WHERE { <http://edrn/protocols/99> <http://edrn/rdf/rdfs/protocols.rdf#involvedInvestigatorSite> ?involvedInvestigatorSite . }'):
-    ...     print i[0]
-    http://edrn/sites/66
-    http://edrn/sites/67
+    >>> results = [i[0] for i in c.query('SELECT ?involvedInvestigatorSite WHERE { <http://edrn/protocols/99> <http://edrn/rdf/rdfs/protocols.rdf#involvedInvestigatorSite> ?involvedInvestigatorSite . }')]
+    >>> results.sort()
+    >>> results
+    [rdflib.URIRef('http://edrn/sites/66'), rdflib.URIRef('http://edrn/sites/67')]
 
 
 People
