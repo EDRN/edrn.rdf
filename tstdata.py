@@ -4,9 +4,9 @@
 Test data setter upper.
 
 To use this, establish an ssh tunnel to ssc@snail.fhcrc.org, directing port
-1433 to pongo.fhcrc.org's port 1433::
+1433 to compass1.fhcrc.org's port 1433::
 
-    ssh -L 1433:pongo.fhcrc.org:1433 ssc@snail.fhcrc.org
+    ssh -L 1433:compass1.fhcrc.org:1433 ssc@snail.fhcrc.org
     
 Then run this script::
 
