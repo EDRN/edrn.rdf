@@ -76,7 +76,7 @@ The RDF Folder is addable anywhere::
     >>> l.click()
     >>> browser.getControl(name='title').value = u'My RDF Folder'
     >>> browser.getControl(name='description').value = u'A place to hold RDF service objects.'
-    >>> browser.getControl(name='form_submit').click()
+    >>> browser.getControl(name='form.button.save').click()
     >>> 'my-rdf-folder' in portal.objectIds()
     True
     >>> rdfFolder = portal['my-rdf-folder']
@@ -108,7 +108,7 @@ organs.  They can only be added to RDF Folders::
     >>> browser.getControl(name='typeURI').value = u'urn:edrn:types:body-system'
     >>> browser.getControl(name='titleURI').value = u'http://purl.org/dc/terms/title'
     >>> browser.getControl(name='descURI').value = u'http://purl.org/dc/terms/description'
-    >>> browser.getControl(name='form_submit').click()
+    >>> browser.getControl(name='form.button.save').click()
     >>> 'my-body-system' in rdfFolder.objectIds()
     True
     >>> bodySystem = rdfFolder['my-body-system']
@@ -168,7 +168,7 @@ Diseases affect body systems. They can be added to RDF Folders only::
     >>> browser.getControl(name='icd9URI').value = u'http://www.who.int/rdf/who.rdf#icd9'
     >>> browser.getControl(name='icd10URI').value = u'http://www.who.int/rdf/who.rdf#icd10'
     >>> browser.getControl(name='bodySysURI').value = u'http://edrn.nci.nih.gov/rdf/terms/body-system'
-    >>> browser.getControl(name='form_submit').click()
+    >>> browser.getControl(name='form.button.save').click()
     >>> 'my-disease' in rdfFolder.objectIds()
     True
     >>> disease = rdfFolder['my-disease']
@@ -261,7 +261,7 @@ details. They can be added to RDF Folders only::
     >>> browser.getControl(name='urlURI').value = u'http://edrn/rdf/rdfs/site.rdf#url'
     >>> browser.getControl(name='memberTypeURI').value = u'http://edrn/rdf/rdfs/site.rdf#memberType'
     >>> browser.getControl(name='histNotesURI').value = u'http://edrn/rdf/rdfs/site.rdf#histNotes'
-    >>> browser.getControl(name='form_submit').click()
+    >>> browser.getControl(name='form.button.save').click()
     >>> 'my-site' in rdfFolder.objectIds()
     True
     >>> site = rdfFolder['my-site']
@@ -375,7 +375,7 @@ sources, they can be added only to RDF folders::
     >>> browser.getControl(name='pubURLURI').value = u'http://edrn/rdf/rdfs/pubs.rdf#pubURL'
     >>> browser.getControl(name='volumeURI').value = u'http://edrn/rdf/rdfs/pubs.rdf#volume'
     >>> browser.getControl(name='yearURI').value = u'http://edrn/rdf/rdfs/pubs.rdf#year'
-    >>> browser.getControl(name='form_submit').click()
+    >>> browser.getControl(name='form.button.save').click()
     >>> 'my-publication' in rdfFolder.objectIds()
     True
     >>> pub = rdfFolder['my-publication']
@@ -419,10 +419,10 @@ A Publication object provides RDF of course::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    1998
-    >>> for i in c.query('SELECT ?title WHERE { <http://edrn/pubs/303> <http://purl.org/dc/terms/title> ?title . }'):
+    1910
+    >>> for i in c.query('SELECT ?title WHERE { <http://edrn/pubs/427> <http://purl.org/dc/terms/title> ?title . }'):
     ...     print i[0]
-    Data reduction using discrete wavelet transform in discriminant analysis of very high dimension
+    Efficient and specific removal of albumin from human serum sample
 
 
 Protocols
@@ -493,7 +493,7 @@ they can be added only to RDF folders::
     >>> browser.getControl(name='siteRoleURI').value = 'http://edrn/rdf/rdfs/protocols.rdf#siteRole'
     >>> browser.getControl(name='reportingStageURI').value = 'http://edrn/rdf/rdfs/protocols.rdf#reportingStage'
     >>> browser.getControl(name='eligibilityCriteriaURI').value = 'http://edrn/rdf/rdfs/protocols.rdf#eligibilityCriteria'
-    >>> browser.getControl(name='form_submit').click()
+    >>> browser.getControl(name='form.button.save').click()
     >>> 'my-protocol' in rdfFolder.objectIds()
     True
     >>> proto = rdfFolder['my-protocol']
@@ -611,7 +611,7 @@ A Protocol also provides RDF, as a matter of course::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    764
+    756
     >>> for i in c.query('SELECT ?title WHERE { <http://edrn/protocols/36> <http://purl.org/dc/terms/title> ?title . }'):
     ...     print i[0]
     Preliminary Clinical Characterization of Serum Biomarkers for Colorectal Neoplasms
@@ -668,7 +668,7 @@ solely to RDF folders::
     >>> browser.getControl(name='photoURI').value = 'http://xmlns.com/foaf/0.1/img'
     >>> browser.getControl(name='edrnTitleURI').value = 'http://edrn.rdf/rdfs/people.rdf#edrnTitle'
     >>> browser.getControl(name='siteURI').value = 'http://edrn.rdf/rdfs/people.rdf#site'
-    >>> browser.getControl(name='form_submit').click()
+    >>> browser.getControl(name='form.button.save').click()
     >>> 'my-registered-person-generator' in rdfFolder.objectIds()
     True
     >>> mrpg = rdfFolder['my-registered-person-generator']
@@ -712,7 +712,7 @@ RDF generation? You got it::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    47
+    56
     >>> for i in c.query('SELECT ?givenname WHERE { <http://edrn/registered-person/34> <http://xmlns.com/foaf/0.1/givenname> ?givenname . }'):
     ...     print i[0]
     Matt
@@ -734,7 +734,7 @@ sites should contain rdf:resource links to those people.  Checking::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    716
+    737
     >>> for i in c.query('SELECT ?title WHERE { <http://edrn/sites/87> <http://purl.org/dc/terms/title> ?title . }'):
     ...     print i[0]
     National Cancer Institute
