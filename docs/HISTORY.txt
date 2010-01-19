@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.0.8 - Official EKE Database
+-----------------------------
+
+This release updates the database server changing it from pongo to compass1.
+The new server, compass1, hosts the official RDF source information and
+contains no funky testing data like "Greg's Cool Protocol".
+
+
 0.0.7 - Protocol Types and Eligibility Criteria
 -----------------------------------------------
 
