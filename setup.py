@@ -5,13 +5,22 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.0.8'
+_name = 'edrn.rdf'
+_version = '0.0.8'
+
+def _read(*rnames):
+    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+
+_header = '*' * len(_name) + '\n' + _name + '\n' + '*' * len(_name)
+_desc = _read('README.txt')
+_longDesc = _header + '\n\n' + _desc + '\n\n' + _read('docs', 'INSTALL.txt') + '\n\n' + _read('docs', 'HISTORY.txt')
+open('doc.txt', 'w').write(_longDesc)
 
 setup(
-    name='edrn.rdf',
-    version=version,
+    name=_name,
+    version=_version,
     description="EDRN RDF Server",
-    long_description=open("README.txt").read() + "\n" + open(os.path.join("docs", "HISTORY.txt")).read(),
+    long_description=_longDesc,
     classifiers=[
         "Framework :: Plone",
         "Programming Language :: Python",

@@ -2,12 +2,6 @@ This package provides an RDF-based web service that describes the knowledge
 assets of the Early Detection Research Network (EDRN).
 
 
-Installation
-============
-
-Add "edrn.rdf" to the buildout.
-
-
 Content Types
 =============
 
