@@ -357,7 +357,7 @@ class IProtocol(ISource):
     )
     siteRoleURI = schema.TextLine(
         title=_(u'Site Role URI'),
-        description=_(u'Uniform Resource Identifier for the predicate that lists the roles the site particiaptes in.'),
+        description=_(u'Uniform Resource Identifier for the predicate that lists the roles the site participates in.'),
         required=True,
     )
     reportingStageURI = schema.TextLine(
