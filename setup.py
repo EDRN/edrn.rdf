@@ -39,7 +39,7 @@ setup(
     install_requires=[
         'setuptools',
         'rdflib>=2.4,<3.0a',
-        'pymssql',
+        'pymssql==1.0.2',
     ],
     entry_points={},
 )
