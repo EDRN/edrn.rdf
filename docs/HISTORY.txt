@@ -1,6 +1,20 @@
 Changelog
 =========
 
+0.0.10 - PyMSSQL Lockdown
+-------------------------
+
+This package depends on the Python Microsoft SQL Server library known as
+"pymssql", but never specified a version of the library to use.  The latest
+version available was just fine for quite some time.
+
+Until today.
+
+Today, pymssql 1.9.905.1 was suddenly available, and it doesn't build.  So,
+we're locking ourselves down to pymssql version 1.0.2, which does build and
+works just fine for what we need.
+
+
 0.0.9 - Account Names
 ---------------------
 
