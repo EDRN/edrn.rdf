@@ -1,6 +1,15 @@
 Changelog
 =========
 
+0.0.9 - Account Names
+---------------------
+
+The DMCC now provides user account names for registered people.  This release
+supports that by providing a place to specify the URI to the RDF predicate,
+and the RDF export uses that URI to state the account names of people who have
+accounts.
+
+
 0.0.8 - Official EKE Database
 -----------------------------
 
