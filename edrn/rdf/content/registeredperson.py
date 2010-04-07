@@ -105,6 +105,15 @@ RegisteredPersonSchema = base.SourceSchema.copy() + atapi.Schema((
             description=_(u'Uniform Resource Identifier for the site predicate.'),
         ),
     ),
+    atapi.StringField(
+        'userIDURI',
+        required=True,
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.StringWidget(
+            label=_(u'User ID URI'),
+            description=_(u'Uniform Resource Identifier for the account name predicate.'),
+        ),
+    ),
 ))
 
 finalizeATCTSchema(RegisteredPersonSchema, folderish=False, moveDiscussion=True)
@@ -125,5 +134,6 @@ class RegisteredPerson(base.Source):
     photoURI                  = atapi.ATFieldProperty('photoURI')
     edrnTitleURI              = atapi.ATFieldProperty('edrnTitleURI')
     siteURI                   = atapi.ATFieldProperty('siteURI')
+    userIDURI                 = atapi.ATFieldProperty('userIDURI')
 
 atapi.registerType(RegisteredPerson, PROJECTNAME)

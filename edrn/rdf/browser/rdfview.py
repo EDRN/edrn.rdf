@@ -424,10 +424,10 @@ class RegisteredPersonGenerator(SourceGenerator):
             URIRef(context.firstNameURI), URIRef(context.middleNameURI), URIRef(context.lastNameURI)
         phoneURI, emailURI, siteURI = URIRef(context.phoneURI), URIRef(context.emailURI), URIRef(context.siteURI)
         faxURI, specialtyURI = URIRef(context.faxURI), URIRef(context.specialtyURI)
-        photoURI, edrnTitleURI = URIRef(context.photoURI), URIRef(context.edrnTitleURI)
+        photoURI, edrnTitleURI, userIDURI = URIRef(context.photoURI), URIRef(context.edrnTitleURI), URIRef(context.userIDURI)
         cursor.execute('select Identifier, Name_First, Name_Middle, Name_Last, Site_Identifier, Phone, Email, Fax, Specialty,' \
-            + 'Photo, EDRN_Title from Registered_Person')
-        for identifier, first, middle, last, siteID, phone, email, fax, specialty, photo, edrnTitle in cursor.fetchall():
+            + 'Photo, EDRN_Title, userID from Registered_Person')
+        for identifier, first, middle, last, siteID, phone, email, fax, specialty, photo, edrnTitle, userID in cursor.fetchall():
             subjectURI = URIRef(context.uriPrefix + unicode(identifier))
             graph.add((subjectURI, RDF.type, URIRef(context.typeURI)))
             if first and first.strip():
@@ -450,3 +450,5 @@ class RegisteredPersonGenerator(SourceGenerator):
                 graph.add((subjectURI, photoURI, URIRef(PIC_PREFIX + unicode(photo))))
             if edrnTitle:
                 graph.add((subjectURI, edrnTitleURI, toLiteral(edrnTitle)))
+            if userID:
+                graph.add((subjectURI, userIDURI, toLiteral(userID)))

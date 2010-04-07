@@ -63,6 +63,10 @@
 				    </label>
 				    <metal:field use-macro='python:context.widget("edrnTitleURI", mode="view")'>http://get.bent/</metal:field>
 				</div>
+				<div>
+				    <label for='parent-fieldname-userIDURI' i18n:translate='label_userIDURI'>User ID URI:</label>
+				    <metal:field use-macro='python:context.widget("userIDURI", mode="view")'>http://get.bent/</metal:field>
+				</div>
                 <div>
                     <label for='parent-fieldname-siteURI' i18n:translate='label_siteURI'>Site URI:</label>
                     <metal:field use-macro='python:context.widget("siteURI", mode="view")'>http://get.bent/</metal:field>

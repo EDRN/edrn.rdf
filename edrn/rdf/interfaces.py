@@ -424,4 +424,8 @@ class IRegisteredPerson(ISource):
         description=_(u'Uniform Resource Identifier for the site predicate.'),
         required=False,
     )
-    
+    userIDURI = schema.TextLine(
+        title=_(u'User ID URI'),
+        description=_(u'Uniform Resource Identifier for the account name predicate.'),
+        required=False,
+    )
