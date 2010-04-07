@@ -212,7 +212,8 @@ def main():
             + 'Fax String, ' \
             + 'Specialty String, ' \
             + 'Photo String, ' \
-            + 'EDRN_Title String)')
+            + 'EDRN_Title String, '\
+            + 'userID String)')
         sourceCur.execute('select ' \
             + 'Identifier, ' \
             + 'Name_First, ' \
@@ -224,7 +225,8 @@ def main():
             + 'Fax, ' \
             + 'Specialty, ' \
             + 'Photo, ' \
-            + 'EDRN_Title from Registered_Person where Identifier < 100')
+            + 'EDRN_Title, '\
+            + 'userID from Registered_Person where Identifier < 100')
         destCur.executemany('insert into Registered_Person (' \
             + 'Identifier, ' \
             + 'Name_First, ' \
@@ -236,7 +238,9 @@ def main():
             + 'Fax, ' \
             + 'Specialty, ' \
             + 'Photo, ' \
-            + 'EDRN_Title) values (' \
+            + 'EDRN_Title, '\
+            + 'userID) values (' \
+            + '?, ' \
             + '?, ' \
             + '?, ' \
             + '?, ' \
