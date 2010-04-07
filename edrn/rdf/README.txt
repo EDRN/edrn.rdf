@@ -413,7 +413,7 @@ A Publication object provides RDF of course::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    1910
+    1911
     >>> for i in c.query('SELECT ?title WHERE { <http://edrn/pubs/427> <http://purl.org/dc/terms/title> ?title . }'):
     ...     print i[0]
     Efficient and specific removal of albumin from human serum sample
@@ -605,7 +605,7 @@ A Protocol also provides RDF, as a matter of course::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    756
+    758
     >>> for i in c.query('SELECT ?title WHERE { <http://edrn/protocols/36> <http://purl.org/dc/terms/title> ?title . }'):
     ...     print i[0]
     Preliminary Clinical Characterization of Serum Biomarkers for Colorectal Neoplasms
@@ -662,6 +662,7 @@ solely to RDF folders::
     >>> browser.getControl(name='photoURI').value = 'http://xmlns.com/foaf/0.1/img'
     >>> browser.getControl(name='edrnTitleURI').value = 'http://edrn.rdf/rdfs/people.rdf#edrnTitle'
     >>> browser.getControl(name='siteURI').value = 'http://edrn.rdf/rdfs/people.rdf#site'
+	>>> browser.getControl(name='userIDURI').value = 'http://xmlns.com/foaf/0.1/accountName'
     >>> browser.getControl(name='form.button.save').click()
     >>> 'my-registered-person-generator' in rdfFolder.objectIds()
     True
@@ -694,6 +695,8 @@ solely to RDF folders::
     'http://edrn.rdf/rdfs/people.rdf#edrnTitle'
     >>> mrpg.siteURI
     'http://edrn.rdf/rdfs/people.rdf#site'
+	>>> mrpg.userIDURI
+	'http://xmlns.com/foaf/0.1/accountName'
 
 RDF generation? You got it::
 
@@ -706,10 +709,13 @@ RDF generation? You got it::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    56
+    57
     >>> for i in c.query('SELECT ?givenname WHERE { <http://edrn/registered-person/34> <http://xmlns.com/foaf/0.1/givenname> ?givenname . }'):
     ...     print i[0]
     Matt
+    >>> for i in c.query('SELECT ?accountName WHERE { <http://edrn/registered-person/51> <http://xmlns.com/foaf/0.1/accountName> ?accountName . }'):
+    ...     print i[0]
+    cedelste
     
 
 New Site Fields: Investigators and Staff
@@ -728,7 +734,7 @@ sites should contain rdf:resource links to those people.  Checking::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    737
+    758
     >>> for i in c.query('SELECT ?title WHERE { <http://edrn/sites/87> <http://purl.org/dc/terms/title> ?title . }'):
     ...     print i[0]
     National Cancer Institute
