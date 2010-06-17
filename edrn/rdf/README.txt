@@ -413,7 +413,7 @@ A Publication object provides RDF of course::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    1911
+    1914
     >>> for i in c.query('SELECT ?title WHERE { <http://edrn/pubs/427> <http://purl.org/dc/terms/title> ?title . }'):
     ...     print i[0]
     Efficient and specific removal of albumin from human serum sample
@@ -734,7 +734,7 @@ sites should contain rdf:resource links to those people.  Checking::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    758
+    769
     >>> for i in c.query('SELECT ?title WHERE { <http://edrn/sites/87> <http://purl.org/dc/terms/title> ?title . }'):
     ...     print i[0]
     National Cancer Institute
