@@ -1,6 +1,16 @@
 Changelog
 =========
 
+0.0.11 - Author! Author!
+------------------------
+
+The RDF feed for EDRN publications has had absolutely no author information in
+it.  And yet no one noticed until today!  So, this release fixes that issue.
+
+By the way, if you're curious, you can see details about the issue at the
+following location: https://oodt.jpl.nasa.gov/jira/browse/CA-582
+
+
 0.0.10 - PyMSSQL Lockdown
 -------------------------
 

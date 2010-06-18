@@ -263,6 +263,10 @@ class PublicationGenerator(SourceGenerator):
             subjectURI = URIRef(context.uriPrefix + unicode(identifier))
             graph.add((subjectURI, RDF.type, URIRef(context.typeURI)))
             graph.add((subjectURI, URIRef(context.titleURI), toLiteral(title)))
+            if author:
+                authorURI = URIRef(context.authorURI)
+                for authorName in author.split(', '):
+                    graph.add((subjectURI, authorURI, toLiteral(authorName)))
             if abstract:
                 graph.add((subjectURI, URIRef(context.abstractURI), toLiteral(abstract)))
             if description:
