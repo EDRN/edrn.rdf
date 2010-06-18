@@ -413,10 +413,20 @@ A Publication object provides RDF of course::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    1914
+    3440
     >>> for i in c.query('SELECT ?title WHERE { <http://edrn/pubs/427> <http://purl.org/dc/terms/title> ?title . }'):
     ...     print i[0]
     Efficient and specific removal of albumin from human serum sample
+
+Where are the author names? CA-582 found that those were missing.
+
+	>>> q = 'SELECT ?author WHERE { <http://edrn/pubs/427> <http://edrn/rdf/rdfs/pubs.rdf#author> ?author . }'
+    >>> n = [unicode(i[0]) for i in c.query(q)]
+    >>> n.sort()
+    >>> n
+    [u'Gonye G and Block TM', u'Mattu TS', u'Nakajima PB', u'Steel LF', u'Trotter MG']
+
+Looks like they're fixed.
 
 
 Protocols
@@ -662,7 +672,7 @@ solely to RDF folders::
     >>> browser.getControl(name='photoURI').value = 'http://xmlns.com/foaf/0.1/img'
     >>> browser.getControl(name='edrnTitleURI').value = 'http://edrn.rdf/rdfs/people.rdf#edrnTitle'
     >>> browser.getControl(name='siteURI').value = 'http://edrn.rdf/rdfs/people.rdf#site'
-	>>> browser.getControl(name='userIDURI').value = 'http://xmlns.com/foaf/0.1/accountName'
+    >>> browser.getControl(name='userIDURI').value = 'http://xmlns.com/foaf/0.1/accountName'
     >>> browser.getControl(name='form.button.save').click()
     >>> 'my-registered-person-generator' in rdfFolder.objectIds()
     True
@@ -695,8 +705,8 @@ solely to RDF folders::
     'http://edrn.rdf/rdfs/people.rdf#edrnTitle'
     >>> mrpg.siteURI
     'http://edrn.rdf/rdfs/people.rdf#site'
-	>>> mrpg.userIDURI
-	'http://xmlns.com/foaf/0.1/accountName'
+    >>> mrpg.userIDURI
+    'http://xmlns.com/foaf/0.1/accountName'
 
 RDF generation? You got it::
 
