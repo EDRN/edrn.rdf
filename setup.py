@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 import os
 
 _name = 'edrn.rdf'
-_version = '0.0.12'
+_version = '1.0.0'
 
 def _read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
