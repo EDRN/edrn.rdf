@@ -34,4 +34,8 @@ RESERVED. U.S. Government Sponsorship acknowledged.
         <require permission='zope2.View' interface='..interfaces.IRegisteredPerson'/>
         <require permission='cmf.ModifyPortalContent' set_schema='..interfaces.IRegisteredPerson'/>
     </class>
+    <class class='.committee.Committee'>
+        <require permission='zope2.View' interface='..interfaces.ICommittee'/>
+        <require permission='cmf.ModifyPortalContent' set_schema='..interfaces.ICommittee'/>
+    </class>
 </configure>

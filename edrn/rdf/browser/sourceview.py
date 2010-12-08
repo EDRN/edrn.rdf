@@ -39,3 +39,7 @@ class ProtocolView(SourceView):
 class RegisteredPersonView(SourceView):
     '''Default view for a Registered Person'''
     __call__ = ViewPageTemplateFile('templates/registeredperson.pt')
+
+class CommitteeView(SourceView):
+    '''Default view for a Committee'''
+    __call__ = ViewPageTemplateFile('templates/committee.pt')

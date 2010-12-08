@@ -11,4 +11,5 @@ RESERVED. U.S. Government Sponsorship acknowledged.
     <object name='Publication'       meta_type='Factory-based Type Information with dynamic views'/>
     <object name='Protocol'          meta_type='Factory-based Type Information with dynamic views'/>
     <object name='Registered Person' meta_type='Factory-based Type Information with dynamic views'/>
+    <object name='Committee'         meta_type='Factory-based Type Information with dynamic views'/>
 </object>
