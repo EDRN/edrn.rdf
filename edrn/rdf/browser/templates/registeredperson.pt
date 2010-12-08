@@ -71,6 +71,30 @@
                     <label for='parent-fieldname-siteURI' i18n:translate='label_siteURI'>Site URI:</label>
                     <metal:field use-macro='python:context.widget("siteURI", mode="view")'>http://get.bent/</metal:field>
                 </div>
+                <div>
+                    <label for='parent-fieldname-addr1URI' i18n:translate='label_addr1URI'>Address Line 1 URI</label>
+                    <metal:field use-macro='python:context.widget("addr1URI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-addr2URI' i18n:translate='label_addr2URI'>Address Line 2 URI</label>
+                    <metal:field use-macro='python:context.widget("addr2URI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-cityURI' i18n:translate='label_cityURI'>City URI</label>
+                    <metal:field use-macro='python:context.widget("cityURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-stateURI' i18n:translate='label_stateURI'>State URI</label>
+                    <metal:field use-macro='python:context.widget("stateURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-zipURI' i18n:translate='label_zipURI'>Zip URI</label>
+                    <metal:field use-macro='python:context.widget("zipURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
+                <div>
+                    <label for='parent-fieldname-countryURI' i18n:translate='label_countryURI'>Country URI</label>
+                    <metal:field use-macro='python:context.widget("countryURI", mode="view")'>http://x.com/y</metal:field>
+                </div>
                 <div metal:use-macro='context/document_relateditems/macros/relatedItems'>
                     Any related items
                 </div>
