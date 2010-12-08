@@ -38,5 +38,10 @@ RESERVED. U.S. Government Sponsorship acknowledged.
             <role name='Owner' />
             <role name='Contributor' />
         </permission>
+        <permission name='EDRN RDF: Add Committee' acquire='True'>
+            <role name='Manager' />
+            <role name='Owner' />
+            <role name='Contributor' />
+        </permission>
     </permissions>
 </rolemap>

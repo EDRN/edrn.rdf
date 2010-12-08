@@ -16,4 +16,5 @@ ADD_PERMISSIONS = {
     'Publication':       'EDRN RDF: Add Publication',
     'Protocol':          'EDRN RDF: Add Protocol',
     'Registered Person': 'EDRN RDF: Add Registered Person',
+    'Committee':         'EDRN RDF: Add Committee',
 }

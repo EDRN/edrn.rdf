@@ -15,7 +15,7 @@ EDRNRDFMessageFactory = MessageFactory('edrn.rdf')
 
 def initialize(context):
     """Initializer called when used as a Zope 2 product."""
-    from content import rdffolder, bodysystem, disease, site, publication, protocol, registeredperson
+    from content import rdffolder, bodysystem, disease, site, publication, protocol, registeredperson, committee
     contentTypes, constructors, ftis = atapi.process_types(atapi.listTypes(config.PROJECTNAME), config.PROJECTNAME)
     for atype, constructor in zip(contentTypes, constructors):
         Products.CMFCore.utils.ContentInit(

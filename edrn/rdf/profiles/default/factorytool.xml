@@ -12,5 +12,6 @@ RESERVED. U.S. Government Sponsorship acknowledged.
         <type portal_type='Publication' />
         <type portal_type='Protocol' />
         <type portal_type='Registered Person' />
+        <type portal_type='Committee' />
     </factorytypes>
 </object>

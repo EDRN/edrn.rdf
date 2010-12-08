@@ -71,42 +71,6 @@ class ISite(ISource):
         description=_(u'Uniform Resource Identifier for the Investigator predicate.'))
     staffURI = schema.TextLine(title=_(u'Staff URI'),
         description=_(u'Uniform Resource Identifier for the staff predicate.'))
-    mailAddr1URI = schema.TextLine(title=_(u'Mailing Address Line 1 URI'),
-        description=_(u'Uniform Resource Identifier for line 1 of the mailing address.'))
-    mailAddr2URI = schema.TextLine(title=_(u'Mailing Address Line 2 URI'),
-        description=_(u'Uniform Resource Identifier for line 2 of the mailing address.'))
-    mailAddrCityURI = schema.TextLine(title=_(u'Mailing Address City URI'),
-        description=_(u'Uniform Resource Identifier for the city of the mailing address predicate.'))
-    mailAddrStateURI = schema.TextLine(title=_(u'Mailing Address State URI'),
-        description=_(u'Uniform Resource Identifier for the state of the mailing address predicate.'))
-    mailAddrZipURI = schema.TextLine(title=_(u'Mailing Address Post Code URI'),
-        description=_(u'Uniform Resource Identifier for the post code (zip code) of the mailing address predicate.'))
-    mailAddrCountryURI = schema.TextLine(title=_(u'Mailing Address Country URI'),
-        description=_(u'Uniform Resource Identifier for the country of the mailing address predicate.'))
-    physAddr1URI = schema.TextLine(title=_(u'Physical Address Line 1 URI'),
-        description=_(u'Uniform Resource Identifier for line 1 of the physical address.'))
-    physAddr2URI = schema.TextLine(title=_(u'Physical Address Line 2 URI'),
-        description=_(u'Uniform Resource Identifier for line 2 of the physical address.'))
-    physAddrCityURI = schema.TextLine(title=_(u'Physical Address City URI'),
-        description=_(u'Uniform Resource Identifier for the city of the physical address predicate.'))
-    physAddrStateURI = schema.TextLine(title=_(u'Physical Address State URI'),
-		description=_(u'Uniform Resource Identifier for the state of the physical address predicate.'))
-    physAddrZipURI = schema.TextLine(title=_(u'Physical Address Post Code URI'),
-		description=_(u'Uniform Resource Identifier for the post code (zip code) of the physical address predicate.'))
-    physAddrCountryURI = schema.TextLine(title=_(u'Physical Address Country URI'),
-        description=_(u'Uniform Resource Identifier for the country of the physical address predicate.'))
-    shipAddr1URI = schema.TextLine(title=_(u'Shipping Address Line 1 URI'),
-		description=_(u'Uniform Resource Identifier for line 1 of the shipping address.'))
-    shipAddr2URI = schema.TextLine(title=_(u'Shipping Address Line 2 URI'),
-		description=_(u'Uniform Resource Identifier for line 2 of the shipping address.'))
-    shipAddrCityURI = schema.TextLine(title=_(u'Shipping Address City URI'),
-		description=_(u'Uniform Resource Identifier for the city of the shipping address predicate.'))
-    shipAddrStateURI = schema.TextLine(title=_(u'Shipping Address State URI'),
-		description=_(u'Uniform Resource Identifier for the state of the shipping address predicate.'))
-    shipAddrZipURI = schema.TextLine(title=_(u'Shipping Address Post Code URI'),
-		description=_(u'Uniform Resource Identifier for the post code (zip code) of the shipping address predicate.'))
-    shipAddrCountryURI = schema.TextLine(title=_(u'Shipping Address Country URI'),
-        description=_(u'Uniform Resource Identifier for the country of the shipping address predicate.'))
     programURI = schema.TextLine(title=_(u'Program URI'),
 		description=_(u'Uniform Resource Identifier for predicate identifying the program description.'))
     urlURI = schema.TextLine(title=_(u'URL URI'),
@@ -428,4 +392,55 @@ class IRegisteredPerson(ISource):
         title=_(u'User ID URI'),
         description=_(u'Uniform Resource Identifier for the account name predicate.'),
         required=False,
+    )
+    addr1URI = schema.TextLine(title=_(u'Mailing Address Line 1 URI'),
+        description=_(u'Uniform Resource Identifier for line 1 of the mailing address.'))
+    addr2URI = schema.TextLine(title=_(u'Mailing Address Line 2 URI'),
+        description=_(u'Uniform Resource Identifier for line 2 of the mailing address.'))
+    cityURI = schema.TextLine(title=_(u'Mailing Address City URI'),
+        description=_(u'Uniform Resource Identifier for the city of the mailing address predicate.'))
+    stateURI = schema.TextLine(title=_(u'Mailing Address State URI'),
+        description=_(u'Uniform Resource Identifier for the state of the mailing address predicate.'))
+    zipURI = schema.TextLine(title=_(u'Mailing Address Post Code URI'),
+        description=_(u'Uniform Resource Identifier for the post code (zip code) of the mailing address predicate.'))
+    countryURI = schema.TextLine(title=_(u'Mailing Address Country URI'),
+        description=_(u'Uniform Resource Identifier for the country of the mailing address predicate.'))
+
+
+class ICommittee(ISource):
+    '''Committee information generation'''
+    titlePredicateURI = schema.TextLine(
+        title=_(u'Title Predicate URI'),
+        description=_(u'Uniform Resource Identifier for the title predicate.'),
+        required=True,
+    )
+    abbreviatedNamePredicateURI = schema.TextLine(
+        title=_(u'Abbreviated Name Predicate URI'),
+        description=_(u'Uniform Resource Identifier for the abbreviated name predicate.'),
+        required=True,
+    )
+    committeeTypePredicateURI = schema.TextLine(
+        title=_(u'Committee Type Predicate URI'),
+        description=_(u'Uniform Resource Identifier for the committee type predicate.'),
+        required=True,
+    )
+    chairPredicateURI = schema.TextLine(
+        title=_(u'Chair Predicate URI'),
+        description=_(u'Uniform Resource Identifier for the chair predicate.'),
+        required=True,
+    )
+    coChairPredicateURI = schema.TextLine(
+        title=_(u'Co-Chair Predicate URI'),
+        description=_(u'Uniform Resource Identifier for the co-chair predicate.'),
+        required=True,
+    )
+    consultantPredicateURI = schema.TextLine(
+        title=_(u'Consultant Predicate URI'),
+        description=_(u'Uniform Resource Identifier for the consultant predicate.'),
+        required=True,
+    )
+    memberPredicateURI = schema.TextLine(
+        title=_(u'Member Predicate URI'),
+        description=_(u'Uniform Resource Identifier for the member predicate.'),
+        required=True,
     )
