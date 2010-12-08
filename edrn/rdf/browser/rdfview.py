@@ -163,20 +163,11 @@ class SiteGenerator(SourceGenerator):
             + 'EDRN_Funding_Date_Start, EDRN_Funding_Date_Finish, FWA_Number, ' \
             + 'ID_for_Principal_Investigator, IDs_for_CoPrincipalInvestigators, ' \
             + 'IDs_for_CoInvestigators, IDs_for_Investigators, IDs_for_Staff, ' \
-            + 'Institution_Name_Abbrev, Institution_Mailing_Address1, Institution_Mailing_Address2, ' \
-            + 'Institution_Mailing_City, Institution_Mailing_State, Institution_Mailing_Zip, ' \
-            + 'Institution_Mailing_Country, Institution_Physical_Address1, Institution_Physical_Address2, ' \
-            + 'Institution_Physical_City, Institution_Physical_State, Institution_Physical_Zip, ' \
-            + 'Institution_Physical_Country, Institution_Shipping_Address1, Institution_Shipping_Address2, ' \
-            + 'Institution_Shipping_City, Institution_Shipping_State, Institution_Shipping_Zip, ' \
-            + 'Institution_Shipping_Country, Site_Program_Description, Institution_URL, Member_Type, ' \
+            + 'Institution_Name_Abbrev, Site_Program_Description, Institution_URL, Member_Type, ' \
             + 'Member_Type_Historical_Notes from Site')
         for i, title, assocMemberSponsor, fundingDateStart, fundingDateFinish, fwaNumber, \
             pi, coPI, coi, investigators, staff, \
-            abbrevName, mailAddr1, mailAddr2, \
-            mailAddrCity, mailAddrState, mailAddrZip, mailAddrCountry, physAddr1, physAddr2, physAddrCity, physAddrState, \
-            physAddrZip, physAddrCountry, shipAddr1, shipAddr2, shipAddrCity, shipAddrState, shipAddrZip, shipAddrCountry, \
-            program, url, memberType, histNotes in cursor.fetchall():
+            abbrevName, program, url, memberType, histNotes in cursor.fetchall():
             if not title:
                 continue
             subjectURI = URIRef(context.uriPrefix + unicode(i))
@@ -207,42 +198,6 @@ class SiteGenerator(SourceGenerator):
                 graph.add((subjectURI, URIRef(context.fwaNumberURI), toLiteral(fwaNumber)))
             if abbrevName:
                 graph.add((subjectURI, URIRef(context.abbrevNameURI), toLiteral(abbrevName)))
-            if mailAddr1:
-                graph.add((subjectURI, URIRef(context.mailAddr1URI), toLiteral(mailAddr1)))
-            if mailAddr2:
-                graph.add((subjectURI, URIRef(context.mailAddr2URI), toLiteral(mailAddr2)))
-            if mailAddrCity:
-                graph.add((subjectURI, URIRef(context.mailAddrCityURI), toLiteral(mailAddrCity)))
-            if mailAddrState:
-                graph.add((subjectURI, URIRef(context.mailAddrStateURI), toLiteral(mailAddrState)))
-            if mailAddrZip:
-                graph.add((subjectURI, URIRef(context.mailAddrZipURI), toLiteral(mailAddrZip)))
-            if mailAddrCountry:
-                graph.add((subjectURI, URIRef(context.mailAddrCountryURI), toLiteral(mailAddrCountry)))
-            if physAddr1:
-                graph.add((subjectURI, URIRef(context.physAddr1URI), toLiteral(physAddr1)))
-            if physAddr2:
-                graph.add((subjectURI, URIRef(context.physAddr2URI), toLiteral(physAddr2)))
-            if physAddrCity:
-                graph.add((subjectURI, URIRef(context.physAddrCityURI), toLiteral(physAddrCity)))
-            if physAddrState:
-                graph.add((subjectURI, URIRef(context.physAddrStateURI), toLiteral(physAddrState)))
-            if physAddrZip:
-                graph.add((subjectURI, URIRef(context.physAddrZipURI), toLiteral(physAddrZip)))
-            if physAddrCountry:
-                graph.add((subjectURI, URIRef(context.physAddrCountryURI), toLiteral(physAddrCountry)))
-            if shipAddr1:
-                graph.add((subjectURI, URIRef(context.shipAddr1URI), toLiteral(shipAddr1)))
-            if shipAddr2:
-                graph.add((subjectURI, URIRef(context.shipAddr2URI), toLiteral(shipAddr2)))
-            if shipAddrCity:
-                graph.add((subjectURI, URIRef(context.shipAddrCityURI), toLiteral(shipAddrCity)))
-            if shipAddrState:
-                graph.add((subjectURI, URIRef(context.shipAddrStateURI), toLiteral(shipAddrState)))
-            if shipAddrZip:
-                graph.add((subjectURI, URIRef(context.shipAddrZipURI), toLiteral(shipAddrZip)))
-            if shipAddrCountry:
-                graph.add((subjectURI, URIRef(context.shipAddrCountryURI), toLiteral(shipAddrCountry)))
             if program:
                 graph.add((subjectURI, URIRef(context.programURI), toLiteral(program)))
             if url:
@@ -429,9 +384,14 @@ class RegisteredPersonGenerator(SourceGenerator):
         phoneURI, emailURI, siteURI = URIRef(context.phoneURI), URIRef(context.emailURI), URIRef(context.siteURI)
         faxURI, specialtyURI = URIRef(context.faxURI), URIRef(context.specialtyURI)
         photoURI, edrnTitleURI, userIDURI = URIRef(context.photoURI), URIRef(context.edrnTitleURI), URIRef(context.userIDURI)
-        cursor.execute('select Identifier, Name_First, Name_Middle, Name_Last, Site_Identifier, Phone, Email, Fax, Specialty,' \
-            + 'Photo, EDRN_Title, userID from Registered_Person')
-        for identifier, first, middle, last, siteID, phone, email, fax, specialty, photo, edrnTitle, userID in cursor.fetchall():
+        addr1URI, addr2URI, cityURI, stateURI = \
+            URIRef(context.addr1URI), URIRef(context.addr2URI), URIRef(context.cityURI), URIRef(context.stateURI)
+        zipURI, countryURI = URIRef(context.zipURI), URIRef(context.countryURI)
+        cursor.execute('select Identifier, Name_First, Name_Middle, Name_Last, Secure_site_siteid, Phone, Email, Fax, Specialty,' \
+            + 'Photo_file_name, EDRN_Title, userID, Mailing_Address1, Mailing_Address2, Mailing_City, Mailing_State,' \
+            + 'Mailing_Zip, Mailing_Country from Registered_Person')
+        for identifier, first, middle, last, siteID, phone, email, fax, specialty, photo, edrnTitle, userID, addr1, addr2, \
+            city, state, zipCode, country in cursor.fetchall():
             subjectURI = URIRef(context.uriPrefix + unicode(identifier))
             graph.add((subjectURI, RDF.type, URIRef(context.typeURI)))
             if first and first.strip():
@@ -456,3 +416,57 @@ class RegisteredPersonGenerator(SourceGenerator):
                 graph.add((subjectURI, edrnTitleURI, toLiteral(edrnTitle)))
             if userID:
                 graph.add((subjectURI, userIDURI, toLiteral(userID)))
+            if addr1:
+                graph.add((subjectURI, addr1URI, toLiteral(addr1)))
+            if addr2:
+                graph.add((subjectURI, addr2URI, toLiteral(addr2)))
+            if city:
+                graph.add((subjectURI, cityURI, toLiteral(city)))
+            if state:
+                graph.add((subjectURI, stateURI, toLiteral(state)))
+            if zipCode:
+                graph.add((subjectURI, zipURI, toLiteral(zipCode)))
+            if country:
+                graph.add((subjectURI, countryURI, toLiteral(country)))
+
+
+class CommitteeGenerator(SourceGenerator):
+    '''Generates RDF for committees'''
+    def populate(self, graph, connection, context):
+        catalog = getToolByName(context, 'portal_catalog')
+        results = catalog(object_provides=IRegisteredPerson.__identifier__)
+        if len(results) == 0:
+            raise RegisteredPersonMissingError('No Registered Person object found')
+        personPrefix                = results[0].getObject().uriPrefix
+        cursor                      = connection.cursor()
+        titlePredicateURI           = URIRef(context.titlePredicateURI)
+        abbreviatedNamePredicateURI = URIRef(context.abbreviatedNamePredicateURI)
+        committeeTypePredicateURI   = URIRef(context.committeeTypePredicateURI)
+        chairPredicateURI           = URIRef(context.chairPredicateURI)
+        coChairPredicateURI         = URIRef(context.coChairPredicateURI)
+        consultantPredicateURI      = URIRef(context.consultantPredicateURI)
+        memberPredicateURI          = URIRef(context.memberPredicateURI)
+        cursor.execute('select Committees.Identifier, Committees.Committee_name, Committees.Committee_name_short, Committees.Committee_type, Committee_Membership.Registered_Person_Identifer, Committee_Membership.RoleName from Committees, Committee_Membership where Committees.Identifier = Committee_Membership.Committee_Identifier')
+        lastIdentifier = None
+        for identifier, title, abbrev, committeeType, personID, role in cursor.fetchall():
+            if lastIdentifier != identifier:
+                subjectURI = URIRef(context.uriPrefix + unicode(identifier))
+                graph.add((subjectURI, RDF.type, URIRef(context.typeURI)))
+                if title: graph.add((subjectURI, titlePredicateURI, toLiteral(title.strip())))
+                if abbrev: graph.add((subjectURI, abbreviatedNamePredicateURI, toLiteral(abbrev.strip())))
+                if committeeType: graph.add((subjectURI, committeeTypePredicateURI, toLiteral(committeeType.strip())))
+                lastIdentifier = identifier
+            if role:
+                role = role.strip().lower()
+                person = URIRef(personPrefix + unicode(personID))
+                if role == 'chair':
+                    predicate = chairPredicateURI
+                elif role == 'co-chair':
+                    predicate = coChairPredicateURI
+                elif role == 'consultant':
+                    predicate = consultantPredicateURI
+                else:
+                    predicate = memberPredicateURI
+                graph.add((subjectURI, predicate, person))
+
+                
