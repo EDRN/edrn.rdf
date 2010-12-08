@@ -151,5 +151,26 @@ RESERVED. U.S. Government Sponsorship acknowledged.
         title='Registered Person view'
     />
 
+    <!-- Committee -->
+    <browser:resource name='committee.gif' file='images/committee.gif'/>
+    <browser:page
+        class='.sourceview.CommitteeView'
+        for='..interfaces.ICommittee'
+        name='view'
+        permission='zope2.View'
+    />
+    <browser:page
+        class='.rdfview.CommitteeGenerator'
+        for='..interfaces.ICommittee'
+        name='rdf'
+        permission='zope2.View'
+    />
+    <browser:menuItem
+        action='@@view'
+        description='Default representation of a Committee.'
+        for='..interfaces.ICommittee'
+        menu='plone_displayviews'
+        title='Committee view'
+    />
 
 </configure>
