@@ -201,6 +201,7 @@ And generated RDF::
     ...     print i[0]
     Malignant neoplasm of other and unspecified parts of mouth
     
+
 Sites
 ~~~~~
 
@@ -233,24 +234,6 @@ details. They can be added to RDF Folders only::
     >>> browser.getControl(name='fundingDateStartURI').value = u'http://edrn/rdf/rdfs/site.rdf#fundingDateStart'
     >>> browser.getControl(name='fundingDateFinishURI').value = u'http://edrn/rdf/rdfs/site.rdf#fundingDateFinish'
     >>> browser.getControl(name='fwaNumberURI').value = u'http://edrn/rdf/rdfs/site.rdf#fwaNumber'
-    >>> browser.getControl(name='mailAddr1URI').value = u'http://edrn/rdf/rdfs/site.rdf#mailAddr1'
-    >>> browser.getControl(name='mailAddr2URI').value = u'http://edrn/rdf/rdfs/site.rdf#mailAddr2'
-    >>> browser.getControl(name='mailAddrCityURI').value = u'http://edrn/rdf/rdfs/site.rdf#mailAddrCity'
-    >>> browser.getControl(name='mailAddrStateURI').value = u'http://edrn/rdf/rdfs/site.rdf#mailAddrState'
-    >>> browser.getControl(name='mailAddrZipURI').value = u'http://edrn/rdf/rdfs/site.rdf#mailAddrZip'
-    >>> browser.getControl(name='mailAddrCountryURI').value = u'http://edrn/rdf/rdfs/site.rdf#mailAddrCountry'
-    >>> browser.getControl(name='physAddr1URI').value = u'http://edrn/rdf/rdfs/site.rdf#physAddr1'
-    >>> browser.getControl(name='physAddr2URI').value = u'http://edrn/rdf/rdfs/site.rdf#physAddr2'
-    >>> browser.getControl(name='physAddrCityURI').value = u'http://edrn/rdf/rdfs/site.rdf#physAddrCity'
-    >>> browser.getControl(name='physAddrStateURI').value = u'http://edrn/rdf/rdfs/site.rdf#physAddrState'
-    >>> browser.getControl(name='physAddrZipURI').value = u'http://edrn/rdf/rdfs/site.rdf#physAddrZip'
-    >>> browser.getControl(name='physAddrCountryURI').value = u'http://edrn/rdf/rdfs/site.rdf#physAddrCountry'
-    >>> browser.getControl(name='shipAddr1URI').value = u'http://edrn/rdf/rdfs/site.rdf#shipAddr1'
-    >>> browser.getControl(name='shipAddr2URI').value = u'http://edrn/rdf/rdfs/site.rdf#shipAddr2'
-    >>> browser.getControl(name='shipAddrCityURI').value = u'http://edrn/rdf/rdfs/site.rdf#shipAddrCity'
-    >>> browser.getControl(name='shipAddrStateURI').value = u'http://edrn/rdf/rdfs/site.rdf#shipAddrState'
-    >>> browser.getControl(name='shipAddrZipURI').value = u'http://edrn/rdf/rdfs/site.rdf#shipAddrZip'
-    >>> browser.getControl(name='shipAddrCountryURI').value = u'http://edrn/rdf/rdfs/site.rdf#shipAddrCountry'
     >>> browser.getControl(name='programURI').value = u'http://edrn/rdf/rdfs/site.rdf#program'
     >>> browser.getControl(name='urlURI').value = u'http://edrn/rdf/rdfs/site.rdf#url'
     >>> browser.getControl(name='memberTypeURI').value = u'http://edrn/rdf/rdfs/site.rdf#memberType'
@@ -289,42 +272,6 @@ details. They can be added to RDF Folders only::
     'http://edrn/rdf/rdfs/site.rdf#fundingDateFinish'
     >>> site.fwaNumberURI
     'http://edrn/rdf/rdfs/site.rdf#fwaNumber'
-    >>> site.mailAddr1URI
-    'http://edrn/rdf/rdfs/site.rdf#mailAddr1'
-    >>> site.mailAddr2URI
-    'http://edrn/rdf/rdfs/site.rdf#mailAddr2'
-    >>> site.mailAddrCityURI
-    'http://edrn/rdf/rdfs/site.rdf#mailAddrCity'
-    >>> site.mailAddrStateURI
-    'http://edrn/rdf/rdfs/site.rdf#mailAddrState'
-    >>> site.mailAddrZipURI
-    'http://edrn/rdf/rdfs/site.rdf#mailAddrZip'
-    >>> site.mailAddrCountryURI
-    'http://edrn/rdf/rdfs/site.rdf#mailAddrCountry'
-    >>> site.physAddr1URI
-    'http://edrn/rdf/rdfs/site.rdf#physAddr1'
-    >>> site.physAddr2URI
-    'http://edrn/rdf/rdfs/site.rdf#physAddr2'
-    >>> site.physAddrCityURI
-    'http://edrn/rdf/rdfs/site.rdf#physAddrCity'
-    >>> site.physAddrStateURI
-    'http://edrn/rdf/rdfs/site.rdf#physAddrState'
-    >>> site.physAddrZipURI
-    'http://edrn/rdf/rdfs/site.rdf#physAddrZip'
-    >>> site.physAddrCountryURI
-    'http://edrn/rdf/rdfs/site.rdf#physAddrCountry'
-    >>> site.shipAddr1URI
-    'http://edrn/rdf/rdfs/site.rdf#shipAddr1'
-    >>> site.shipAddr2URI
-    'http://edrn/rdf/rdfs/site.rdf#shipAddr2'
-    >>> site.shipAddrCityURI
-    'http://edrn/rdf/rdfs/site.rdf#shipAddrCity'
-    >>> site.shipAddrStateURI
-    'http://edrn/rdf/rdfs/site.rdf#shipAddrState'
-    >>> site.shipAddrZipURI
-    'http://edrn/rdf/rdfs/site.rdf#shipAddrZip'
-    >>> site.shipAddrCountryURI
-    'http://edrn/rdf/rdfs/site.rdf#shipAddrCountry'
     >>> site.programURI
     'http://edrn/rdf/rdfs/site.rdf#program'
     >>> site.urlURI
@@ -413,18 +360,18 @@ A Publication object provides RDF of course::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    3440
-    >>> for i in c.query('SELECT ?title WHERE { <http://edrn/pubs/427> <http://purl.org/dc/terms/title> ?title . }'):
+    2854
+    >>> for i in c.query('SELECT ?title WHERE { <http://edrn/pubs/196> <http://purl.org/dc/terms/title> ?title . }'):
     ...     print i[0]
-    Efficient and specific removal of albumin from human serum sample
+    Aberrant methylation during cervical carcinogenesis
 
 Where are the author names? CA-582 found that those were missing.
 
-	>>> q = 'SELECT ?author WHERE { <http://edrn/pubs/427> <http://edrn/rdf/rdfs/pubs.rdf#author> ?author . }'
+	>>> q = 'SELECT ?author WHERE { <http://edrn/pubs/196> <http://edrn/rdf/rdfs/pubs.rdf#author> ?author . }'
     >>> n = [unicode(i[0]) for i in c.query(q)]
     >>> n.sort()
     >>> n
-    [u'Gonye G and Block TM', u'Mattu TS', u'Nakajima PB', u'Steel LF', u'Trotter MG']
+    [u'Gazdar AF', u'Mathis M', u'Muller C', u'Rathi A', u'Virmani AK', u'Zoechbauer-Mueller S']
 
 Looks like they're fixed.
 
@@ -615,7 +562,7 @@ A Protocol also provides RDF, as a matter of course::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    758
+    720
     >>> for i in c.query('SELECT ?title WHERE { <http://edrn/protocols/36> <http://purl.org/dc/terms/title> ?title . }'):
     ...     print i[0]
     Preliminary Clinical Characterization of Serum Biomarkers for Colorectal Neoplasms
@@ -626,11 +573,11 @@ A Protocol also provides RDF, as a matter of course::
 Issue CA-285 complained that there were numeric codes instead of descriptive
 names for the fields of research in a protocol.  Checking::
 
-    >>> results = c.query('SELECT ?for WHERE { <http://edrn/protocols/57> <http://edrn/rdf/rdfs/protocols.rdf#fieldOfResearch> ?for . }')
+    >>> results = c.query('SELECT ?for WHERE { <http://edrn/protocols/67> <http://edrn/rdf/rdfs/protocols.rdf#fieldOfResearch> ?for . }')
     >>> results = [str(i[0]) for i in results]
     >>> results.sort()
     >>> results
-    ['Genomics', 'Proteomics']
+    ['Genomics', 'Metabolomics', 'Proteomics']
 
 See? All better!  But what about involved investigator sites?
 
@@ -673,6 +620,12 @@ solely to RDF folders::
     >>> browser.getControl(name='edrnTitleURI').value = 'http://edrn.rdf/rdfs/people.rdf#edrnTitle'
     >>> browser.getControl(name='siteURI').value = 'http://edrn.rdf/rdfs/people.rdf#site'
     >>> browser.getControl(name='userIDURI').value = 'http://xmlns.com/foaf/0.1/accountName'
+    >>> browser.getControl(name='addr1URI').value = u'http://edrn/rdf/rdfs/site.rdf#addr1'
+    >>> browser.getControl(name='addr2URI').value = u'http://edrn/rdf/rdfs/site.rdf#addr2'
+    >>> browser.getControl(name='cityURI').value = u'http://edrn/rdf/rdfs/site.rdf#city'
+    >>> browser.getControl(name='stateURI').value = u'http://edrn/rdf/rdfs/site.rdf#state'
+    >>> browser.getControl(name='zipURI').value = u'http://edrn/rdf/rdfs/site.rdf#zip'
+    >>> browser.getControl(name='countryURI').value = u'http://edrn/rdf/rdfs/site.rdf#country'
     >>> browser.getControl(name='form.button.save').click()
     >>> 'my-registered-person-generator' in rdfFolder.objectIds()
     True
@@ -707,6 +660,18 @@ solely to RDF folders::
     'http://edrn.rdf/rdfs/people.rdf#site'
     >>> mrpg.userIDURI
     'http://xmlns.com/foaf/0.1/accountName'
+    >>> mrpg.addr1URI
+    'http://edrn/rdf/rdfs/site.rdf#addr1'
+    >>> mrpg.addr2URI
+    'http://edrn/rdf/rdfs/site.rdf#addr2'
+    >>> mrpg.cityURI
+    'http://edrn/rdf/rdfs/site.rdf#city'
+    >>> mrpg.stateURI
+    'http://edrn/rdf/rdfs/site.rdf#state'
+    >>> mrpg.zipURI
+    'http://edrn/rdf/rdfs/site.rdf#zip'
+    >>> mrpg.countryURI
+    'http://edrn/rdf/rdfs/site.rdf#country'
 
 RDF generation? You got it::
 
@@ -719,10 +684,10 @@ RDF generation? You got it::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    57
-    >>> for i in c.query('SELECT ?givenname WHERE { <http://edrn/registered-person/34> <http://xmlns.com/foaf/0.1/givenname> ?givenname . }'):
+    66
+    >>> for i in c.query('SELECT ?givenname WHERE { <http://edrn/registered-person/29> <http://xmlns.com/foaf/0.1/givenname> ?givenname . }'):
     ...     print i[0]
-    Matt
+    Mark
     >>> for i in c.query('SELECT ?accountName WHERE { <http://edrn/registered-person/51> <http://xmlns.com/foaf/0.1/accountName> ?accountName . }'):
     ...     print i[0]
     cedelste
@@ -744,7 +709,7 @@ sites should contain rdf:resource links to those people.  Checking::
     >>> c.parse(StringIO(browser.contents))
     <Graph...
     >>> len(c)
-    769
+    517
     >>> for i in c.query('SELECT ?title WHERE { <http://edrn/sites/87> <http://purl.org/dc/terms/title> ?title . }'):
     ...     print i[0]
     National Cancer Institute
@@ -752,5 +717,75 @@ sites should contain rdf:resource links to those people.  Checking::
     ...     print i[0]
     http://edrn/registered-person/1015
 
+
+Committees
+~~~~~~~~~~
+
+Committees are groups of registered people who work together to delay in
+accomplishing some task.  They can be added solely to RDF Folders::
+
+    >>> browser.open(portalURL)
+    >>> browser.getLink(id='committee')
+    Traceback (most recent call last):
+    ...
+    LinkNotFoundError
+    >>> browser.open(portalURL + '/my-rdf-folder')
+    >>> l = browser.getLink(id='committee')
+    >>> l.url.endswith('createObject?type_name=Committee')
+    True
+    >>> l.click()
+    >>> browser.getControl(name='title').value = u'My Committees'
+    >>> browser.getControl(name='description').value = u'Provides committee descriptions.'
+    >>> browser.getControl(name='uriPrefix').value = u'http://edrn/committees/'
+    >>> browser.getControl(name='typeURI').value = u'urn:edrn:types:committee'
+    >>> browser.getControl(name='titlePredicateURI').value = u'http://purl.org/dc/terms/title'
+    >>> browser.getControl(name='abbreviatedNamePredicateURI').value = u'http://edrn/rdf/rdfs/site.rdf#abbreviatedName'
+    >>> browser.getControl(name='committeeTypePredicateURI').value = u'http://edrn/rdf/rdfs/site.rdf#committeeType'
+    >>> browser.getControl(name='chairPredicateURI').value = u'http://edrn/rdf/rdfs/site.rdf#chair'
+    >>> browser.getControl(name='coChairPredicateURI').value = u'http://edrn/rdf/rdfs/site.rdf#coChair'
+    >>> browser.getControl(name='consultantPredicateURI').value = u'http://edrn/rdf/rdfs/site.rdf#consultant'
+    >>> browser.getControl(name='memberPredicateURI').value = u'http://edrn/rdf/rdfs/site.rdf#member'
+    >>> browser.getControl(name='form.button.save').click()
+    >>> 'my-committees' in rdfFolder.objectIds()
+    True
+    >>> committees = rdfFolder['my-committees']
+    >>> committees.title
+    'My Committees'
+    >>> committees.description
+    'Provides committee descriptions.'
+    >>> committees.uriPrefix
+    'http://edrn/committees/'
+    >>> committees.typeURI
+    'urn:edrn:types:committee'
+    >>> committees.titlePredicateURI
+    'http://purl.org/dc/terms/title'
+    >>> committees.abbreviatedNamePredicateURI
+    'http://edrn/rdf/rdfs/site.rdf#abbreviatedName'
+    >>> committees.committeeTypePredicateURI
+    'http://edrn/rdf/rdfs/site.rdf#committeeType'
+    >>> committees.chairPredicateURI
+    'http://edrn/rdf/rdfs/site.rdf#chair'
+    >>> committees.coChairPredicateURI
+    'http://edrn/rdf/rdfs/site.rdf#coChair'
+    >>> committees.consultantPredicateURI
+    'http://edrn/rdf/rdfs/site.rdf#consultant'
+    >>> committees.memberPredicateURI
+    'http://edrn/rdf/rdfs/site.rdf#member'
+    
+And generated RDF::
+
+    >>> browser.open(portalURL + '/my-rdf-folder/my-committees/rdf')
+    >>> browser.isHtml
+    False
+    >>> browser.headers['content-type']
+    'application/rdf+xml'
+    >>> c = ConjunctiveGraph()
+    >>> c.parse(StringIO(browser.contents))
+    <Graph...
+    >>> len(c)
+    12
+    >>> for i in c.query('SELECT ?title WHERE { <http://edrn/committees/8> <http://purl.org/dc/terms/title> ?title . }'):
+    ...     print i[0]
+    Data Sharing and Informatics Subcommittee
 
 That's it.
