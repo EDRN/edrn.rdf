@@ -8,34 +8,26 @@ RESERVED. U.S. Government Sponsorship acknowledged.
     
     <class class='.rdffolder.RDFFolder'>
         <require permission='zope2.View' interface='..interfaces.IRDFFolder'/>
-        <require permission='cmf.ModifyPortalContent' set_schema='..interfaces.IRDFFolder'/>
     </class>
     <class class='.bodysystem.BodySystem'>
         <require permission='zope2.View' interface='..interfaces.IBodySystem'/>
-        <require permission='cmf.ModifyPortalContent' set_schema='..interfaces.IBodySystem'/>
     </class>
     <class class='.disease.Disease'>
         <require permission='zope2.View' interface='..interfaces.IDisease'/>
-        <require permission='cmf.ModifyPortalContent' set_schema='..interfaces.IDisease'/>
     </class>
     <class class='.site.Site'>
         <require permission='zope2.View' interface='..interfaces.ISite'/>
-        <require permission='cmf.ModifyPortalContent' set_schema='..interfaces.ISite'/>
     </class>
     <class class='.publication.Publication'>
         <require permission='zope2.View' interface='..interfaces.IPublication'/>
-        <require permission='cmf.ModifyPortalContent' set_schema='..interfaces.IPublication'/>
     </class>
     <class class='.protocol.Protocol'>
         <require permission='zope2.View' interface='..interfaces.IProtocol'/>
-        <require permission='cmf.ModifyPortalContent' set_schema='..interfaces.IProtocol'/>
     </class>
     <class class='.registeredperson.RegisteredPerson'>
         <require permission='zope2.View' interface='..interfaces.IRegisteredPerson'/>
-        <require permission='cmf.ModifyPortalContent' set_schema='..interfaces.IRegisteredPerson'/>
     </class>
     <class class='.committee.Committee'>
         <require permission='zope2.View' interface='..interfaces.ICommittee'/>
-        <require permission='cmf.ModifyPortalContent' set_schema='..interfaces.ICommittee'/>
     </class>
 </configure>
