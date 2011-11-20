@@ -1,52 +1,20 @@
 edrn.rdf Installation
 =====================
 
-To install edrn.rdf into the global Python environment (or a workingenv),
-using a traditional Zope 2 instance, you can do this:
-
-* When you're reading this you have probably already run 
-  ``easy_install edrn.rdf``. Find out how to install setuptools
-  (and EasyInstall) here:
-  http://peak.telecommunity.com/DevCenter/EasyInstall
-
-* If you are using Zope 2.9 (not 2.10), get `pythonproducts`_ and install it 
-  via::
-
-    python setup.py install --home /path/to/instance
-
-  into your Zope instance.
-
-* Create a file called ``edrn.rdf-configure.zcml`` in the
-  ``/path/to/instance/etc/package-includes`` directory.  The file
-  should only contain this::
-
-    <include package="edrn.rdf" />
-
-.. _pythonproducts: http://plone.org/products/pythonproducts
-
-
-Alternatively, if you are using zc.buildout and the plone.recipe.zope2instance
-recipe to manage your project, you can do this:
+Use zc.buildout and the plone.recipe.zope2instance recipe to manage your
+project, and do the following:
 
 * Add ``edrn.rdf`` to the list of eggs to install, e.g.::
- 
-        [buildout]
+
+    [buildout]
+    ...
+    eggs =
         ...
-        eggs =
-            ...
-            edrn.rdf
-        
-* Tell the plone.recipe.zope2instance recipe to install a ZCML slug::
-  
-        [instance]
-        recipe = plone.recipe.zope2instance
-        ...
-        zcml =
-            edrn.rdf
-        
+        edrn.rdf
+    
 * Re-run buildout, e.g. with::
-  
-        $ ./bin/buildout
-        
-You can skip the ZCML slug if you are going to explicitly include the package
-from another package's configure.zcml file.
+
+    $ ./bin/buildout
+    
+You don't need a ZCML slug because it uses z3c.autoinclude.plugin with the
+Plone target.
