@@ -2,6 +2,8 @@
 # Copyright 2008-2011 California Institute of Technology. ALL RIGHTS
 # RESERVED. U.S. Government Sponsorship acknowledged.
 
+from distribute_setup import use_setuptools
+use_setuptools()
 from setuptools import setup, find_packages
 import os.path
 
