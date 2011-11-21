@@ -6,6 +6,14 @@ identifiers appear, you can find more about them by visiting this project's
 issue tracker at https://oodt.jpl.nasa.gov/jira/browse/CA.
 
 
+1.1.2 — Release Early, Release Often
+------------------------------------
+
+This release fixes the default password for the EKE database.  (We should
+really just make this a parameter on a control panel, except we're supposed to
+switch over to the ws_newcompass webservice anyway.)
+
+
 1.1.1 — Default Database Deliberation
 -------------------------------------
 

@@ -16,7 +16,7 @@ class RDFDatabase(object):
     def connect(self):
         return pymssql.connect(
             user='ekeuser',
-            password='Hello999',
+            password='H3ll0?bke7',
             host='localhost:1433',
             database='dbEKE'
         )
