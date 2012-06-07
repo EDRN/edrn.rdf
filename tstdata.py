@@ -27,7 +27,7 @@ Move in the new, and commit::
 Done.
 '''
 
-_user, _passwd, _host, _dbname = 'ekeuser', 'Hello999', 'localhost:1433', 'dbEKE'
+_user, _passwd, _host, _dbname = 'ekeuser', 'G00dby3!!*', 'localhost:1433', 'dbEKE'
 
 import SnakeSQL, pymssql
 
