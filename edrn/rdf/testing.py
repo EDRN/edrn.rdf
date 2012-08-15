@@ -7,18 +7,16 @@ from plone.app.testing import PloneSandboxLayer, IntegrationTesting, FunctionalT
 from plone.testing import z2
 from zope.interface import implements
 from zope.component import provideUtility
-import pkg_resources, SnakeSQL, tempfile, shutil
+import pkg_resources, tempfile, shutil
 
 class TestDatabase(object):
     implements(IRDFDatabase)
     def __init__(self):
-        self.dbdir = tempfile.mkdtemp()
-        shutil.rmtree(self.dbdir)
-        shutil.copytree(pkg_resources.resource_filename(__name__, 'tests/testdata'), self.dbdir)
+        pass
     def close(self):
-        shutil.rmtree(self.dbdir)
-    def connect(self):
-        return SnakeSQL.connect(database=self.dbdir, autoCreate=False)
+        pass
+    def query(self, x):
+        return None
 
 
 class EDRN_RDF_Layer(PloneSandboxLayer):

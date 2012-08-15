@@ -26,9 +26,11 @@ _entryPoints     = {
     'z3c.autoinclude.plugin': ['target=plone'],
 }
 _requirements = [
-    'rdflib>=2.4,<3.0a',
-    'pymssql==1.0.2',
+    'Pillow',
+    'rdflib',
     'Products.CMFPlone',
+    'plone.app.dexterity',
+    'collective.autopermission',
     'setuptools',
 ]
 _extras = {

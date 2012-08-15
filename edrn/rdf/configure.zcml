@@ -1,18 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--
-Copyright 2008 California Institute of Technology. ALL RIGHTS
+Copyright 2008—2012 California Institute of Technology. ALL RIGHTS
 RESERVED. U.S. Government Sponsorship acknowledged.
 -->
 <configure
     xmlns='http://namespaces.zope.org/zope'
-    xmlns:five='http://namespaces.zope.org/five'
+    xmlns:browser='http://namespaces.zope.org/browser'
+    xmlns:grok='http://namespaces.zope.org/grok'
     xmlns:genericsetup='http://namespaces.zope.org/genericsetup'
     i18n_domain='edrn.rdf'>
-
-    <five:registerPackage package='.' initialize='.initialize' />
-    <include package='.browser' />
-    <include package='.content' />
-    
+    <includeDependencies package='.' />
+    <grok:grok package='.' />
+    <!-- <browser:page
+        for='plone.app.layout.navigation.interfaces.INavigationRoot'
+        name='updateRDF'
+        class='.rdfupdater.RDFUpdater'
+        permission='cmf.ManagePortal'
+    /> -->
     <genericsetup:registerProfile
         name='default'
         title='EDRN RDF Service'
@@ -20,7 +24,4 @@ RESERVED. U.S. Government Sponsorship acknowledged.
         description='RDF-based descriptions of EDRN resources'
         provides='Products.GenericSetup.interfaces.EXTENSION'
     />
-    
-    <utility factory='.utils.RDFDatabase'/>
-    
 </configure>
