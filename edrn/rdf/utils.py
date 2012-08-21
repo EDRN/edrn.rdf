@@ -6,18 +6,49 @@
 EDRN RDF Service: utilities.
 '''
 
-import pymssql
-from edrn.rdf.interfaces import IRDFDatabase
 from zope.interface import implements
+import urlparse, re
 
-class RDFDatabase(object):
-    '''Default RDF databaes: provided by DMCC via SQL Server.'''
-    implements(IRDFDatabase)
-    def connect(self):
-        return pymssql.connect(
-            user='ekeuser',
-            password='G00dby3!!*',
-            host='localhost:1433',
-            database='dbEKE'
-        )
-    
+# URL schemes we consider "accessible"
+ACCESSIBLE_SCHEMES = frozenset((
+    'file',
+    'ftp',
+    'gopher',
+    'http',
+    'https',
+    'ldap',
+    'ldaps',
+    'news',
+    'nntp',
+    'prospero',
+    'telnet',
+    'wais',
+    'testscheme', # Used during testing.
+))
+
+def validateAccessibleURL(s):
+    '''Ensure the unicode string ``s`` is a valid URL and one whose scheme we deem "accessible".
+    "Accessible" means that we reasonably expect our network APIs to handle locally- or network-
+    retrieval resources.
+    '''
+    parts = urlparse.urlparse(s)
+    return parts.scheme in ACCESSIBLE_SCHEMES
+
+
+START_TAG = re.compile(r'^<([A-Z][A-Za-z]*)>') # <Key>, saving "Key"
+
+def parseTokens(s):
+    '''Parse DMCC-style tokenized key-value pairs in the string ``s``.'''
+    if not isinstance(s, basestring): raise TypeError('Token parsing works on strings only')
+    s = s.strip()
+    while len(s) > 0:
+        match = START_TAG.match(s)
+        if not match: raise ValueError('Missing start element')
+        key = match.group(1)
+        s = s[match.end():]
+        match = re.match(r'^(.*)</' + key + '>', s)
+        if not match: raise ValueError('Unterminated <%s> element' % key)
+        value = match.group(1)
+        s = s[match.end():].lstrip()
+        yield key, value
+        

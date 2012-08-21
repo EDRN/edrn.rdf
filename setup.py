@@ -31,10 +31,11 @@ _requirements = [
     'Products.CMFPlone',
     'plone.app.dexterity',
     'collective.autopermission',
+    'z3c.suds',
     'setuptools',
 ]
 _extras = {
-    'test': ['plone.app.testing'],
+    'test': ['plone.app.testing', 'rdfextras'],
 }
 _classifiers = [
     'Development Status :: 4 - Beta',

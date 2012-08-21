@@ -31,11 +31,17 @@ class IRDFSource(form.Schema):
         required=False,
         source=ObjPathSourceBinder(object_provides=IRDFGenerator.__identifier__),
     )
-    active = RelationChoice(
-        title=_(u'Active'),
+    approvedFile = RelationChoice(
+        title=_(u''),
         description=_(u'Which of the RDF files is the active one.'),
         required=False,
         source=ObjPathSourceBinder(portal_type='File'),
+    )
+    active = schema.Bool(
+        title=_(u'Active'),
+        description=_(u'Is this source active? If so, it will have RDF routinely generated for it.'),
+        required=False,
+        default=False,
     )
     
 
@@ -47,9 +53,9 @@ class View(grok.View):
     grok.name('rdf')
     def render(self):
         context = aq_inner(self.context)
-        if context.active and context.active.to_object:
-            raise Exception('not yet implemented')
-        raise ValueError('The RDF Source at %s does not have an active RDF file to send' % '/'.join(context.getPhysicalPath()))
-
+        if context.approvedFile and context.approvedFile.to_object:
+            self.request.response.redirect(context.approvedFile.to_object.absolute_url())
+        else:
+            raise ValueError('The RDF Source at %s does not have an active RDF file to send' % '/'.join(context.getPhysicalPath()))
         
     

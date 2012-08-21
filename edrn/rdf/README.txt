@@ -34,6 +34,7 @@ portal::
     >>> l.click()
     >>> browser.getControl(name='form.widgets.title').value = u'A Simple Source'
     >>> browser.getControl(name='form.widgets.description').value = u"It's just for functional tests."
+    >>> browser.getControl(name='form.widgets.active:list').value = False
     >>> browser.getControl(name='form.buttons.save').click()
     >>> 'a-simple-source' in portal.keys()
     True
@@ -42,6 +43,8 @@ portal::
     u'A Simple Source'
     >>> source.description
     u"It's just for functional tests."
+    >>> source.active
+    False
 
 Now, these things are supposed to produce RDF when called with the appropriate
 view.  Does it?
@@ -90,8 +93,16 @@ useful, but it's nice to have for testing.  Check it out::
 We'll set up our RDF source with this generator (and hand-craft the POST
 because it's AJAX)::
 
+    >>> from urllib import urlencode
     >>> browser.open(portalURL + '/a-simple-source/edit')
-    >>> browser.post(portalURL + '/a-simple-source/@@edit', 'form.widgets.generator:list=/plone/silence&form.buttons.save=Save&form.widgets.title=A+Simple+Source')
+    >>> postParams = {
+    ...     'form.widgets.title': source.title,
+    ...     'form.widgets.description': source.description,
+    ...     'form.widgets.generator:list': '/plone/silence',
+    ...     'form.buttons.save': 'Save',
+    ... }
+    >>> if source.active: postParams['form.widgets.active:list'] = 'selected'
+    >>> browser.post(portalURL + '/a-simple-source/@@edit', urlencode(postParams))
     >>> source.generator.to_object.title
     u'Silence'
     >>> browser.open(portalURL + '/a-simple-source')
@@ -122,22 +133,58 @@ demanded.
 Tickling::
 
     >>> browser.open(portalURL + '/@@updateRDF')
-    >>> browser.contents
-    '...Sources updated: 1...'
 
-Now check out our simple source::
+And is there any RDF?  Let's check::
+
+    >>> browser.open(portalURL + '/a-simple-source/@@rdf')
+    Traceback (most recent call last):
+    ...
+    ValueError: The RDF Source at /plone/a-simple-source does not have an active RDF file to send
+
+Still no RDF?!  Right, because RDF Sources can be active or not.  If they're
+active, then when it's time to generate RDF their generator will actually get
+run.  But the source "A Simple Source" is *not* active.  We didn't check the
+active box when we made it.  So, let's fix that and re-tickle::
+
+    >>> browser.open(portalURL + '/a-simple-source/edit')
+    >>> browser.getControl(name='form.widgets.active:list').value = True
+    >>> browser.getControl(name='form.buttons.save').click()
+    >>> browser.open(portalURL + '/@@updateRDF')
+    >>> browser.contents
+    '...Sources updated:...<span id="numberSuccesses">1</span>...'
+
+That looks promising: one source got updated.  I hope it was our simple source::
 
     >>> browser.open(portalURL + '/a-simple-source/@@rdf')
     >>> browser.isHtml
     False
     >>> browser.headers['content-type']
-    'application/rdf+xml; charset=utf-8'
+    'application/rdf+xml'
     >>> browser.contents
     '<?xml version="1.0" encoding="UTF-8"?>\n<rdf:RDF\n   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"\n>\n</rdf:RDF>\n'
 
 Finally, an RDF graph that makes absolutely no statements!
 
-Note that "updateRDF" is a Zope view is available at the site root only::
+    The Simple Source now contains a single File object:
+    >>> len(source.keys())
+    1
+    >>> generatedFileID = source.keys()[0]
+    >>> generatedFileID.startswith('file.')
+    True
+    >>> source.approvedFile.to_object.id == generatedFileID
+    True
+
+If we re-generate all active RDF, the generator will detect that new file
+matches the old and won't bother changing anything in the source::
+
+    >>> browser.open(portalURL + '/@@updateRDF')
+    >>> browser.contents
+    '...Sources updated:...<span id="numberSuccesses">0</span>...'
+    >>> source.approvedFile.to_object.id == generatedFileID
+    True
+
+By the way, that "updateRDF" is a Zope view that's available at the site root
+only::
 
     >>> browser.open(portalURL + '/a-simple-source/@@updateRDF')
     Traceback (most recent call last):
@@ -162,6 +209,12 @@ anywhere:
     >>> l.click()
     >>> browser.getControl(name='form.widgets.title').value = u'Organs'
     >>> browser.getControl(name='form.widgets.description').value = u'Generates lists of organs.'
+    >>> browser.getControl(name='form.widgets.webServiceURL').value = u'testscheme://localhost/ws_newcompass.asmx?WSDL'
+    >>> browser.getControl(name='form.widgets.operationName').value = u'Body_System'
+    >>> browser.getControl(name='form.widgets.verificationNum').value = u'0'
+    >>> browser.getControl(name='form.widgets.uriPrefix').value = u'urn:testing:data:organ:'
+    >>> browser.getControl(name='form.widgets.identifyingKey').value = u'Identifier'
+    >>> browser.getControl(name='form.widgets.typeURI').value = u'urn:testing:types:organ'
     >>> browser.getControl(name='form.buttons.save').click()
     >>> 'organs' in portal.keys()
     True
@@ -170,6 +223,166 @@ anywhere:
     u'Organs'
     >>> generator.description
     u'Generates lists of organs.'
+    >>> generator.webServiceURL
+    u'testscheme://localhost/ws_newcompass.asmx?WSDL'
+    >>> generator.operationName
+    u'Body_System'
+    >>> generator.verificationNum
+    u'0'
+    >>> generator.uriPrefix
+    u'urn:testing:data:organ:'
+    >>> generator.identifyingKey
+    u'Identifier'
+    >>> generator.typeURI
+    u'urn:testing:types:organ'
+
+We've got the generator, but we need to tell it how to map from the DMCC's
+awful quasi-XML tags and into RDF predicates.  To do so, we add Predicate
+Handlers to the Simple DMCC RDF Generator.  There are two kinds:
+
+* Literal Predicate Handlers that map a clumsy DMCC key to a predicate whose
+  object is a literal value.
+* Reference Predicate Handlers that map a inept DMCC key to a predicate whose
+  object is a reference to another object, identified by its subject URI.
+
+Note that predicate handlers must be added to Simple DMCC RDF Generators; they
+can't be added elsewhere::
+
+    >>> browser.open(portalURL)
+    >>> browser.getLink(id='edrn-rdf-literalpredicatehandler')
+    Traceback (most recent call last):
+    ...
+    LinkNotFoundError
+
+For organs, we need only the first kind, the Literal Predicate Handler::
+
+    >>> browser.open(portalURL + '/organs')
+    >>> l = browser.getLink(id='edrn-rdf-literalpredicatehandler')
+    >>> l.url.endswith('++add++edrn.rdf.literalpredicatehandler')
+    True
+    >>> l.click()
+    >>> browser.getControl(name='form.widgets.title').value = u'Title'
+    >>> browser.getControl(name='form.widgets.description').value = u'Maps the <Title> key to the Dublin Core title predicate URI.'
+    >>> browser.getControl(name='form.widgets.predicateURI').value = u'http://purl.org/dc/terms/title'
+    >>> browser.getControl(name='form.buttons.save').click()
+    >>> 'title-1' in generator.keys()
+    True
+    >>> predicateHandler = generator['title-1']
+    >>> predicateHandler.title
+    u'Title'
+    >>> predicateHandler.description
+    u'Maps the <Title> key to the Dublin Core title predicate URI.'
+    >>> predicateHandler.predicateURI
+    u'http://purl.org/dc/terms/title'
+
+That takes care of mapping <Title> to http://purl.org/dc/terms/title.  Now for
+the <Description> key in the blundering DMCC output::
+
+    >>> browser.open(portalURL + '/organs')
+    >>> browser.getLink(id='edrn-rdf-literalpredicatehandler').click()
+    >>> browser.getControl(name='form.widgets.title').value = u'Description'
+    >>> browser.getControl(name='form.widgets.description').value = u'Maps the <Description> key to the DC description term.'
+    >>> browser.getControl(name='form.widgets.predicateURI').value = u'http://purl.org/dc/terms/description'
+    >>> browser.getControl(name='form.buttons.save').click()
+
+The Simple DMCC RDF Generator for organs is now ready.  We'll set it up as the
+generator for our simple source::
+
+    >>> browser.open(portalURL + '/a-simple-source/edit')
+    >>> postParams = {
+    ...     'form.widgets.title': source.title,
+    ...     'form.widgets.description': source.description,
+    ...     'form.widgets.generator:list': '/plone/organs',
+    ...     'form.widgets.approvedFile:list': source.approvedFile.to_path if source.approvedFile else '',
+    ...     'form.buttons.save': 'Save',
+    ... }
+    >>> if source.active: postParams['form.widgets.active:list'] = 'selected'
+    >>> browser.post(portalURL + '/a-simple-source/@@edit', urlencode(postParams))
+    >>> source.generator.to_object.title
+    u'Organs'
+    >>> browser.open(portalURL + '/a-simple-source')
+    >>> browser.contents
+    '...Generator...href="/plone/organs"...Organs...'
+
+Tickling::
+
+    >>> browser.open(portalURL + '/@@updateRDF')
+
+And now::
+
+    >>> browser.open(portalURL + '/a-simple-source/@@rdf')
+    >>> browser.headers['content-type']
+    'application/rdf+xml'
+    >>> import rdflib
+    >>> graph = rdflib.Graph()
+    >>> graph.parse(data=browser.contents)
+    <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
+    >>> len(graph)
+    9
+    >>> namespaceURIs = [i[1] for i in graph.namespaces()]
+    >>> namespaceURIs.sort()
+    >>> namespaceURIs[0]
+    rdflib.term.URIRef(u'http://purl.org/dc/terms/')
+    >>> subjects = frozenset([unicode(i) for i in graph.subjects() if unicode(i)])
+    >>> subjects = list(subjects)
+    >>> subjects.sort()
+    >>> subjects
+    [u'urn:testing:data:organ:1', u'urn:testing:data:organ:2', u'urn:testing:data:organ:3']
+    >>> predicates = frozenset([unicode(i) for i in graph.predicates()])
+    >>> predicates = list(predicates)
+    >>> predicates.sort()
+    >>> predicates
+    [u'http://purl.org/dc/terms/description', u'http://purl.org/dc/terms/title', u'http://www.w3.org/1999/02/22-rdf-syntax-ns#type']
+    >>> objects = [unicode(i) for i in graph.objects() if isinstance(i, rdflib.term.Literal)]
+    >>> objects.sort()
+    >>> objects
+    [u'Bladder', u'Blood', u'Bone', u'Carries oxygen', u'Holds urine', u'Provides structure']
+
+Now that's some fine looking RDF.
+
+
+Approved RDF Files in RDF Sources
+=================================
+
+While we're here, notice this: our "Simple Source" first produced an empty
+graph, thanks to the Null RDF Generator, then it produced a non-empty graph,
+thanks to the Simple DMCC RDF Generator.  However, the previous, empty RDF is
+still there.  We can change the approved RDF at any time from the latest
+generated file to any other generated file.
+
+The RDF Source is a container object that holds all of the RDF files generated
+for it::
+
+    >>> files = list(source.keys())
+    >>> len(files)
+    2
+    >>> latest = source.approvedFile.to_object.id
+    >>> files.remove(latest)
+    >>> earliest = files[0]
+
+You can point the source to an older file::
+
+    >>> browser.open(portalURL + '/a-simple-source/edit')
+    >>> postParams = {
+    ...     'form.widgets.title': source.title,
+    ...     'form.widgets.description': source.description,
+    ...     'form.widgets.generator:list': source.generator.to_path if source.generator else '',
+    ...     'form.widgets.approvedFile:list': '/plone/a-simple-source/' + earliest,
+    ...     'form.buttons.save': 'Save',
+    ... }
+    >>> if source.active: postParams['form.widgets.active:list'] = 'selected'
+    >>> browser.post(portalURL + '/a-simple-source/@@edit', urlencode(postParams))
+    >>> source.approvedFile.to_object.id == earliest
+    True
+    >>> browser.open(portalURL + '/a-simple-source/@@rdf')
+    >>> browser.contents
+    '<?xml version="1.0" encoding="UTF-8"?>\n<rdf:RDF\n   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"\n>\n</rdf:RDF>\n'
+
+Using this, you can go back to an earlier RDF file in case a later one
+contains bad data.  Note, though, that the next time the source's generator
+gets run, it'll make an active file again.  To prevent that from happening,
+uncheck the source's "Active" checkbox.
+
 
 
 

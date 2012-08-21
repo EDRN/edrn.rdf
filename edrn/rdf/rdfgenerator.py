@@ -21,8 +21,4 @@ class IRDFGenerator(form.Schema):
         description=_(u'A short summary of this RDF generator.'),
         required=False,
     )
-    def generate(self):
-        '''Generate RDF statements as a graph.  Subclasses must override this.'''
-        raise NotImplementedError('Subclasses must override %s.generate' % self.__class__.__name__)
-
 

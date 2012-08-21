@@ -7,12 +7,12 @@
 
 from zope.interface import Interface
 
-class IRDFDatabase(Interface):
-    def query(x):
-        '''...'''
-        
-
 class IRDFUpdater(Interface):
     '''An object whose RDF may be updated'''
     def updateRDF():
-        '''Update this object's RDF graph'''
+        '''Update this object's RDF file.'''
+
+class IGraphGenerator(Interface):
+    '''An object that creates statement graphs.'''
+    def generateGraph():
+        '''Generate this object's RDF graph.'''
