@@ -46,11 +46,10 @@ class EDRN_RDF_Layer(PloneSandboxLayer):
     def setUpZope(self, app, configurationContext):
         import edrn.rdf
         self.loadZCML(package=edrn.rdf)
-        z2.installProduct(app, 'edrn.rdf')
         urllib2.install_opener(urllib2.build_opener(TestSchemeHandler))
         # suds doesn't use the global openers, so monkey-patch it to include our testscheme handler
         HttpTransport.u2handlers = monkeyedU2handlers
-        # don't let it cache anything in /tmp
+        # don't let suds cache anything in /tmp
         ObjectCache.get = monkeyedObjectCacheGetter
     def setUpPloneSite(self, portal):
         self.applyProfile(portal, 'edrn.rdf:default')

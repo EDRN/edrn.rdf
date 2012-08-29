@@ -9,7 +9,7 @@ sets of data available at the DMCC by accessing their crummy web service.
 from edrn.rdf import _
 from five import grok
 from zope import schema
-from interfaces import IGraphGenerator
+from interfaces import IGraphGenerator, IAsserter
 from rdfgenerator import IRDFGenerator
 from utils import validateAccessibleURL
 from exceptions import MissingParameterError
@@ -71,7 +71,7 @@ class SimpleDMCCGraphGenerator(grok.Adapter):
         verificationNum = context.verificationNum if context.verificationNum else DEFAULT_VERIFICATION_NUM
         predicates = {}
         for objID, item in context.contentItems():
-            predicates[item.title] = URIRef(item.predicateURI)
+            predicates[item.title] = IAsserter(item)
         client = get_suds_client(context.webServiceURL, context)
         function = getattr(client.service, context.operationName)
         horribleString = function(verificationNum)
@@ -83,10 +83,8 @@ class SimpleDMCCGraphGenerator(grok.Adapter):
                 if key == context.identifyingKey and not subjectURI:
                     subjectURI = URIRef(context.uriPrefix + value)
                     graph.add((subjectURI, rdflib.RDF.type, context.typeURI))
-                elif key in predicates:
-                    # Here we should actually adapt to the handler and let it generate a (predicateURI, obj) pair
-                    predicateURI = predicates[key]
-                    statements.append((predicateURI, Literal(value)))
+                elif key in predicates and len(value) > 0:
+                    statements.extend(predicates[key].characterize(value))
             for predicate, obj in statements:
                 graph.add((subjectURI, predicate, obj))
         return graph

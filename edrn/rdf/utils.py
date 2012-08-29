@@ -9,6 +9,9 @@ EDRN RDF Service: utilities.
 from zope.interface import implements
 import urlparse, re
 
+ # Why, why, why? DMCC, you so stupid!
+DEFAULT_VERIFICATION_NUM = u'0' * 40960
+
 # URL schemes we consider "accessible"
 ACCESSIBLE_SCHEMES = frozenset((
     'file',
@@ -35,7 +38,7 @@ def validateAccessibleURL(s):
     return parts.scheme in ACCESSIBLE_SCHEMES
 
 
-START_TAG = re.compile(r'^<([A-Z][A-Za-z]*)>') # <Key>, saving "Key"
+START_TAG = re.compile(r'^<([-_A-Za-z0-9]+)>') # <Key>, saving "Key"
 
 def parseTokens(s):
     '''Parse DMCC-style tokenized key-value pairs in the string ``s``.'''

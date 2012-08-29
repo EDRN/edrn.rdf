@@ -4,7 +4,7 @@
     <Body_SystemResponse xmlns="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx">
       <Body_SystemResult>&lt;Identifier&gt;1&lt;/Identifier&gt;&lt;Title&gt;Bladder&lt;/Title&gt;&lt;Description&gt;Holds urine&lt;/Description&gt;!!
 &lt;Identifier&gt;2&lt;/Identifier&gt;&lt;Title&gt;Blood&lt;/Title&gt;&lt;Description&gt;Carries oxygen&lt;/Description&gt;!!
-&lt;Identifier&gt;3&lt;/Identifier&gt;&lt;Title&gt;Bone&lt;/Title&gt;&lt;Description&gt;Provides structure&lt;/Description&gt;</Body_SystemResult>
+&lt;Identifier&gt;3&lt;/Identifier&gt;&lt;Title&gt;Bone&lt;/Title&gt;&lt;Description&gt;&lt;/Description&gt;</Body_SystemResult>
     </Body_SystemResponse>
   </soap:Body>
 </soap:Envelope>

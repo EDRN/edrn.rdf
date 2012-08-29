@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2012 California Institute of Technology. ALL RIGHTS
+RESERVED. U.S. Government Sponsorship acknowledged.
+-->
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <soap:Body>
+        <DiseaseResponse xmlns="http://perdy.fhcrc.org/edrn_ws/ws_newcompass.asmx">
+<DiseaseResult>&lt;Identifier&gt;1&lt;/Identifier&gt;&lt;pv&gt;1&lt;/pv&gt;&lt;pvdescription&gt;Bladder&lt;/pvdescription&gt;&lt;icd10&gt;C67.&lt;/icd10&gt;&lt;icd9&gt;188&lt;/icd9&gt;&lt;title&gt;Malignant neoplasm of bladder&lt;/title&gt;&lt;body_system&gt;1&lt;/body_system&gt;&lt;description&gt;&lt;/description&gt;&lt;body_system_identifier&gt;&lt;/body_system_identifier&gt;!!&lt;Identifier&gt;2&lt;/Identifier&gt;&lt;pv&gt;2&lt;/pv&gt;&lt;pvdescription&gt;Bone&lt;/pvdescription&gt;&lt;icd10&gt;C41.&lt;/icd10&gt;&lt;icd9&gt;170&lt;/icd9&gt;&lt;title&gt;Malignant neoplasm of bone and articular cartilage&lt;/title&gt;&lt;body_system&gt;3, 7&lt;/body_system&gt;&lt;description&gt;&lt;/description&gt;&lt;body_system_identifier&gt;&lt;/body_system_identifier&gt;!!&lt;Identifier&gt;3&lt;/Identifier&gt;&lt;pv&gt;3&lt;/pv&gt;&lt;pvdescription&gt;Brain&lt;/pvdescription&gt;&lt;icd10&gt;C71.&lt;/icd10&gt;&lt;icd9&gt;191&lt;/icd9&gt;&lt;title&gt;Malignant neoplasm of brain&lt;/title&gt;&lt;body_system&gt;4&lt;/body_system&gt;&lt;description&gt;&lt;/description&gt;&lt;body_system_identifier&gt;&lt;/body_system_identifier&gt;</DiseaseResult>
+        </DiseaseResponse>
+    </soap:Body>
+</soap:Envelope>

@@ -16,3 +16,10 @@ class IGraphGenerator(Interface):
     '''An object that creates statement graphs.'''
     def generateGraph():
         '''Generate this object's RDF graph.'''
+
+class IAsserter(Interface):
+    '''An object that describes subjects with a known predicate and a given object'''
+    def characterize(obj):
+        '''Characterize some subject using a known predicate for complementary ``obj``.  Returns a sequence of doubles
+        containing a predicate URI (a URIRef) and an appropriate Literal or URIRef object.'''
+

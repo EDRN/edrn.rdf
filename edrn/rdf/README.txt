@@ -60,7 +60,7 @@ Generators.
 
 
 RDF Generators
-===============
+==============
 
 RDF Generators have the responsibility of accessing various sources of data
 (notably the DMCC's web service) and yielding an RDF graph, suitable for
@@ -238,12 +238,16 @@ anywhere:
 
 We've got the generator, but we need to tell it how to map from the DMCC's
 awful quasi-XML tags and into RDF predicates.  To do so, we add Predicate
-Handlers to the Simple DMCC RDF Generator.  There are two kinds:
+Handlers to the Simple DMCC RDF Generator.  There are a few kinds:
 
-* Literal Predicate Handlers that map a clumsy DMCC key to a predicate whose
+• Literal Predicate Handlers that map a clumsy DMCC key to a predicate whose
   object is a literal value.
-* Reference Predicate Handlers that map a inept DMCC key to a predicate whose
+• Reference Predicate Handlers that map a inept DMCC key to a predicate whose
   object is a reference to another object, identified by its subject URI.
+• Multi Literal Predicate Handlers map an awkward DMCC key that contains
+  values separated by commas to multiple statements, one object per
+  comma-separated value.
+• Various specialized handlers for DMCC's other cumbersome cases.
 
 Note that predicate handlers must be added to Simple DMCC RDF Generators; they
 can't be added elsewhere::
@@ -254,7 +258,11 @@ can't be added elsewhere::
     ...
     LinkNotFoundError
 
-For organs, we need only the first kind, the Literal Predicate Handler::
+
+Literal Predicate Handlers
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For organs, we need only to use the Literal Predicate Handler::
 
     >>> browser.open(portalURL + '/organs')
     >>> l = browser.getLink(id='edrn-rdf-literalpredicatehandler')
@@ -318,7 +326,7 @@ And now::
     >>> graph.parse(data=browser.contents)
     <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
     >>> len(graph)
-    9
+    8
     >>> namespaceURIs = [i[1] for i in graph.namespaces()]
     >>> namespaceURIs.sort()
     >>> namespaceURIs[0]
@@ -336,26 +344,272 @@ And now::
     >>> objects = [unicode(i) for i in graph.objects() if isinstance(i, rdflib.term.Literal)]
     >>> objects.sort()
     >>> objects
-    [u'Bladder', u'Blood', u'Bone', u'Carries oxygen', u'Holds urine', u'Provides structure']
+    [u'Bladder', u'Blood', u'Bone', u'Carries oxygen', u'Holds urine']
 
 Now that's some fine looking RDF.
+
+
+Empty Values
+............
+
+The DMCC's web services are "full" of "empty" information.  In our organ test
+data, we reflect this in the entry for "Bone": it has an empty "Description"
+field.  When a field like this is empty, the corresponding RDF graph should
+not contain an empty statement about Bone's description.
+
+Note::
+
+    >>> from rdflib import plugin
+    >>> plugin.register('sparql', rdflib.query.Processor, 'rdfextras.sparql.processor', 'Processor')
+    >>> plugin.register('sparql', rdflib.query.Result, 'rdfextras.sparql.query', 'SPARQLQueryResult')
+    >>> results = graph.query('''select ?description where {
+    ...    <urn:testing:data:organ:3> <http://purl.org/dc/terms/description> ?description .
+    ... }''')
+    >>> len(results)
+    0
+
+Looks good.
+
+
+Reference Predicate Handlers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Diseases are another topic covered by the DMCC.  Diseases affect specific
+organs, so they give us an opportunity to demonstrate Reference Predicate
+Handlers.  First, we'll make a new Simple DMCC RDF Generator::
+
+    >>> browser.open(portalURL)
+    >>> browser.getLink(id='edrn-rdf-simpledmccrdfgenerator').click()
+    >>> browser.getControl(name='form.widgets.title').value = u'Diseases'
+    >>> browser.getControl(name='form.widgets.description').value = u'Generates lists of diseases.'
+    >>> browser.getControl(name='form.widgets.webServiceURL').value = u'testscheme://localhost/ws_newcompass.asmx?WSDL'
+    >>> browser.getControl(name='form.widgets.operationName').value = u'Disease'
+    >>> browser.getControl(name='form.widgets.verificationNum').value = u'0'
+    >>> browser.getControl(name='form.widgets.uriPrefix').value = u'urn:testing:data:disease:'
+    >>> browser.getControl(name='form.widgets.identifyingKey').value = u'Identifier'
+    >>> browser.getControl(name='form.widgets.typeURI').value = u'urn:testing:types:disease'
+    >>> browser.getControl(name='form.buttons.save').click()
+    >>> generator = portal['diseases']
+
+Now a couple Literal Predicate Handler to handle the basics like title, etc.::
+
+    >>> browser.open(portalURL + '/diseases')
+    >>> browser.getLink(id='edrn-rdf-literalpredicatehandler').click()
+    >>> browser.getControl(name='form.widgets.title').value = u'title'
+    >>> browser.getControl(name='form.widgets.description').value = u'Maps the <title> key to the Dublin Core title predicate URI.'
+    >>> browser.getControl(name='form.widgets.predicateURI').value = u'http://purl.org/dc/terms/title'
+    >>> browser.getControl(name='form.buttons.save').click()
+    >>> browser.open(portalURL + '/diseases')
+    >>> browser.getLink(id='edrn-rdf-literalpredicatehandler').click()
+    >>> browser.getControl(name='form.widgets.title').value = u'icd9'
+    >>> browser.getControl(name='form.widgets.description').value = u'Maps the <icd9> key to the an EDRN-specific URI.'
+    >>> browser.getControl(name='form.widgets.predicateURI').value = u'urn:testing:predicates:icd9code'
+    >>> browser.getControl(name='form.buttons.save').click()
+
+Diseases affect organs, so here's the reference::
+
+    >>> browser.open(portalURL + '/diseases')
+    >>> l = browser.getLink(id='edrn-rdf-referencepredicatehandler')
+    >>> l.url.endswith('++add++edrn.rdf.referencepredicatehandler')
+    True
+    >>> l.click()
+    >>> browser.getControl(name='form.widgets.title').value = u'body_system'
+    >>> browser.getControl(name='form.widgets.description').value = u'Maps to organs that diseases affect.'
+    >>> browser.getControl(name='form.widgets.predicateURI').value = u'urn:testing:predicates:affectedOrgan'
+    >>> browser.getControl(name='form.widgets.uriPrefix').value = u'urn:testing:data:organs:'
+    >>> browser.getControl(name='form.buttons.save').click()
+    >>> 'body_system' in generator.keys()
+    True
+    >>> predicateHandler = generator['body_system']
+    >>> predicateHandler.title
+    u'body_system'
+    >>> predicateHandler.description
+    u'Maps to organs that diseases affect.'
+    >>> predicateHandler.predicateURI
+    u'urn:testing:predicates:affectedOrgan'
+    >>> predicateHandler.uriPrefix
+    u'urn:testing:data:organs:'
+
+The Simple DMCC RDF Generator for diseases is now ready.  We'll set it up as
+the generator for our simple source::
+
+    >>> browser.open(portalURL + '/a-simple-source/edit')
+    >>> postParams = {
+    ...     'form.widgets.title': source.title,
+    ...     'form.widgets.description': source.description,
+    ...     'form.widgets.generator:list': '/plone/diseases',
+    ...     'form.widgets.approvedFile:list': source.approvedFile.to_path if source.approvedFile else '',
+    ...     'form.widgets.active:list': 'selected',
+    ...     'form.buttons.save': 'Save',
+    ... }
+    >>> browser.post(portalURL + '/a-simple-source/@@edit', urlencode(postParams))
+    >>> source.generator.to_object.title
+    u'Diseases'
+
+Tickling::
+
+    >>> browser.open(portalURL + '/@@updateRDF')
+
+And now::
+
+    >>> browser.open(portalURL + '/a-simple-source/@@rdf')
+    >>> graph = rdflib.Graph()
+    >>> graph.parse(data=browser.contents)
+    <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
+    >>> len(graph)
+    13
+    >>> namespaceURIs = [i[1] for i in graph.namespaces()]
+    >>> namespaceURIs.sort()
+    >>> namespaceURIs[0]
+    rdflib.term.URIRef(u'http://purl.org/dc/terms/')
+    >>> namespaceURIs[4]
+    rdflib.term.URIRef(u'urn:testing:predicates:')
+    >>> subjects = frozenset([unicode(i) for i in graph.subjects() if unicode(i)])
+    >>> subjects = list(subjects)
+    >>> subjects.sort()
+    >>> subjects
+    [u'urn:testing:data:disease:1', u'urn:testing:data:disease:2', u'urn:testing:data:disease:3']
+    >>> predicates = frozenset([unicode(i) for i in graph.predicates()])
+    >>> predicates = list(predicates)
+    >>> predicates.sort()
+    >>> predicates[0]
+    u'http://purl.org/dc/terms/title'
+    >>> predicates[2]
+    u'urn:testing:predicates:affectedOrgan'
+    >>> predicates[3]
+    u'urn:testing:predicates:icd9code'
+    >>> objects = [unicode(i) for i in graph.objects() if isinstance(i, rdflib.term.Literal)]
+    >>> objects.sort()
+    >>> objects
+    [u'170', u'188', u'191', u'Malignant neoplasm of bladder', u'Malignant neoplasm of bone and articular cartilage', u'Malignant neoplasm of brain']
+    >>> references = frozenset([unicode(i) for i in graph.objects() if isinstance(i, rdflib.term.URIRef)])
+    >>> references = list(references)
+    >>> references.sort()
+    >>> references
+    [u'urn:testing:data:organs:1', u'urn:testing:data:organs:3', u'urn:testing:data:organs:4', u'urn:testing:data:organs:7', u'urn:testing:types:disease']
+
+That's even better lookin' RDF.
+
+
+Multiple Literal Values
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Some of the information in the DMCC's web service contains literal values that
+are separated by commas.  For example, the ``Publication`` operation yields a
+sequence of comma-separated author names.  In RDF, we don't use such in-band
+signaling, since that's moronic.  Instead, we make multiple statements about a
+publication, each one describing a separate author.
+
+We've got a class to handle just that case: the Multi-Literal Predicate
+Handler.
+
+Let's try it out.  First, let's make a brand new Simple DMCC RDF Generator for
+publications:
+
+    >>> browser.open(portalURL)
+    >>> browser.getLink(id='edrn-rdf-simpledmccrdfgenerator').click()
+    >>> browser.getControl(name='form.widgets.title').value = u'Publications'
+    >>> browser.getControl(name='form.widgets.description').value = u'Generates lists of journal articles and stuff.'
+    >>> browser.getControl(name='form.widgets.webServiceURL').value = u'testscheme://localhost/ws_newcompass.asmx?WSDL'
+    >>> browser.getControl(name='form.widgets.operationName').value = u'Publication'
+    >>> browser.getControl(name='form.widgets.verificationNum').value = u'0'
+    >>> browser.getControl(name='form.widgets.uriPrefix').value = u'urn:testing:data:publication:'
+    >>> browser.getControl(name='form.widgets.identifyingKey').value = u'Identifier'
+    >>> browser.getControl(name='form.widgets.typeURI').value = u'urn:testing:types:publication'
+    >>> browser.getControl(name='form.buttons.save').click()
+    >>> generator = portal['publications']
+
+Now a Literal Predicate Handler to handle the title of each publication::
+
+    >>> browser.open(portalURL + '/publications')
+    >>> browser.getLink(id='edrn-rdf-literalpredicatehandler').click()
+    >>> browser.getControl(name='form.widgets.title').value = u'title'
+    >>> browser.getControl(name='form.widgets.description').value = u'Maps the <Title> key to the Dublin Core title predicate URI.'
+    >>> browser.getControl(name='form.widgets.predicateURI').value = u'http://purl.org/dc/terms/title'
+    >>> browser.getControl(name='form.buttons.save').click()
+
+And a Multi-Literal Predicate Handler for the authors::
+
+    >>> browser.open(portalURL + '/publications')
+    >>> l = browser.getLink(id='edrn-rdf-multiliteralpredicatehandler')
+    >>> l.url.endswith('++add++edrn.rdf.multiliteralpredicatehandler')
+    True
+    >>> l.click()
+    >>> browser.getControl(name='form.widgets.title').value = u'Author'
+    >>> browser.getControl(name='form.widgets.description').value = u'Maps to authors of publications.'
+    >>> browser.getControl(name='form.widgets.predicateURI').value = u'http://purl.org/dc/terms/creator'
+    >>> browser.getControl(name='form.buttons.save').click()
+    >>> 'author' in generator.keys()
+    True
+    >>> predicateHandler = generator['author']
+    >>> predicateHandler.title
+    u'Author'
+    >>> predicateHandler.description
+    u'Maps to authors of publications.'
+    >>> predicateHandler.predicateURI
+    u'http://purl.org/dc/terms/creator'
+
+Does it work?  Let's make the simple source use it to find out::
+
+    >>> browser.open(portalURL + '/a-simple-source/edit')
+    >>> postParams = {
+    ...     'form.widgets.title': source.title,
+    ...     'form.widgets.description': source.description,
+    ...     'form.widgets.generator:list': '/plone/publications',
+    ...     'form.widgets.approvedFile:list': source.approvedFile.to_path if source.approvedFile else '',
+    ...     'form.widgets.active:list': 'selected',
+    ...     'form.buttons.save': 'Save',
+    ... }
+    >>> browser.post(portalURL + '/a-simple-source/@@edit', urlencode(postParams))
+    >>> source.generator.to_object.title
+    u'Publications'
+
+Tickling::
+
+    >>> browser.open(portalURL + '/@@updateRDF')
+
+And now for the RDF::
+
+    >>> browser.open(portalURL + '/a-simple-source/@@rdf')
+    >>> graph = rdflib.Graph()
+    >>> graph.parse(data=browser.contents)
+    <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
+    >>> len(graph)
+    22
+    >>> subjects = frozenset([unicode(i) for i in graph.subjects() if unicode(i)])
+    >>> subjects = list(subjects)
+    >>> subjects.sort()
+    >>> subjects
+    [u'urn:testing:data:publication:128', u'urn:testing:data:publication:129', u'urn:testing:data:publication:131']
+    >>> predicates = frozenset([unicode(i) for i in graph.predicates()])
+    >>> predicates = list(predicates)
+    >>> predicates.sort()
+    >>> predicates[0]
+    u'http://purl.org/dc/terms/creator'
+    >>> objects = [unicode(i) for i in graph.objects() if isinstance(i, rdflib.term.Literal)]
+    >>> objects.sort()
+    >>> objects
+    [u'Berkowitz R', u'Berkowitz RS', u'Chao J', u'Cramer DW', u'Cramer DW', u'Fu L', u'Highsmith WE', u'Kwong-kwok W', u'Leung S', u'Li E', u'Mok', u'Mok SC', u'Muto MG', u'Pratomo V', u'SC', u'Skates S', u'Skates S', u'Ye B', u'Yiu GK']
+
+Yes, fine—and I mean *fiiiiiine*—RDF.
 
 
 Approved RDF Files in RDF Sources
 =================================
 
 While we're here, notice this: our "Simple Source" first produced an empty
-graph, thanks to the Null RDF Generator, then it produced a non-empty graph,
+graph, thanks to the Null RDF Generator, then it produced non-empty graphs,
 thanks to the Simple DMCC RDF Generator.  However, the previous, empty RDF is
-still there.  We can change the approved RDF at any time from the latest
-generated file to any other generated file.
+still there, as are each of the other files for organs, diseases, and our
+latest one, publications.  We can change the approved RDF at any time from the
+latest generated file to any other generated file.
 
 The RDF Source is a container object that holds all of the RDF files generated
 for it::
 
     >>> files = list(source.keys())
     >>> len(files)
-    2
+    4
     >>> latest = source.approvedFile.to_object.id
     >>> files.remove(latest)
     >>> earliest = files[0]
@@ -368,24 +622,182 @@ You can point the source to an older file::
     ...     'form.widgets.description': source.description,
     ...     'form.widgets.generator:list': source.generator.to_path if source.generator else '',
     ...     'form.widgets.approvedFile:list': '/plone/a-simple-source/' + earliest,
+    ...     'form.widgets.active:list': 'selected',
     ...     'form.buttons.save': 'Save',
     ... }
-    >>> if source.active: postParams['form.widgets.active:list'] = 'selected'
     >>> browser.post(portalURL + '/a-simple-source/@@edit', urlencode(postParams))
     >>> source.approvedFile.to_object.id == earliest
     True
     >>> browser.open(portalURL + '/a-simple-source/@@rdf')
-    >>> browser.contents
-    '<?xml version="1.0" encoding="UTF-8"?>\n<rdf:RDF\n   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"\n>\n</rdf:RDF>\n'
+    >>> graph = rdflib.Graph()
+    >>> graph.parse(data=browser.contents)
+    <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
+    >>> len(graph)
+    0
 
 Using this, you can go back to an earlier RDF file in case a later one
 contains bad data.  Note, though, that the next time the source's generator
-gets run, it'll make an active file again.  To prevent that from happening,
-uncheck the source's "Active" checkbox.
+gets run, it'll make an active file again::
+
+    >>> browser.open(portalURL + '/@@updateRDF')
+    >>> browser.open(portalURL + '/a-simple-source/@@rdf')
+    >>> graph = rdflib.Graph()
+    >>> graph.parse(data=browser.contents)
+    <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
+    >>> len(graph)
+    22
+
+To prevent that from happening, uncheck the source's "Active" checkbox.
 
 
+Advanced RDF Generators
+=======================
+
+The Simple DMCC RDF Generator handles simple statements with literal objects
+as well as referential statements with reference objects.  With this, we can
+provide RDF for a number of the DMCC's sources of EDRN information, including:
+
+• Body systems
+• Diseases
+• Sites
+• Publications
+• Registered Persons
+
+More tricky are EDRN's committees and protocols.  They're so tricky, in fact,
+that they have dedicated RDF generators:
+
+• DMCC Committee RDF Generator
+• DMCC Protocols RDF Generator
+
+Let's dive right in.
 
 
+Generating RDF for Committees
+-----------------------------
+
+Committees require input from multiple SOAP API calls into the DMCC's ungainly
+web service.  They may be created anywhere::
+
+    >>> browser.open(portalURL)
+    >>> l = browser.getLink(id='edrn-rdf-dmcccommitteerdfgenerator')
+    >>> l.url.endswith('++add++edrn.rdf.dmcccommitteerdfgenerator')
+    True
+    >>> l.click()
+    >>> browser.getControl(name='form.widgets.title').value = u'Committees'
+    >>> browser.getControl(name='form.widgets.description').value = u'Generates info about EDRN committees.'
+    >>> browser.getControl(name='form.widgets.webServiceURL').value = u'testscheme://localhost/ws_newcompass.asmx?WSDL'
+    >>> browser.getControl(name='form.widgets.committeeOperation').value = u'Committees'
+    >>> browser.getControl(name='form.widgets.membershipOperation').value = u'Committee_Membership'
+    >>> browser.getControl(name='form.widgets.verificationNum').value = u'0'
+    >>> browser.getControl(name='form.widgets.typeURI').value = u'urn:testing:types:committee'
+    >>> browser.getControl(name='form.widgets.uriPrefix').value = u'urn:testing:data:committee:'
+    >>> browser.getControl(name='form.widgets.personPrefix').value = u'urn:testing:data:person:'
+    >>> browser.getControl(name='form.widgets.titlePredicateURI').value = u'http://purl.org/dc/terms/title'
+    >>> browser.getControl(name='form.widgets.abbrevNamePredicateURI').value = u'urn:testing:predicates:abbrevName'
+    >>> browser.getControl(name='form.widgets.committeeTypePredicateURI').value = u'urn:testing:predicates:committeeType'
+    >>> browser.getControl(name='form.widgets.chairPredicateURI').value = u'urn:testing:predicates:chair'
+    >>> browser.getControl(name='form.widgets.coChairPredicateURI').value = u'urn:testing:predicates:coChair'
+    >>> browser.getControl(name='form.widgets.consultantPredicateURI').value = u'urn:testing:predicates:consultant'
+    >>> browser.getControl(name='form.widgets.memberPredicateURI').value = u'urn:testing:predicates:member'
+    >>> browser.getControl(name='form.buttons.save').click()
+    >>> 'committees' in portal.keys()
+    True
+    >>> generator = portal['committees']
+    >>> generator.title
+    u'Committees'
+    >>> generator.description
+    u'Generates info about EDRN committees.'
+    >>> generator.webServiceURL
+    u'testscheme://localhost/ws_newcompass.asmx?WSDL'
+    >>> generator.committeeOperation
+    u'Committees'
+    >>> generator.membershipOperation
+    u'Committee_Membership'
+    >>> generator.verificationNum
+    u'0'
+    >>> generator.typeURI
+    u'urn:testing:types:committee'
+    >>> generator.uriPrefix
+    u'urn:testing:data:committee:'
+    >>> generator.personPrefix
+    u'urn:testing:data:person:'
+    >>> generator.titlePredicateURI
+    u'http://purl.org/dc/terms/title'
+    >>> generator.abbrevNamePredicateURI
+    u'urn:testing:predicates:abbrevName'
+    >>> generator.committeeTypePredicateURI
+    u'urn:testing:predicates:committeeType'
+    >>> generator.chairPredicateURI
+    u'urn:testing:predicates:chair'
+    >>> generator.coChairPredicateURI
+    u'urn:testing:predicates:coChair'
+    >>> generator.consultantPredicateURI
+    u'urn:testing:predicates:consultant'
+    >>> generator.memberPredicateURI
+    u'urn:testing:predicates:member'
+
+Looks good.  Now, we could make this generator be the source for our simple
+source that we've been using so far, but frankly, we've been riding the simple
+source pretty hard for a while now.  Let's give it a rest and come up with a
+fresh source, just for the committees generator::
+
+    >>> browser.open(portalURL)
+    >>> browser.getLink(id='edrn-rdf-rdfsource').click()
+    >>> browser.getControl(name='form.widgets.title').value = u'A Committee Source'
+    >>> browser.getControl(name='form.widgets.description').value = u"It's just for functional tests."
+    >>> browser.getControl(name='form.widgets.active:list').value = True
+    >>> browser.getControl(name='form.buttons.save').click()
+    >>> source = portal['a-committee-source']
+    >>> browser.open(portalURL + '/a-committee-source/edit')
+    >>> postParams = {
+    ...     'form.widgets.title': source.title,
+    ...     'form.widgets.description': source.description,
+    ...     'form.widgets.generator:list': '/plone/committees',
+    ...     'form.widgets.active:list': 'selected',
+    ...     'form.buttons.save': 'Save',
+    ... }
+    >>> browser.post(portalURL + '/a-committee-source/@@edit', urlencode(postParams))
+
+Now for the tickle::
+
+    >>> browser.open(portalURL + '/@@updateRDF')
+
+And now for the RDF::
+
+    >>> browser.open(portalURL + '/a-committee-source/@@rdf')
+    >>> graph = rdflib.Graph()
+    >>> graph.parse(data=browser.contents)
+    <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
+    >>> len(graph)
+    17
+    >>> subjects = frozenset([unicode(i) for i in graph.subjects() if unicode(i)])
+    >>> subjects = list(subjects)
+    >>> subjects.sort()
+    >>> subjects
+    [u'urn:testing:data:committee:1', u'urn:testing:data:committee:2', u'urn:testing:data:committee:3']
+    >>> predicates = frozenset([unicode(i) for i in graph.predicates()])
+    >>> predicates = list(predicates)
+    >>> predicates.sort()
+    >>> predicates[0]
+    u'http://purl.org/dc/terms/title'
+    >>> predicates[2]
+    u'urn:testing:predicates:abbrevName'
+    >>> predicates[3]
+    u'urn:testing:predicates:chair'
+    >>> predicates[4]
+    u'urn:testing:predicates:coChair'
+    >>> predicates[5]
+    u'urn:testing:predicates:committeeType'
+    >>> predicates[6]
+    u'urn:testing:predicates:consultant'
+    >>> predicates[7]
+    u'urn:testing:predicates:member'
+    >>> objects = [unicode(i) for i in graph.objects() if isinstance(i, rdflib.term.Literal)]
+    >>> objects.sort()
+    >>> objects
+    [u'Committee', u'Committee', u'EC', u'Executive Committee', u'NCT', u'Network Consulting Team', u'SC', u'Steering Committee', u'Team']
+
+Major wootness.
 
     
 
