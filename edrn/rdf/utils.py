@@ -49,7 +49,7 @@ def parseTokens(s):
         if not match: raise ValueError('Missing start element')
         key = match.group(1)
         s = s[match.end():]
-        match = re.match(r'^(.*)</' + key + '>', s)
+        match = re.match(r'^(.*)</' + key + '>', s, re.DOTALL)
         if not match: raise ValueError('Unterminated <%s> element' % key)
         value = match.group(1)
         s = s[match.end():].lstrip()

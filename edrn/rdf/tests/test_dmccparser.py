@@ -67,6 +67,11 @@ class TokenizerTest(unittest.TestCase):
         generator = parseTokens(u'<Unterminated>Value')
         with self.assertRaises(ValueError):
             generator.next()
+    def testMultilineValues(self):
+        '''Assure we handle values with embedded newlines properly'''
+        k, v = parseTokens(u'<msg>Hello,\nworld.</msg>').next()
+        self.assertEquals(u'msg', k)
+        self.assertEquals(u'Hello,\nworld.', v)
 
 
 def test_suite():

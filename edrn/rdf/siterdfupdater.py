@@ -7,6 +7,9 @@ from edrn.rdf.rdfsource import IRDFSource
 from five import grok
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from Products.CMFCore.utils import getToolByName
+import logging
+
+_logger = logging.getLogger('edrn.rdf')
 
 class SiteRDFUpdater(grok.View):
     '''A "view" that instructs all RDF sources to generate fresh RDF.'''
@@ -25,5 +28,6 @@ class SiteRDFUpdater(grok.View):
                 updater.updateRDF()
                 self.count += 1
             except Exception, ex:
+                _logger.exception('Failure updating RDF for "%s"', i.getPath())
                 self.failures.append(dict(title=i.Title, url=source.absolute_url(), message=unicode(ex)))
         self.numFailed = len(self.failures)

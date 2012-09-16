@@ -8,6 +8,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
     <object name='edrn.rdf.nullrdfgenerator' meta_type='Dexterity FTI' />
     <object name='edrn.rdf.simpledmccrdfgenerator' meta_type='Dexterity FTI' />
     <object name='edrn.rdf.dmcccommitteerdfgenerator' meta_type='Dexterity FTI' />
+    <object name='edrn.rdf.dmccprotocolrdfgenerator' meta_type='Dexterity FTI' />
     <object name='edrn.rdf.literalpredicatehandler' meta_type='Dexterity FTI' />
     <object name='edrn.rdf.multiliteralpredicatehandler' meta_type='Dexterity FTI' />
     <object name='edrn.rdf.referencepredicatehandler' meta_type='Dexterity FTI' />
