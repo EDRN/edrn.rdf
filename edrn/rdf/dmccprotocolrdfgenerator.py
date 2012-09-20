@@ -440,25 +440,32 @@ class Protocol(_Slotted):
     def getSubjectURI(self, context):
         return URIRef(context.uriPrefix + self.identifier)
     def _addInvolvedInvestigatorSites(self, graph, specifics, context):
-        for involvedInvestigatorSiteID in self.slots.get(u'Involved_Investigator_Site_ID', u'').split(u', '):
-            key = (self.identifier, involvedInvestigatorSiteID)
-            if key not in specifics: continue
-            specific = specifics[key]
-            subject = URIRef(context.siteSpecURIPrefix + self.identifier + u'-' + involvedInvestigatorSiteID)
-            graph.add((subject, rdflib.RDF.type, URIRef(context.siteSpecificTypeURI)))
-            for fieldName, predicateFieldName in _specificsPredicates.iteritems():
-                fieldValue = getattr(specific, fieldName, None)
-                if not fieldValue: continue
-                predicateURI = URIRef(getattr(context, predicateFieldName))
-                graph.add((subject, predicateURI, Literal(fieldValue)))
-            if specific.siteRoles:
-                predicateURI = URIRef(context.siteRoleURI)
-                for roleID in specific.siteRoles.split(u', '):
-                    graph.add((subject, predicateURI, Literal(_siteRoles.get(roleID, u'UNKNOWN'))))
-            if specific.reportingStages:
-                predicateURI = URIRef(context.reportingStageURI)
-                for reportingStageID in specific.reportingStages.split(u', '):
-                    graph.add((subject, predicateURI, Literal(_reportingStages.get(reportingStageID, u'UNKNOWN'))))
+        # FIXME:
+        # EDRN Portal versions 3.0.0–4.2.0 cannot handle site-specific information.  It turns out the old
+        # RDF Server had a bug and never generated them.  This RDF server does indeed generate site-
+        # specific information, but that makes the EDRN Portal choke.  Since we can't update the portal
+        # at this time, we'll disable generation of site-specific information for now.
+        # 
+        # for involvedInvestigatorSiteID in self.slots.get(u'Involved_Investigator_Site_ID', u'').split(u', '):
+        #     key = (self.identifier, involvedInvestigatorSiteID)
+        #     if key not in specifics: continue
+        #     specific = specifics[key]
+        #     subject = URIRef(context.siteSpecURIPrefix + self.identifier + u'-' + involvedInvestigatorSiteID)
+        #     graph.add((subject, rdflib.RDF.type, URIRef(context.siteSpecificTypeURI)))
+        #     for fieldName, predicateFieldName in _specificsPredicates.iteritems():
+        #         fieldValue = getattr(specific, fieldName, None)
+        #         if not fieldValue: continue
+        #         predicateURI = URIRef(getattr(context, predicateFieldName))
+        #         graph.add((subject, predicateURI, Literal(fieldValue)))
+        #     if specific.siteRoles:
+        #         predicateURI = URIRef(context.siteRoleURI)
+        #         for roleID in specific.siteRoles.split(u', '):
+        #             graph.add((subject, predicateURI, Literal(_siteRoles.get(roleID, u'UNKNOWN'))))
+        #     if specific.reportingStages:
+        #         predicateURI = URIRef(context.reportingStageURI)
+        #         for reportingStageID in specific.reportingStages.split(u', '):
+        #             graph.add((subject, predicateURI, Literal(_reportingStages.get(reportingStageID, u'UNKNOWN'))))
+        pass
     def _addOtherSites(self, graph, context):
         subjectURI = self.getSubjectURI(context)
         for slotName, predicateFieldName in (
