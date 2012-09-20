@@ -121,7 +121,6 @@ class IDMCCProtocolRDFGenerator(IRDFGenerator):
         description=_(u'Prefix string to prepend to identifiers to generate complete URIs to sites.'),
         required=True,
     )
-    
     titleURI = schema.TextLine(
         title=_(u'Title URI'),
         description=_(u'Uniform Resource Identifier for the title predicate.'),
@@ -446,7 +445,7 @@ class Protocol(_Slotted):
             if key not in specifics: continue
             specific = specifics[key]
             subject = URIRef(context.siteSpecURIPrefix + self.identifier + u'-' + involvedInvestigatorSiteID)
-            graph.add((subject, rdflib.RDF.type, context.siteSpecificTypeURI))
+            graph.add((subject, rdflib.RDF.type, URIRef(context.siteSpecificTypeURI)))
             for fieldName, predicateFieldName in _specificsPredicates.iteritems():
                 fieldValue = getattr(specific, fieldName, None)
                 if not fieldValue: continue
@@ -558,7 +557,7 @@ class DMCCProtocolGraphGenerator(grok.Adapter):
         return get_suds_client(self.context.webServiceURL, self.context)
     def getSlottedItems(self, operation, kind):
         function = getattr(self.client.service, operation)
-        horribleString = function()
+        horribleString = function(self.verificationNum)
         objects = {}
         obj = None
         for row in horribleString.split(u'!!'):
@@ -582,7 +581,7 @@ class DMCCProtocolGraphGenerator(grok.Adapter):
         return self.getSlottedItems(self.context.edrnProtocolOperation, Protocol)
     def getSpecifics(self):
         function = getattr(self.client.service, self.context.protoSiteSpecificsOperation)
-        horribleString = function()
+        horribleString = function(self.verificationNum)
         specifics = {}
         for row in horribleString.split(u'!!'):
             specific = Specifics(row)
@@ -590,7 +589,7 @@ class DMCCProtocolGraphGenerator(grok.Adapter):
         return specifics
     def getRelationships(self):
         function = getattr(self.client.service, self.context.protoProtoRelationshipOperation)
-        horribleString = function()
+        horribleString = function(self.verificationNum)
         relationships = []
         for row in horribleString.split(u'!!'):
             relationships.append(Relationship(row))
