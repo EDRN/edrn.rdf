@@ -15,7 +15,7 @@ from utils import validateAccessibleURL
 from exceptions import MissingParameterError
 from Acquisition import aq_inner
 from z3c.suds import get_suds_client
-from rdflib.term import URIRef, Literal
+from rdflib.term import URIRef
 from utils import parseTokens
 import rdflib
 
@@ -77,16 +77,21 @@ class SimpleDMCCGraphGenerator(grok.Adapter):
         horribleString = function(verificationNum)
         graph = rdflib.Graph()
         for row in horribleString.split('!!'):
-            subjectURI = None
-            statements = []
+            subjectURI, statements, statementsMade = None, [], False
             for key, value in parseTokens(row):
                 if key == context.identifyingKey and not subjectURI:
                     subjectURI = URIRef(context.uriPrefix + value)
-                    graph.add((subjectURI, rdflib.RDF.type, URIRef(context.typeURI)))
                 elif key in predicates and len(value) > 0:
                     statements.extend(predicates[key].characterize(value))
-            for predicate, obj in statements:
-                graph.add((subjectURI, predicate, obj))
+                    statementsMade = True
+            # DMCC is giving out empty rows: they have an Identifier number, but no values in any of the columns.
+            # While we may wish to generate RDF for those (essentially just saying "Disease #31 exists", for example)
+            # It means we need to update EDRN Portal code to handle them, which we can't do right now.
+            # So just drop these.  TODO: Add them back, but update the EDRN Portal.
+            if statementsMade:
+                graph.add((subjectURI, rdflib.RDF.type, URIRef(context.typeURI)))
+                for predicate, obj in statements:
+                    graph.add((subjectURI, predicate, obj))
         return graph
 
                         
