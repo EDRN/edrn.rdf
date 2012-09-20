@@ -15,12 +15,12 @@
                     <span id="numberSuccesses" tal:content="successCount">42</span>
                 </p>
                 <div tal:condition="python:failureCount &gt; 0">
-                    <h2 i18n:translate="rdfUpdateFailuresHeading">Failures</h2>
+                    <h2 i18n:translate="rdfUpdateFailuresHeading">Not Updated</h2>
                     <table tal:define="failures view/failures" class="listing">
                         <thead>
                             <tr>
-                                <th i18n:translate="rdfUpdateFailuresColHeadingTitle">Title</th>
-                                <th i18n:translate="rdfUpdateFailuresColHeadingMessage">Error Message</th>
+                                <th i18n:translate="rdfUpdateFailuresColHeadingTitle">Source</th>
+                                <th i18n:translate="rdfUpdateFailuresColHeadingMessage">Reason</th>
                             </tr>
                         </thead>
                         <tbody>
