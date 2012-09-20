@@ -127,7 +127,7 @@ class DMCCCommitteeGraphGenerator(grok.Adapter):
             for key, value in parseTokens(row):
                 if key == u'Identifier' and not subjectURI:
                     subjectURI = URIRef(context.uriPrefix + value)
-                    graph.add((subjectURI, rdflib.RDF.type, context.typeURI))
+                    graph.add((subjectURI, rdflib.RDF.type, URIRef(context.typeURI)))
                 elif key in _committeePredicates and len(value) > 0:
                     predicateURI = URIRef(getattr(context, _committeePredicates[key]))
                     statements[predicateURI] = Literal(value)
