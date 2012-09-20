@@ -36,7 +36,7 @@ def createBodySystemsGenerator(context):
     generator = createContentInContainer(
         context,
         'edrn.rdf.simpledmccrdfgenerator',
-        title=u'Body Systems',
+        title=u'Body Systems Generator',
         description=u'Generates graphs describing organs and other body systems.',
         webServiceURL=_dmccURL,
         operationName=u'Body_System',
@@ -52,7 +52,7 @@ def createDiseaseGenerator(context):
     generator = createContentInContainer(
         context,
         'edrn.rdf.simpledmccrdfgenerator',
-        title=u'Diseases',
+        title=u'Diseases Generator',
         description=u'Generates graphs describing diseases that affect body systems.',
         webServiceURL=_dmccURL,
         operationName=u'Disease',
@@ -90,7 +90,7 @@ def createPublicationGenerator(context):
     generator = createContentInContainer(
         context,
         'edrn.rdf.simpledmccrdfgenerator',
-        title=u'Publications',
+        title=u'Publications Generator',
         description=u'Generates graphs describing articles published by EDRN.',
         webServiceURL=_dmccURL,
         operationName=u'Publication',
@@ -156,7 +156,7 @@ def createSiteGenerator(context):
     generator = createContentInContainer(
         context,
         'edrn.rdf.simpledmccrdfgenerator',
-        title=u'Sites',
+        title=u'Sites Generator',
         description=u'Generates graphs describing the member sites of EDRN.',
         webServiceURL=_dmccURL,
         operationName=u'Site',
@@ -276,7 +276,7 @@ def createPersonGenerator(context):
     generator = createContentInContainer(
         context,
         'edrn.rdf.simpledmccrdfgenerator',
-        title=u'People',
+        title=u'Person Generator',
         description=u'Generates graphs describing the people of EDRN.',
         webServiceURL=_dmccURL,
         operationName=u'Registered_Person',
@@ -362,7 +362,7 @@ def createPersonGenerator(context):
         title=u'Site_id',
         description=u'''Maps from DMCC's Site_id to EDRN-specific predicate for the member's site.''',
         predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#site',
-        uriPrefix=u'http://edrn.nci.nih.gov/data/site/'
+        uriPrefix=u'http://edrn.nci.nih.gov/data/sites/'
     )
     createContentInContainer(
         generator,
@@ -412,7 +412,7 @@ def createCommitteeGenerator(context):
     return createContentInContainer(
         context,
         'edrn.rdf.dmcccommitteerdfgenerator',
-        title=u'Committees',
+        title=u'Committees Generator',
         description=u'Generates graphs describing the EDRN\'s committees.',
         webServiceURL=_dmccURL,
         committeeOperation=u'Committees',
@@ -433,7 +433,7 @@ def createProtocolGenerator(context):
     return createContentInContainer(
         context,
         'edrn.rdf.dmccprotocolrdfgenerator',
-        title=u'Protocols',
+        title=u'Protocols Generator',
         description=u'Generates graphs describing EDRN protocols and studies.',
         webServiceURL=_dmccURL,
         protocolOrStudyOperation=u'Protocol_or_Study',
