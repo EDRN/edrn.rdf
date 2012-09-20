@@ -11,12 +11,6 @@ RESERVED. U.S. Government Sponsorship acknowledged.
     i18n_domain='edrn.rdf'>
     <includeDependencies package='.' />
     <grok:grok package='.' />
-    <!-- <browser:page
-        for='plone.app.layout.navigation.interfaces.INavigationRoot'
-        name='updateRDF'
-        class='.rdfupdater.RDFUpdater'
-        permission='cmf.ManagePortal'
-    /> -->
     <genericsetup:registerProfile
         name='default'
         title='EDRN RDF Service'
@@ -24,4 +18,15 @@ RESERVED. U.S. Government Sponsorship acknowledged.
         description='RDF-based descriptions of EDRN resources'
         provides='Products.GenericSetup.interfaces.EXTENSION'
     />
+    <genericsetup:importStep
+        name='edrn.rdf'
+        title='EDRN RDF import handlers'
+        description='Creates initial set of RDF sources and generators'
+        handler='edrn.rdf.setuphandlers.setupVarious'>
+        <depends name='content' />
+    </genericsetup:importStep>
 </configure>
+<!--
+toolset
+rolemap
+-->
