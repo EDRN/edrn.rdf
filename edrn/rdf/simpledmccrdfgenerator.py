@@ -82,7 +82,7 @@ class SimpleDMCCGraphGenerator(grok.Adapter):
             for key, value in parseTokens(row):
                 if key == context.identifyingKey and not subjectURI:
                     subjectURI = URIRef(context.uriPrefix + value)
-                    graph.add((subjectURI, rdflib.RDF.type, context.typeURI))
+                    graph.add((subjectURI, rdflib.RDF.type, URIRef(context.typeURI)))
                 elif key in predicates and len(value) > 0:
                     statements.extend(predicates[key].characterize(value))
             for predicate, obj in statements:
