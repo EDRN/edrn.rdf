@@ -909,7 +909,7 @@ And now for the RDF::
     >>> graph.parse(data=browser.contents)
     <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
     >>> len(graph)
-    6178
+    3311
     >>> subjects = frozenset([unicode(i) for i in graph.subjects() if unicode(i)])
     >>> subjects = list(subjects)
     >>> subjects.sort()
@@ -923,4 +923,4 @@ And now for the RDF::
     >>> objects = [unicode(i) for i in graph.objects() if isinstance(i, rdflib.term.Literal)]
     >>> objects.sort()
     >>> objects[19]
-    u'00-06-14-01'
+    u'1'
