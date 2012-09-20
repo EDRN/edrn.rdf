@@ -23,5 +23,9 @@ class NoUpdateRequired(RDFUpdateError):
 class MissingParameterError(RDFUpdateError):
     '''An error that tells that some required parameters to update RDF are not present.'''
     def __init__(self, rdfSource, parameter):
-        super(MissingParametersError, self).__init__(rdfSource, 'Missing parameter: %s' % parameter)
+        super(MissingParameterError, self).__init__(rdfSource, 'Missing parameter: %s' % parameter)
     
+class SourceNotActive(RDFUpdateError):
+    '''Error that tells that we cannot update a source that is not marked as active'''
+    def __init__(self, rdfSource):
+        super(SourceNotActive, self).__init__(rdfSource, 'Source is not active')
