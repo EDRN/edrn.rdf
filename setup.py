@@ -9,7 +9,7 @@ import os.path
 # ------------
 
 _name            = 'edrn.rdf'
-_version         = '1.1.4'
+_version         = '1.2.0'
 _description     = 'EDRN RDF Server'
 _url             = 'http://cancer.jpl.nasa.gov/'
 _downloadURL     = 'http://oodt.jpl.nasa.gov/dist/edrn-rdf'
@@ -26,13 +26,13 @@ _entryPoints     = {
     'z3c.autoinclude.plugin': ['target=plone'],
 }
 _requirements = [
-    'Pillow',
-    'rdflib',
-    'Products.CMFPlone',
-    'plone.app.dexterity',
     'collective.autopermission',
-    'z3c.suds',
+    'Pillow',
+    'plone.app.dexterity',
+    'Products.CMFPlone',
+    'rdflib',
     'setuptools',
+    'z3c.suds',
 ]
 _extras = {
     'test': ['plone.app.testing', 'rdfextras'],
