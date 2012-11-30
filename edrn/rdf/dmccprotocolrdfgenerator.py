@@ -475,11 +475,11 @@ class Protocol(_Slotted):
             siteIDs = self.slots.get(slotName, u'')
             predicateURI = URIRef(getattr(context, predicateFieldName))
             for siteID in siteIDs.split(u', '):
-                graph.add((subjectURI, predicateURI, URIRef(context.siteURIPrefix)))
+                graph.add((subjectURI, predicateURI, URIRef(context.siteURIPrefix + siteID)))
     def _addPublications(self, graph, context):
         subjectURI, predicateURI = self.getSubjectURI(context), URIRef(context.publicationsURI)
         for pubID in self.slots.get(u'Protocol_Publications', u'').split(u', '):
-            graph.add((subjectURI, predicateURI, URIRef(context.publicationURIPrefix)))
+            graph.add((subjectURI, predicateURI, URIRef(context.publicationURIPrefix + pubID)))
     def _addFieldsOfResearch(self, graph, context):
         subjectURI, predicateURI = self.getSubjectURI(context), URIRef(context.fieldOfResearchURI)
         for fieldOfResearchID in self.slots.get(u'Protocol_Field_of_Research', u'').split(u', '):
