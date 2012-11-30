@@ -9,7 +9,7 @@ import os.path
 # ------------
 
 _name            = 'edrn.rdf'
-_version         = '1.2.2'
+_version         = '1.2.3'
 _description     = 'EDRN RDF Server'
 _url             = 'http://cancer.jpl.nasa.gov/'
 _downloadURL     = 'http://oodt.jpl.nasa.gov/dist/edrn-rdf'
