@@ -107,7 +107,7 @@ because it's AJAX)::
     u'Silence'
     >>> browser.open(portalURL + '/a-simple-source')
     >>> browser.contents
-    '...Generator...href="/plone/silence"...Silence...'
+    '...Generator...href="http://nohost/plone/silence"...Silence...'
 
 The RDF source still doesn't produce any RDF, though::
 
@@ -310,7 +310,7 @@ generator for our simple source::
     u'Organs'
     >>> browser.open(portalURL + '/a-simple-source')
     >>> browser.contents
-    '...Generator...href="/plone/organs"...Organs...'
+    '...Generator...href="http://nohost/plone/organs"...Organs...'
 
 Tickling::
 

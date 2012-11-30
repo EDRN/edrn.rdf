@@ -394,7 +394,7 @@ class Study(_Slotted):
         ):
             value = self.slots.get(slotName, None)
             if not value: continue
-            predicateURI = getattr(context, attrName)
+            predicateURI = URIRef(getattr(context, attrName))
             graph.add((subjectURI, predicateURI, Literal(value)))
 
 _specificsPredicates = {
