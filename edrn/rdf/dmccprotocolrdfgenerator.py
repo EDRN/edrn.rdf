@@ -479,6 +479,8 @@ class Protocol(_Slotted):
     def _addPublications(self, graph, context):
         subjectURI, predicateURI = self.getSubjectURI(context), URIRef(context.publicationsURI)
         for pubID in self.slots.get(u'Protocol_Publications', u'').split(u', '):
+            pubID = pubID.strip()
+            if not pubID: continue
             graph.add((subjectURI, predicateURI, URIRef(context.publicationURIPrefix + pubID)))
     def _addFieldsOfResearch(self, graph, context):
         subjectURI, predicateURI = self.getSubjectURI(context), URIRef(context.fieldOfResearchURI)

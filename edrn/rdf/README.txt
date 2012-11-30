@@ -904,11 +904,12 @@ Once again, tickling::
 And now for the RDF::
 
     >>> browser.open(portalURL + '/a-protocol-source/@@rdf')
+    >>> xxx = open('/tmp/log.html', 'w'); xxx.write(browser.contents); xxx.close()
     >>> graph = rdflib.Graph()
     >>> graph.parse(data=browser.contents)
     <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
     >>> len(graph)
-    3328
+    3160
     >>> subjects = frozenset([unicode(i) for i in graph.subjects() if unicode(i)])
     >>> subjects = list(subjects)
     >>> subjects.sort()
@@ -948,4 +949,15 @@ That looks good for publications.  And sites::
     >>> results.result[0][0]
     rdflib.term.URIRef(u'urn:testing:data:sites:92')
 
-OK, great!
+OK, great!  But let's make sure the publications don't appear at all when an
+protocol doesn't have any::
+
+    >>> results = graph.query('''select ?publicationsURI where {
+    ...    <urn:testing:data:protocol:72> <urn:testing:predicates:publicationsURI> ?publicationsURI .
+    ... }''')
+    >>> len(results)
+    0
+
+Fan-freakin'-tastic.
+
+
