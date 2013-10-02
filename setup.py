@@ -28,7 +28,9 @@ _entryPoints     = {
 _requirements = [
     'collective.autopermission',
     'Pillow',
-    'plone.app.dexterity',
+    'plone.app.dexterity [grok, relations]',
+    'z3c.relationfield',
+    'plone.app.relationfield',
     'Products.CMFPlone',
     'rdflib',
     'setuptools',

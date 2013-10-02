@@ -359,9 +359,6 @@ not contain an empty statement about Bone's description.
 
 Note::
 
-    >>> from rdflib import plugin
-    >>> plugin.register('sparql', rdflib.query.Processor, 'rdfextras.sparql.processor', 'Processor')
-    >>> plugin.register('sparql', rdflib.query.Result, 'rdfextras.sparql.query', 'SPARQLQueryResult')
     >>> results = graph.query('''select ?description where {
     ...    <urn:testing:data:organ:3> <http://purl.org/dc/terms/description> ?description .
     ... }''')
@@ -462,7 +459,7 @@ And now::
     >>> namespaceURIs.sort()
     >>> namespaceURIs[0]
     rdflib.term.URIRef(u'http://purl.org/dc/terms/')
-    >>> namespaceURIs[4]
+    >>> namespaceURIs[-1]
     rdflib.term.URIRef(u'urn:testing:predicates:')
     >>> subjects = frozenset([unicode(i) for i in graph.subjects() if unicode(i)])
     >>> subjects = list(subjects)
@@ -904,7 +901,6 @@ Once again, tickling::
 And now for the RDF::
 
     >>> browser.open(portalURL + '/a-protocol-source/@@rdf')
-    >>> xxx = open('/tmp/log.html', 'w'); xxx.write(browser.contents); xxx.close()
     >>> graph = rdflib.Graph()
     >>> graph.parse(data=browser.contents)
     <Graph identifier=...(<class 'rdflib.graph.Graph'>)>

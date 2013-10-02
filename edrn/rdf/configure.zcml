@@ -7,8 +7,10 @@ RESERVED. U.S. Government Sponsorship acknowledged.
     xmlns='http://namespaces.zope.org/zope'
     xmlns:browser='http://namespaces.zope.org/browser'
     xmlns:grok='http://namespaces.zope.org/grok'
+    xmlns:zcml='http://namespaces.zope.org/zcml'
     xmlns:genericsetup='http://namespaces.zope.org/genericsetup'
     i18n_domain='edrn.rdf'>
+    <include package='z3c.autoinclude' file='meta.zcml' />
     <includeDependencies package='.' />
     <grok:grok package='.' />
     <genericsetup:registerProfile
@@ -25,8 +27,13 @@ RESERVED. U.S. Government Sponsorship acknowledged.
         handler='edrn.rdf.setuphandlers.setupVarious'>
         <depends name='content' />
     </genericsetup:importStep>
+    <include
+        zcml:condition='installed Products.GenericSetup.upgrade'
+        file='upgrades.zcml'
+    />
 </configure>
 <!--
+What was I thinking here?
 toolset
 rolemap
 -->
