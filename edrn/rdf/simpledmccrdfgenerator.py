@@ -16,7 +16,7 @@ from exceptions import MissingParameterError
 from Acquisition import aq_inner
 from z3c.suds import get_suds_client
 from rdflib.term import URIRef
-from utils import parseTokens
+from utils import parseTokens, splitDMCCRows
 import rdflib
 
 DEFAULT_VERIFICATION_NUM = u'0' * 40960 # Why, why, why? DMCC, you so stupid!
@@ -76,7 +76,7 @@ class SimpleDMCCGraphGenerator(grok.Adapter):
         function = getattr(client.service, context.operationName)
         horribleString = function(verificationNum)
         graph = rdflib.Graph()
-        for row in horribleString.split('!!'):
+        for row in splitDMCCRows(horribleString):
             subjectURI, statements, statementsMade = None, [], False
             for key, value in parseTokens(row):
                 if key == context.identifyingKey and not subjectURI:

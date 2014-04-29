@@ -9,7 +9,7 @@ import os.path
 # ------------
 
 _name            = 'edrn.rdf'
-_version         = '1.2.4'
+_version         = '1.3.0'
 _description     = 'EDRN RDF Server'
 _url             = 'http://cancer.jpl.nasa.gov/'
 _downloadURL     = 'http://oodt.jpl.nasa.gov/dist/edrn-rdf'
@@ -31,6 +31,8 @@ _requirements = [
     'plone.app.dexterity [grok, relations]',
     'z3c.relationfield',
     'plone.app.relationfield',
+    'plone.behavior',
+    'plone.app.kss', # See https://github.com/innocenceproject/collective.salesforce.fundraising/issues/63
     'Products.CMFPlone',
     'rdflib',
     'setuptools',

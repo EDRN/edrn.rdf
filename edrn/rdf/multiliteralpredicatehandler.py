@@ -18,4 +18,4 @@ class MultiLiteralAsserter(grok.Adapter):
     grok.provides(IAsserter)
     def characterize(self, obj):
         context = aq_inner(self.context)
-        return [(rdflib.URIRef(context.predicateURI), rdflib.Literal(i)) for i in obj.split(', ')]
+        return [(rdflib.URIRef(context.predicateURI), rdflib.Literal(i.strip())) for i in obj.split(', ')]

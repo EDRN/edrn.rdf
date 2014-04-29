@@ -13,6 +13,7 @@ from rdfgenerator import IRDFGenerator
 from rdflib.term import URIRef, Literal
 from utils import parseTokens, DEFAULT_VERIFICATION_NUM
 from utils import validateAccessibleURL
+from utils import splitDMCCRows
 from z3c.suds import get_suds_client
 from zope import schema
 import rdflib
@@ -121,7 +122,7 @@ class DMCCCommitteeGraphGenerator(grok.Adapter):
         
         # Get the committees
         horribleCommittees = committees(verificationNum)
-        for row in horribleCommittees.split('!!'):
+        for row in splitDMCCRows(horribleCommittees):
             subjectURI = None
             statements = {}
             for key, value in parseTokens(row):
@@ -136,7 +137,7 @@ class DMCCCommitteeGraphGenerator(grok.Adapter):
         
         # Get the members of the committees
         horribleMembers = members(verificationNum)
-        for row in horribleMembers.split('!!'):
+        for row in splitDMCCRows(horribleMembers):
             subjectURI = predicateURI = obj = None
             for key, value in parseTokens(row):
                 if not value: continue

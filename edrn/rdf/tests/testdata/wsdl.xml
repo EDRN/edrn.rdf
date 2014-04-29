@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-Copyright 2012 California Institute of Technology. ALL RIGHTS
-RESERVED. U.S. Government Sponsorship acknowledged.
--->
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx">
+      <s:element name="ConfirmStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="verificationNum" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConfirmStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="pwdVerification">
         <s:complexType>
           <s:sequence>
@@ -135,6 +146,20 @@ RESERVED. U.S. Government Sponsorship acknowledged.
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="Protocol_Registered_Person_Specifics">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="verificationNum" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Protocol_Registered_Person_SpecificsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Protocol_Registered_Person_SpecificsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="Publication">
         <s:complexType>
           <s:sequence>
@@ -221,6 +246,12 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </s:element>
     </s:schema>
   </wsdl:types>
+  <wsdl:message name="ConfirmStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:ConfirmStatus" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:ConfirmStatusResponse" />
+  </wsdl:message>
   <wsdl:message name="pwdVerificationSoapIn">
     <wsdl:part name="parameters" element="tns:pwdVerification" />
   </wsdl:message>
@@ -275,6 +306,12 @@ RESERVED. U.S. Government Sponsorship acknowledged.
   <wsdl:message name="Protocol_Site_SpecificsSoapOut">
     <wsdl:part name="parameters" element="tns:Protocol_Site_SpecificsResponse" />
   </wsdl:message>
+  <wsdl:message name="Protocol_Registered_Person_SpecificsSoapIn">
+    <wsdl:part name="parameters" element="tns:Protocol_Registered_Person_Specifics" />
+  </wsdl:message>
+  <wsdl:message name="Protocol_Registered_Person_SpecificsSoapOut">
+    <wsdl:part name="parameters" element="tns:Protocol_Registered_Person_SpecificsResponse" />
+  </wsdl:message>
   <wsdl:message name="PublicationSoapIn">
     <wsdl:part name="parameters" element="tns:Publication" />
   </wsdl:message>
@@ -312,6 +349,10 @@ RESERVED. U.S. Government Sponsorship acknowledged.
     <wsdl:part name="parameters" element="tns:tlkpReportingStagesResponse" />
   </wsdl:message>
   <wsdl:portType name="ws_newcompassSoap">
+    <wsdl:operation name="ConfirmStatus">
+      <wsdl:input message="tns:ConfirmStatusSoapIn" />
+      <wsdl:output message="tns:ConfirmStatusSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="pwdVerification">
       <wsdl:input message="tns:pwdVerificationSoapIn" />
       <wsdl:output message="tns:pwdVerificationSoapOut" />
@@ -348,6 +389,10 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       <wsdl:input message="tns:Protocol_Site_SpecificsSoapIn" />
       <wsdl:output message="tns:Protocol_Site_SpecificsSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="Protocol_Registered_Person_Specifics">
+      <wsdl:input message="tns:Protocol_Registered_Person_SpecificsSoapIn" />
+      <wsdl:output message="tns:Protocol_Registered_Person_SpecificsSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="Publication">
       <wsdl:input message="tns:PublicationSoapIn" />
       <wsdl:output message="tns:PublicationSoapOut" />
@@ -375,8 +420,17 @@ RESERVED. U.S. Government Sponsorship acknowledged.
   </wsdl:portType>
   <wsdl:binding name="ws_newcompassSoap" type="tns:ws_newcompassSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConfirmStatus">
+      <soap:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/ConfirmStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="pwdVerification">
-      <soap:operation soapAction="testscheme://localhost/ws_newcompass.asmx/pwdVerification" style="document" />
+      <soap:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/pwdVerification" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -385,7 +439,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="edrnStaffInfoByLogin">
-      <soap:operation soapAction="testscheme://localhost/ws_newcompass.asmx/edrnStaffInfoByLogin" style="document" />
+      <soap:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/edrnStaffInfoByLogin" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -394,7 +448,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Committees">
-      <soap:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Committees" style="document" />
+      <soap:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Committees" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -403,7 +457,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Committee_Membership">
-      <soap:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Committee_Membership" style="document" />
+      <soap:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Committee_Membership" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -412,7 +466,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Disease">
-      <soap:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Disease" style="document" />
+      <soap:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Disease" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -421,7 +475,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="EDRN_Protocol">
-      <soap:operation soapAction="testscheme://localhost/ws_newcompass.asmx/EDRN_Protocol" style="document" />
+      <soap:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/EDRN_Protocol" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -430,7 +484,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Protocol_or_Study">
-      <soap:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Protocol_or_Study" style="document" />
+      <soap:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Protocol_or_Study" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -439,7 +493,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Protocol_Protocol_Relationship">
-      <soap:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Protocol_Protocol_Relationship" style="document" />
+      <soap:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Protocol_Protocol_Relationship" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -448,7 +502,16 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Protocol_Site_Specifics">
-      <soap:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Protocol_Site_Specifics" style="document" />
+      <soap:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Protocol_Site_Specifics" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Protocol_Registered_Person_Specifics">
+      <soap:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Protocol_Registered_Person_Specifics" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -457,7 +520,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Publication">
-      <soap:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Publication" style="document" />
+      <soap:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Publication" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -466,7 +529,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Registered_Person">
-      <soap:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Registered_Person" style="document" />
+      <soap:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Registered_Person" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -475,7 +538,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Site">
-      <soap:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Site" style="document" />
+      <soap:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Site" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -484,7 +547,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="tlkpProtocolSiteRoles">
-      <soap:operation soapAction="testscheme://localhost/ws_newcompass.asmx/tlkpProtocolSiteRoles" style="document" />
+      <soap:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/tlkpProtocolSiteRoles" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -493,7 +556,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Body_System">
-      <soap:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Body_System" style="document" />
+      <soap:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Body_System" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -502,7 +565,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="tlkpReportingStages">
-      <soap:operation soapAction="testscheme://localhost/ws_newcompass.asmx/tlkpReportingStages" style="document" />
+      <soap:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/tlkpReportingStages" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -513,8 +576,17 @@ RESERVED. U.S. Government Sponsorship acknowledged.
   </wsdl:binding>
   <wsdl:binding name="ws_newcompassSoap12" type="tns:ws_newcompassSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConfirmStatus">
+      <soap12:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/ConfirmStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="pwdVerification">
-      <soap12:operation soapAction="testscheme://localhost/ws_newcompass.asmx/pwdVerification" style="document" />
+      <soap12:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/pwdVerification" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -523,7 +595,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="edrnStaffInfoByLogin">
-      <soap12:operation soapAction="testscheme://localhost/ws_newcompass.asmx/edrnStaffInfoByLogin" style="document" />
+      <soap12:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/edrnStaffInfoByLogin" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -532,7 +604,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Committees">
-      <soap12:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Committees" style="document" />
+      <soap12:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Committees" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -541,7 +613,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Committee_Membership">
-      <soap12:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Committee_Membership" style="document" />
+      <soap12:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Committee_Membership" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -550,7 +622,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Disease">
-      <soap12:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Disease" style="document" />
+      <soap12:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Disease" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -559,7 +631,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="EDRN_Protocol">
-      <soap12:operation soapAction="testscheme://localhost/ws_newcompass.asmx/EDRN_Protocol" style="document" />
+      <soap12:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/EDRN_Protocol" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -568,7 +640,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Protocol_or_Study">
-      <soap12:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Protocol_or_Study" style="document" />
+      <soap12:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Protocol_or_Study" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -577,7 +649,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Protocol_Protocol_Relationship">
-      <soap12:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Protocol_Protocol_Relationship" style="document" />
+      <soap12:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Protocol_Protocol_Relationship" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -586,7 +658,16 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Protocol_Site_Specifics">
-      <soap12:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Protocol_Site_Specifics" style="document" />
+      <soap12:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Protocol_Site_Specifics" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Protocol_Registered_Person_Specifics">
+      <soap12:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Protocol_Registered_Person_Specifics" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -595,7 +676,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Publication">
-      <soap12:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Publication" style="document" />
+      <soap12:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Publication" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -604,7 +685,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Registered_Person">
-      <soap12:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Registered_Person" style="document" />
+      <soap12:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Registered_Person" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -613,7 +694,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Site">
-      <soap12:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Site" style="document" />
+      <soap12:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Site" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -622,7 +703,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="tlkpProtocolSiteRoles">
-      <soap12:operation soapAction="testscheme://localhost/ws_newcompass.asmx/tlkpProtocolSiteRoles" style="document" />
+      <soap12:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/tlkpProtocolSiteRoles" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -631,7 +712,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Body_System">
-      <soap12:operation soapAction="testscheme://localhost/ws_newcompass.asmx/Body_System" style="document" />
+      <soap12:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/Body_System" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -640,7 +721,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="tlkpReportingStages">
-      <soap12:operation soapAction="testscheme://localhost/ws_newcompass.asmx/tlkpReportingStages" style="document" />
+      <soap12:operation soapAction="http://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx/tlkpReportingStages" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

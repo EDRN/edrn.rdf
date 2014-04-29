@@ -4,16 +4,16 @@
 
 '''RDF Source'''
 
-from five import grok
-from zope import schema
-from plone.directives import form, dexterity
+from Acquisition import aq_inner
 from edrn.rdf import _
+from five import grok
+from plone.formwidget.contenttree import ObjPathSourceBinder
+from plone.supermodel import model
 from rdfgenerator import IRDFGenerator
 from z3c.relationfield.schema import RelationChoice
-from plone.formwidget.contenttree import ObjPathSourceBinder
-from Acquisition import aq_inner
+from zope import schema
 
-class IRDFSource(form.Schema):
+class IRDFSource(model.Schema):
     '''A source of RDF data.'''
     title = schema.TextLine(
         title=_(u'Name'),
@@ -32,7 +32,7 @@ class IRDFSource(form.Schema):
         source=ObjPathSourceBinder(object_provides=IRDFGenerator.__identifier__),
     )
     approvedFile = RelationChoice(
-        title=_(u''),
+        title=_(u'Active RDF File'),
         description=_(u'Which of the RDF files is the active one.'),
         required=False,
         source=ObjPathSourceBinder(portal_type='File'),

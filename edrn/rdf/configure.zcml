@@ -11,8 +11,14 @@ RESERVED. U.S. Government Sponsorship acknowledged.
     xmlns:genericsetup='http://namespaces.zope.org/genericsetup'
     i18n_domain='edrn.rdf'>
     <include package='z3c.autoinclude' file='meta.zcml' />
+    <include package="plone.behavior" file='meta.zcml' />
+    <include package="plone.app.relationfield" />
     <includeDependencies package='.' />
     <grok:grok package='.' />
+    <browser:resourceDirectory
+        name='edrn.rdf'
+        directory='static'
+    />
     <genericsetup:registerProfile
         name='default'
         title='EDRN RDF Service'

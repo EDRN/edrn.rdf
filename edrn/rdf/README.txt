@@ -242,7 +242,7 @@ Handlers to the Simple DMCC RDF Generator.  There are a few kinds:
 
 • Literal Predicate Handlers that map a clumsy DMCC key to a predicate whose
   object is a literal value.
-• Reference Predicate Handlers that map a inept DMCC key to a predicate whose
+• Reference Predicate Handlers that map an inept DMCC key to a predicate whose
   object is a reference to another object, identified by its subject URI.
 • Multi Literal Predicate Handlers map an awkward DMCC key that contains
   values separated by commas to multiple statements, one object per
@@ -269,17 +269,17 @@ For organs, we need only to use the Literal Predicate Handler::
     >>> l.url.endswith('++add++edrn.rdf.literalpredicatehandler')
     True
     >>> l.click()
-    >>> browser.getControl(name='form.widgets.title').value = u'Title'
-    >>> browser.getControl(name='form.widgets.description').value = u'Maps the <Title> key to the Dublin Core title predicate URI.'
+    >>> browser.getControl(name='form.widgets.title').value = u'item_Title'
+    >>> browser.getControl(name='form.widgets.description').value = u'Maps the <item_Title> key to the Dublin Core title predicate URI.'
     >>> browser.getControl(name='form.widgets.predicateURI').value = u'http://purl.org/dc/terms/title'
     >>> browser.getControl(name='form.buttons.save').click()
-    >>> 'title-1' in generator.keys()
+    >>> 'item_title' in generator.keys()
     True
-    >>> predicateHandler = generator['title-1']
+    >>> predicateHandler = generator['item_title']
     >>> predicateHandler.title
-    u'Title'
+    u'item_Title'
     >>> predicateHandler.description
-    u'Maps the <Title> key to the Dublin Core title predicate URI.'
+    u'Maps the <item_Title> key to the Dublin Core title predicate URI.'
     >>> predicateHandler.predicateURI
     u'http://purl.org/dc/terms/title'
 
@@ -326,7 +326,7 @@ And now::
     >>> graph.parse(data=browser.contents)
     <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
     >>> len(graph)
-    8
+    66
     >>> namespaceURIs = [i[1] for i in graph.namespaces()]
     >>> namespaceURIs.sort()
     >>> namespaceURIs[0]
@@ -334,17 +334,17 @@ And now::
     >>> subjects = frozenset([unicode(i) for i in graph.subjects() if unicode(i)])
     >>> subjects = list(subjects)
     >>> subjects.sort()
-    >>> subjects
-    [u'urn:testing:data:organ:1', u'urn:testing:data:organ:2', u'urn:testing:data:organ:3']
+    >>> subjects[0:3]
+    [u'urn:testing:data:organ:1', u'urn:testing:data:organ:10', u'urn:testing:data:organ:11']
     >>> predicates = frozenset([unicode(i) for i in graph.predicates()])
     >>> predicates = list(predicates)
     >>> predicates.sort()
-    >>> predicates
-    [u'http://purl.org/dc/terms/description', u'http://purl.org/dc/terms/title', u'http://www.w3.org/1999/02/22-rdf-syntax-ns#type']
+    >>> predicates[0:2]
+    [u'http://purl.org/dc/terms/title', u'http://www.w3.org/1999/02/22-rdf-syntax-ns#type']
     >>> objects = [unicode(i) for i in graph.objects() if isinstance(i, rdflib.term.Literal)]
     >>> objects.sort()
-    >>> objects
-    [u'Bladder', u'Blood', u'Bone', u'Carries oxygen', u'Holds urine']
+    >>> objects[0:5]
+    [u'Bladder', u'Blood', u'Bone', u'Brain', u'Breast']
 
 Now that's some fine looking RDF.
 
@@ -392,8 +392,8 @@ Now a couple Literal Predicate Handler to handle the basics like title, etc.::
 
     >>> browser.open(portalURL + '/diseases')
     >>> browser.getLink(id='edrn-rdf-literalpredicatehandler').click()
-    >>> browser.getControl(name='form.widgets.title').value = u'title'
-    >>> browser.getControl(name='form.widgets.description').value = u'Maps the <title> key to the Dublin Core title predicate URI.'
+    >>> browser.getControl(name='form.widgets.title').value = u'item_Title'
+    >>> browser.getControl(name='form.widgets.description').value = u'Maps the <item_Title> key to the Dublin Core title predicate URI.'
     >>> browser.getControl(name='form.widgets.predicateURI').value = u'http://purl.org/dc/terms/title'
     >>> browser.getControl(name='form.buttons.save').click()
     >>> browser.open(portalURL + '/diseases')
@@ -454,7 +454,7 @@ And now::
     >>> graph.parse(data=browser.contents)
     <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
     >>> len(graph)
-    13
+    124
     >>> namespaceURIs = [i[1] for i in graph.namespaces()]
     >>> namespaceURIs.sort()
     >>> namespaceURIs[0]
@@ -464,8 +464,8 @@ And now::
     >>> subjects = frozenset([unicode(i) for i in graph.subjects() if unicode(i)])
     >>> subjects = list(subjects)
     >>> subjects.sort()
-    >>> subjects
-    [u'urn:testing:data:disease:1', u'urn:testing:data:disease:2', u'urn:testing:data:disease:3']
+    >>> subjects[0:3]
+    [u'urn:testing:data:disease:1', u'urn:testing:data:disease:10', u'urn:testing:data:disease:11']
     >>> predicates = frozenset([unicode(i) for i in graph.predicates()])
     >>> predicates = list(predicates)
     >>> predicates.sort()
@@ -477,13 +477,13 @@ And now::
     u'urn:testing:predicates:icd9code'
     >>> objects = [unicode(i) for i in graph.objects() if isinstance(i, rdflib.term.Literal)]
     >>> objects.sort()
-    >>> objects
-    [u'170', u'188', u'191', u'Malignant neoplasm of bladder', u'Malignant neoplasm of bone and articular cartilage', u'Malignant neoplasm of brain']
+    >>> objects[27:32]
+    [u'205', u'208.9', u'Liver cell carcinoma', u'Lymphoid leukaemia', u'Malignant melanoma of skin']
     >>> references = frozenset([unicode(i) for i in graph.objects() if isinstance(i, rdflib.term.URIRef)])
     >>> references = list(references)
     >>> references.sort()
-    >>> references
-    [u'urn:testing:data:organs:1', u'urn:testing:data:organs:3', u'urn:testing:data:organs:4', u'urn:testing:data:organs:7', u'urn:testing:types:disease']
+    >>> references[0:3]
+    [u'urn:testing:data:organs:1', u'urn:testing:data:organs:10', u'urn:testing:data:organs:11']
 
 That's even better lookin' RDF.
 
@@ -520,8 +520,8 @@ Now a Literal Predicate Handler to handle the title of each publication::
 
     >>> browser.open(portalURL + '/publications')
     >>> browser.getLink(id='edrn-rdf-literalpredicatehandler').click()
-    >>> browser.getControl(name='form.widgets.title').value = u'title'
-    >>> browser.getControl(name='form.widgets.description').value = u'Maps the <Title> key to the Dublin Core title predicate URI.'
+    >>> browser.getControl(name='form.widgets.title').value = u'item_Title'
+    >>> browser.getControl(name='form.widgets.description').value = u'Maps the <item_Title> key to the Dublin Core title predicate URI.'
     >>> browser.getControl(name='form.widgets.predicateURI').value = u'http://purl.org/dc/terms/title'
     >>> browser.getControl(name='form.buttons.save').click()
 
@@ -572,12 +572,12 @@ And now for the RDF::
     >>> graph.parse(data=browser.contents)
     <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
     >>> len(graph)
-    22
+    1908
     >>> subjects = frozenset([unicode(i) for i in graph.subjects() if unicode(i)])
     >>> subjects = list(subjects)
     >>> subjects.sort()
-    >>> subjects
-    [u'urn:testing:data:publication:128', u'urn:testing:data:publication:129', u'urn:testing:data:publication:131']
+    >>> subjects[0:3]
+    [u'urn:testing:data:publication:128', u'urn:testing:data:publication:129', u'urn:testing:data:publication:130']
     >>> predicates = frozenset([unicode(i) for i in graph.predicates()])
     >>> predicates = list(predicates)
     >>> predicates.sort()
@@ -585,8 +585,8 @@ And now for the RDF::
     u'http://purl.org/dc/terms/creator'
     >>> objects = [unicode(i) for i in graph.objects() if isinstance(i, rdflib.term.Literal)]
     >>> objects.sort()
-    >>> objects
-    [u'Berkowitz R', u'Berkowitz RS', u'Chao J', u'Cramer DW', u'Cramer DW', u'Fu L', u'Highsmith WE', u'Kwong-kwok W', u'Leung S', u'Li E', u'Mok', u'Mok SC', u'Muto MG', u'Pratomo V', u'SC', u'Skates S', u'Skates S', u'Ye B', u'Yiu GK']
+    >>> objects[20:23]
+    [u'Aberrant promoter methylation and silencing of the RASSF1A gene in pediatric tumors and cell lines', u'Aberrant promoter methylation profile of bladder cancer and its relationship to clinicopathologic features', u'Aberrant promoter methylation profile of bladder cancer and its relationship to clinicopathological features']
 
 Yes, fine—and I mean *fiiiiiine*—RDF.
 
@@ -642,7 +642,7 @@ gets run, it'll make an active file again::
     >>> graph.parse(data=browser.contents)
     <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
     >>> len(graph)
-    22
+    1908
 
 To prevent that from happening, uncheck the source's "Active" checkbox.
 
@@ -766,12 +766,12 @@ And now for the RDF::
     >>> graph.parse(data=browser.contents)
     <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
     >>> len(graph)
-    17
+    247
     >>> subjects = frozenset([unicode(i) for i in graph.subjects() if unicode(i)])
     >>> subjects = list(subjects)
     >>> subjects.sort()
-    >>> subjects
-    [u'urn:testing:data:committee:1', u'urn:testing:data:committee:2', u'urn:testing:data:committee:3']
+    >>> subjects[0:3]
+    [u'urn:testing:data:committee:1', u'urn:testing:data:committee:10', u'urn:testing:data:committee:14']
     >>> predicates = frozenset([unicode(i) for i in graph.predicates()])
     >>> predicates = list(predicates)
     >>> predicates.sort()
@@ -791,8 +791,8 @@ And now for the RDF::
     u'urn:testing:predicates:member'
     >>> objects = [unicode(i) for i in graph.objects() if isinstance(i, rdflib.term.Literal)]
     >>> objects.sort()
-    >>> objects
-    [u'Committee', u'Committee', u'EC', u'Executive Committee', u'NCT', u'Network Consulting Team', u'SC', u'Steering Committee', u'Team']
+    >>> objects[0:6]
+    [u'Assoc. Member', u'Associate Member', u'BDL', u'BRL', u'Biomarker Developmental  Laboratories', u'Biomarker Reference Laboratories']
 
 Major wootness.
 
@@ -905,12 +905,12 @@ And now for the RDF::
     >>> graph.parse(data=browser.contents)
     <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
     >>> len(graph)
-    3160
+    2518
     >>> subjects = frozenset([unicode(i) for i in graph.subjects() if unicode(i)])
     >>> subjects = list(subjects)
     >>> subjects.sort()
     >>> subjects[0]
-    u'urn:testing:data:protocol:101'
+    u'urn:testing:data:protocol:100'
     >>> predicates = frozenset([unicode(i) for i in graph.predicates()])
     >>> predicates = list(predicates)
     >>> predicates.sort()
@@ -918,38 +918,39 @@ And now for the RDF::
     u'urn:testing:predicates:abbreviatedNameURI'
     >>> objects = [unicode(i) for i in graph.objects() if isinstance(i, rdflib.term.Literal)]
     >>> objects.sort()
-    >>> objects[19]
-    u'1'
+    >>> objects[-1]
+    u'xyz'
 
 CA-1031 complains that the rdf:resource links for a protocol to its sites and
 its publications are bad, consisting of a URI prefix but with no final numeric
 identifier.  Really?  Let's check::
 
+    >>> with open('/tmp/log.html', 'w') as xxx: xxx.write(browser.contents)
     >>> results = graph.query('''select ?publicationsURI where {
-    ...    <urn:testing:data:protocol:67> <urn:testing:predicates:publicationsURI> ?publicationsURI .
+    ...    <urn:testing:data:protocol:155> <urn:testing:predicates:publicationsURI> ?publicationsURI .
     ... }''')
     >>> len(results)
-    9
+    3
     >>> ids = [unicode(i[0]) for i in results.result]
     >>> ids.sort()
     >>> ids
-    [u'urn:testing:data:publication:1053', u'urn:testing:data:publication:1055', u'urn:testing:data:publication:1056'...] 
+    [u'urn:testing:data:publication:184', u'urn:testing:data:publication:265', u'urn:testing:data:publication:332'] 
     
 That looks good for publications.  And sites::
 
     >>> results = graph.query('''select ?leadInvestigatorSiteURI where {
-    ...    <urn:testing:data:protocol:67> <urn:testing:predicates:leadInvestigatorSiteURI> ?leadInvestigatorSiteURI .
+    ...    <urn:testing:data:protocol:342> <urn:testing:predicates:leadInvestigatorSiteURI> ?leadInvestigatorSiteURI .
     ... }''')
     >>> len(results)
     1
     >>> results.result[0][0]
-    rdflib.term.URIRef(u'urn:testing:data:sites:92')
+    rdflib.term.URIRef(u'urn:testing:data:sites:244')
 
 OK, great!  But let's make sure the publications don't appear at all when an
 protocol doesn't have any::
 
     >>> results = graph.query('''select ?publicationsURI where {
-    ...    <urn:testing:data:protocol:72> <urn:testing:predicates:publicationsURI> ?publicationsURI .
+    ...    <urn:testing:data:protocol:342> <urn:testing:predicates:publicationsURI> ?publicationsURI .
     ... }''')
     >>> len(results)
     0

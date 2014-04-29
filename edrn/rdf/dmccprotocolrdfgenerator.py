@@ -11,7 +11,7 @@ from five import grok
 from interfaces import IGraphGenerator
 from rdfgenerator import IRDFGenerator
 from rdflib.term import URIRef, Literal
-from utils import parseTokens, validateAccessibleURL, DEFAULT_VERIFICATION_NUM
+from utils import parseTokens, validateAccessibleURL, DEFAULT_VERIFICATION_NUM, splitDMCCRows
 from z3c.suds import get_suds_client
 from zope import schema
 import rdflib
@@ -569,7 +569,7 @@ class DMCCProtocolGraphGenerator(grok.Adapter):
         horribleString = function(self.verificationNum)
         objects = {}
         obj = None
-        for row in horribleString.split(u'!!'):
+        for row in splitDMCCRows(horribleString):
             lastSlot = None
             for key, value in parseTokens(row):
                 if key == u'Identifier':
@@ -592,7 +592,7 @@ class DMCCProtocolGraphGenerator(grok.Adapter):
         function = getattr(self.client.service, self.context.protoSiteSpecificsOperation)
         horribleString = function(self.verificationNum)
         specifics = {}
-        for row in horribleString.split(u'!!'):
+        for row in splitDMCCRows(horribleString):
             specific = Specifics(row)
             specifics[(specific.protocolID, specific.siteID)] = specific
         return specifics
@@ -600,12 +600,15 @@ class DMCCProtocolGraphGenerator(grok.Adapter):
         function = getattr(self.client.service, self.context.protoProtoRelationshipOperation)
         horribleString = function(self.verificationNum)
         relationships = []
-        for row in horribleString.split(u'!!'):
+        for row in splitDMCCRows(horribleString):
             relationships.append(Relationship(row))
         return relationships
     def generateGraph(self):
         graph = rdflib.Graph()
-        studies, specifics, relationships = self.getStudies(), self.getSpecifics(), self.getRelationships()
+        # studies, specifics, relationships = self.getStudies(), self.getSpecifics(), self.getRelationships()
+        studies = self.getStudies()
+        specifics = self.getSpecifics()
+        relationships = self.getRelationships()
         protocols = self.getProtocols()
         for study in studies.itervalues():
             subjectURI = URIRef(self.context.uriPrefix + study.identifier)

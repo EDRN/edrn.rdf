@@ -29,6 +29,15 @@ ACCESSIBLE_SCHEMES = frozenset((
     'testscheme', # Used during testing.
 ))
 
+# DMCC no longer separates rows by '!!'. Yay.
+_rowSep = re.compile(ur'<recordNumber>[0-9]+</recordNumber><numberOfRecords>[0-9]+</numberOfRecords>'
+    ur'<ontologyVersion>[0-9.]+</ontologyVersion>')
+def splitDMCCRows(horribleString):
+    u'''Split a horrible DMCC string into rows.  Returns an iterable.'''
+    i = _rowSep.split(horribleString)
+    i = i[1:] # Skip first item, which is the empty string to the left of the first row separator
+    return i
+
 def validateAccessibleURL(s):
     '''Ensure the unicode string ``s`` is a valid URL and one whose scheme we deem "accessible".
     "Accessible" means that we reasonably expect our network APIs to handle locally- or network-
