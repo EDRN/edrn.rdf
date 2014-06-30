@@ -44,7 +44,7 @@ def createBodySystemsGenerator(context):
         identifyingKey=u'Identifier',
         typeURI=u'http://edrn.nci.nih.gov/rdf/types.rdf#BodySystem'
     )
-    addDCTitle(generator, u'Title')
+    addDCTitle(generator, u'item_Title')
     addDCDescription(generator, u'Description')
     return generator
 
@@ -60,7 +60,7 @@ def createDiseaseGenerator(context):
         identifyingKey=u'Identifier',
         typeURI=u'http://edrn.nci.nih.gov/rdf/types.rdf#Disease'
     )
-    addDCTitle(generator, u'title')
+    addDCTitle(generator, u'item_Title')
     addDCDescription(generator, u'description')
     createContentInContainer(
         generator,
@@ -98,7 +98,7 @@ def createPublicationGenerator(context):
         identifyingKey=u'Identifier',
         typeURI=u'http://edrn.nci.nih.gov/rdf/types.rdf#Publication'
     )
-    addDCTitle(generator, u'Title')
+    addDCTitle(generator, u'item_Title')
     addDCDescription(generator, u'Description')
     createContentInContainer(
         generator,
@@ -164,7 +164,7 @@ def createSiteGenerator(context):
         identifyingKey=u'Identifier',
         typeURI=u'http://edrn.nci.nih.gov/rdf/types.rdf#Site'
     )
-    addDCTitle(generator, u'Title')
+    addDCTitle(generator, u'item_Title')
     createContentInContainer(
         generator,
         'edrn.rdf.literalpredicatehandler',
