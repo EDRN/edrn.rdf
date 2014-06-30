@@ -27,6 +27,8 @@ class ReferenceAsserter(grok.Adapter):
         context = aq_inner(self.context)
         characterizations = []
         for i in obj.split(', '):
+            i = i.strip()
+            if not i: continue
             target = context.uriPrefix + i
             characterizations.append((rdflib.URIRef(context.predicateURI), rdflib.URIRef(target)))
         return characterizations
