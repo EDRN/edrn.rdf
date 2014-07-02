@@ -30,7 +30,6 @@ _requirements = [
     'z3c.relationfield',
     'plone.app.relationfield',
     'plone.behavior',
-    'plone.app.kss', # See https://github.com/innocenceproject/collective.salesforce.fundraising/issues/63
     'Products.CMFPlone',
     'rdflib',
     'setuptools',
@@ -60,7 +59,7 @@ def _read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
 _header = '*' * len(_name) + '\n' + _name + '\n' + '*' * len(_name)
-_longDescription = _header + '\n\n' + _read('README.txt') + '\n\n' + _read('docs', 'INSTALL.txt') + '\n\n' \
+_longDescription = _header + '\n\n' + _read('README.rst') + '\n\n' + _read('docs', 'INSTALL.txt') + '\n\n' \
     + _read('docs', 'HISTORY.txt') + '\n'
 open('doc.txt', 'w').write(_longDescription)
 
