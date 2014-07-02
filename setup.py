@@ -11,13 +11,11 @@ import os.path
 _name            = 'edrn.rdf'
 _version         = '1.3.1'
 _description     = 'EDRN RDF Server'
-_url             = 'http://cancer.jpl.nasa.gov/'
-_downloadURL     = 'http://oodt.jpl.nasa.gov/dist/edrn-rdf'
 _author          = 'Sean Kelly'
 _authorEmail     = 'sean.kelly@jpl.nasa.gov'
 _maintainer      = 'Sean Kelly'
 _maintainerEmail = 'sean.kelly@jpl.nasa.gov'
-_license         = 'Proprietary'
+_license         = 'ALv2'
 _namespaces      = ['edrn']
 _zipSafe         = False
 _keywords        = 'rdf web zope plone cancer bioinformatics detection informatics edrn'
@@ -63,7 +61,7 @@ def _read(*rnames):
 
 _header = '*' * len(_name) + '\n' + _name + '\n' + '*' * len(_name)
 _longDescription = _header + '\n\n' + _read('README.txt') + '\n\n' + _read('docs', 'INSTALL.txt') + '\n\n' \
-    + _read('docs', 'HISTORY.txt') + '\n\n' + _read('docs', 'LICENSE.txt')
+    + _read('docs', 'HISTORY.txt') + '\n'
 open('doc.txt', 'w').write(_longDescription)
 
 setup(
@@ -71,7 +69,6 @@ setup(
     author_email=_authorEmail,
     classifiers=_classifiers,
     description=_description,
-    download_url=_downloadURL,
     entry_points=_entryPoints,
     extras_require=_extras,
     include_package_data=True,
@@ -84,7 +81,7 @@ setup(
     name=_name,
     namespace_packages=_namespaces,
     packages=find_packages(exclude=['ez_setup', 'distribute_setup', 'bootstrap']),
-    url=_url,
+    url='https://github.com/EDRN/' + _name,
     version=_version,
     zip_safe=_zipSafe,
 )
