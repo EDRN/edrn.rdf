@@ -358,54 +358,101 @@ def createPersonGenerator(context):
     )
     createContentInContainer(
         generator,
+        'edrn.rdf.literalpredicatehandler',
+        title=u'Role_Secure_Site',
+        description=u'''Maps from DMCC's Role_Secure_Site to the EDRN predicate for secure site role.''',
+        predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#secureSiteRole'
+    )
+    createContentInContainer(
+        generator,
+        'edrn.rdf.literalpredicatehandler',
+        title=u'Salutation',
+        description=u'''Maps from DMCC's salutation to the FOAF predicate for account name.''',
+        predicateURI=u'http://xmlns.com/foaf/0.1/salutation'
+    )
+    createContentInContainer(
+        generator,
         'edrn.rdf.referencepredicatehandler',
         title=u'Site_id',
         description=u'''Maps from DMCC's Site_id to EDRN-specific predicate for the member's site.''',
         predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#site',
         uriPrefix=u'http://edrn.nci.nih.gov/data/sites/'
     )
+    for kind in (u'mailing', u'physical', u'shipping'):
+        prefix = kind[0].upper() + kind[1:]
+        createContentInContainer(
+            generator,
+            'edrn.rdf.literalpredicatehandler',
+            title=prefix + u'_Address1',
+            description=u'Maps from DMCC\'s {}_Address1 to EDRN-specific predicate of {} address.'.format(
+                prefix, kind
+            ),
+            predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#{}Address'.format(kind)
+        )
+        # Why, DMCC? Why?
+        createContentInContainer(
+            generator,
+            'edrn.rdf.literalpredicatehandler',
+            title=prefix + u'_Other_StateOrProvince',
+            description=u'Maps DMCC\'s {}_Other_StateOrProvince to EDRN-specific predicate for {} other address'.format(
+                prefix, kind
+            ),
+            predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#{}OtherStateOrProvince'.format(kind)
+        )
+        # Why, DMCC? Why?
+        createContentInContainer(
+            generator,
+            'edrn.rdf.literalpredicatehandler',
+            title=prefix + u'Mailing_Other_State_Province',
+            description=u'Maps DMCC\'s {}Mailing_Other_State_Province to predicate for {} state/prov address'.format(
+                prefix, kind
+            ),
+            predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#{}OtherStateAndProvince'.format(kind)
+        )
+        createContentInContainer(
+            generator,
+            'edrn.rdf.literalpredicatehandler',
+            title=prefix + u'_City',
+            description=u'Maps from DMCC\'s {}_City to EDRN-specific predicate for {} city.'.format(prefix, kind),
+            predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#{}City'.format(kind)
+        )
+        createContentInContainer(
+            generator,
+            'edrn.rdf.literalpredicatehandler',
+            title=prefix + u'_State',
+            description=u'Maps from DMCC\'s {}_State to EDRN-specific predicate for {} state.'.format(prefix, kind),
+            predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#{}State'.format(kind)
+        )
+        createContentInContainer(
+            generator,
+            'edrn.rdf.literalpredicatehandler',
+            title=prefix + u'_Zip',
+            description=u'Maps from DMCC\'s {}_Zip to EDRN-specific predicate for {} postal code.'.format(prefix, kind),
+            predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#{}PostalCode'.format(kind)
+        )
+        createContentInContainer(
+            generator,
+            'edrn.rdf.literalpredicatehandler',
+            title=prefix + u'_Country',
+            description=u'Maps from DMCC\'s {}_Country to EDRN-specific predicate for {} country.'.format(prefix, kind),
+            predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#{}Country'.format(kind)
+        )
+    # Special case (thanks DMCC):
     createContentInContainer(
         generator,
         'edrn.rdf.literalpredicatehandler',
-        title=u'Mailing_Address1',
-        description=u'''Maps from DMCC's Mailing_Address1 to EDRN-specific predicate for line 1 of mailing address.''',
-        predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#addr1'
+        title=u'Shipping_Address2',
+        description=u'Maps from DMCC\'s Shipping_Address2 to EDRN-specific predicate for shipping address line 2.',
+        predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#shippingAddress2'
     )
-    createContentInContainer(
-        generator,
-        'edrn.rdf.literalpredicatehandler',
-        title=u'Mailing_Address2',
-        description=u'''Maps from DMCC's Mailing_Address2 to EDRN-specific predicate for line 2 of mailing address.''',
-        predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#addr2'
-    )
-    createContentInContainer(
-        generator,
-        'edrn.rdf.literalpredicatehandler',
-        title=u'Mailing_City',
-        description=u'''Maps from DMCC's Mailing_City to EDRN-specific predicate for mailing city.''',
-        predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#city'
-    )
-    createContentInContainer(
-        generator,
-        'edrn.rdf.literalpredicatehandler',
-        title=u'Mailing_State',
-        description=u'''Maps from DMCC's Mailing_State to EDRN-specific predicate for mailing state.''',
-        predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#state'
-    )
-    createContentInContainer(
-        generator,
-        'edrn.rdf.literalpredicatehandler',
-        title=u'Mailing_Zip',
-        description=u'''Maps from DMCC's Mailing_Zip to EDRN-specific predicate for postal code.''',
-        predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#postalCode'
-    )
-    createContentInContainer(
-        generator,
-        'edrn.rdf.literalpredicatehandler',
-        title=u'Mailing_Country',
-        description=u'''Maps from DMCC's Mailing_Country to EDRN-specific predicate for mailing country.''',
-        predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#country'
-    )
+    for degree in range(1, 4):
+        createContentInContainer(
+            generator,
+            'edrn.rdf.literalpredicatehandler',
+            title=u'Degree{}'.format(degree),
+            description=u'Maps from DMCC\'s Degree{} to EDRN-specific predicate for degree #{}'.format(degree, degree),
+            predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#degree{}'.format(degree)
+        )
     return generator
 
 def createCommitteeGenerator(context):
