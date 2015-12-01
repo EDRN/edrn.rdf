@@ -12,6 +12,7 @@ from zope.app.intid.interfaces import IIntIds
 from zope.component import getUtility
 
 _dmccURL = u'https://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx?WSDL'
+_biomutaURL = u'https://hive.biochemistry.gwu.edu/tools/biomuta/download.php?file=BioMuta_stat.csv'
 
 def addDCTitle(context, key):
     createContentInContainer(
@@ -455,6 +456,23 @@ def createPersonGenerator(context):
         )
     return generator
 
+def createBiomutaGenerator(context):
+    return createContentInContainer(
+        context,
+        'edrn.rdf.biomutardfgenerator',
+        title=u'Biomuta Generator',
+        description=u'Generates graphs describing the EDRN\'s biomaker mutation statistics.',
+        webServiceURL=_biomutaURL,
+        typeURI=u'http://edrn.nci.nih.gov/rdf/types.rdf#Biomuta',
+        uriPrefix=u'http://edrn.nci.nih.gov/data/biomuta/',
+        geneNamePredicateURI=u'http://edrn.nci.nih.gov/xml/rdf/edrn.rdf#geneName',
+        uniProtACPredicateURI=u'http://edrn.nci.nih.gov/xml/rdf/edrn.rdf#uniprotAccession',
+        mutCountPredicateURI=u'http://edrn.nci.nih.gov/xml/rdf/edrn.rdf#mutationCount',
+        pmidCountPredicateURI=u'http://edrn.nci.nih.gov/xml/rdf/edrn.rdf#pubmedIDCount',
+        cancerDOCountPredicateURI=u'http://edrn.nci.nih.gov/xml/rdf/edrn.rdf#cancerDOCount',
+        affProtFuncSiteCountPredicateURI=u'http://edrn.nci.nih.gov/xml/rdf/edrn.rdf#affectedProtFuncSiteCount'
+    )
+
 def createCommitteeGenerator(context):
     return createContentInContainer(
         context,
@@ -553,6 +571,8 @@ def createRDFGenerators(context):
     generators['publications']      = createPublicationGenerator(folder)
     generators['registered-person'] = createPersonGenerator(folder)
     generators['sites']             = createSiteGenerator(folder)
+    generators['biomuta']           = createBiomutaGenerator(folder)
+
     return generators
 
 def createRDFSources(context, generators):
@@ -566,6 +586,7 @@ def createRDFSources(context, generators):
         ('sites', u'Sites', u'Source of RDF for EDRN\'s member sites.'),
         ('registered-person', u'Registered Person', u'Source of RDF for EDRN\'s people.'),
         ('committees', u'Committees', u'Source of RDF for committees and working groups in EDRN.'),
+        ('biomuta', u'Biomuta', u'Source of RDF for biomarker mutation statistics in EDRN.'),
         ('protocols', u'Protocols', u'Source of RDF for EDRN\'s various protocols and studies.')
     ):
         generator = RelationValue(generators[objID])

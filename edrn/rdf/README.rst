@@ -958,3 +958,112 @@ protocol doesn't have any::
 Fan-freakin'-tastic.
 
 
+RDF Generators added by David
+=============================
+
+Generating RDF for Biomuta
+-----------------------------
+
+Biomuta generator grabs csv file from George Washington University's 
+High-performance Integrated Virtual Environment (HIVE).  They may be created anywhere::
+
+    >>> browser.open(portalURL)
+    >>> l = browser.getLink(id='edrn-rdf-biomutardfgenerator')
+    >>> l.url.endswith('++add++edrn.rdf.biomutardfgenerator')
+    True
+    >>> l.click()
+    >>> browser.getControl(name='form.widgets.title').value = u'Biomuta'
+    >>> browser.getControl(name='form.widgets.description').value = u'Generates mutation info about EDRN biomarkers.'
+    >>> browser.getControl(name='form.widgets.webServiceURL').value = u'https://hive.biochemistry.gwu.edu/tools/biomuta/download.php?file=BioMuta_stat.csv'
+    >>> browser.getControl(name='form.widgets.typeURI').value = u'urn:testing:types:biomuta'
+    >>> browser.getControl(name='form.widgets.uriPrefix').value = u'urn:testing:data:biomuta:'
+    >>> browser.getControl(name='form.widgets.geneNamePredicateURI').value = u'urn:testing:predicates:geneName'
+    >>> browser.getControl(name='form.widgets.uniProtACPredicateURI').value = u'urn:testing:predicates:uniprotAccession'
+    >>> browser.getControl(name='form.widgets.mutCountPredicateURI').value = u'urn:testing:predicates:mutationCount'
+    >>> browser.getControl(name='form.widgets.pmidCountPredicateURI').value = u'urn:testing:predicates:pubmedIDCount'
+    >>> browser.getControl(name='form.widgets.cancerDOCountPredicateURI').value = u'urn:testing:predicates:cancerDOCount'
+    >>> browser.getControl(name='form.widgets.affProtFuncSiteCountPredicateURI').value = u'urn:testing:predicates:affectedProtFuncSiteCount'
+    >>> browser.getControl(name='form.buttons.save').click()
+    >>> 'biomuta' in portal.keys()
+    True
+    >>> generator = portal['biomuta']
+    >>> generator.title
+    u'Biomuta'
+    >>> generator.description
+    u'Generates mutation info about EDRN biomarkers.'
+    >>> generator.webServiceURL
+    u'https://hive.biochemistry.gwu.edu/tools/biomuta/download.php?file=BioMuta_stat.csv'
+    >>> generator.typeURI
+    u'urn:testing:types:biomuta'
+    >>> generator.uriPrefix
+    u'urn:testing:data:biomuta:'
+    >>> generator.geneNamePredicateURI
+    u'urn:testing:predicates:geneName'
+    >>> generator.uniProtACPredicateURI
+    u'urn:testing:predicates:uniprotAccession'
+    >>> generator.mutCountPredicateURI
+    u'urn:testing:predicates:mutationCount'
+    >>> generator.pmidCountPredicateURI
+    u'urn:testing:predicates:pubmedIDCount'
+    >>> generator.cancerDOCountPredicateURI
+    u'urn:testing:predicates:cancerDOCount'
+    >>> generator.affProtFuncSiteCountPredicateURI
+    u'urn:testing:predicates:affectedProtFuncSiteCount'
+
+Looks good.  Fresh source for the biomuta generator::
+
+    >>> browser.open(portalURL)
+    >>> browser.getLink(id='edrn-rdf-rdfsource').click()
+    >>> browser.getControl(name='form.widgets.title').value = u'A Biomuta Source'
+    >>> browser.getControl(name='form.widgets.description').value = u"It's just for functional tests."
+    >>> browser.getControl(name='form.widgets.active:list').value = True
+    >>> browser.getControl(name='form.buttons.save').click()
+    >>> source = portal['a-biomuta-source']
+    >>> browser.open(portalURL + '/a-biomuta-source/edit')
+    >>> postParams = {
+    ...     'form.widgets.title': source.title,
+    ...     'form.widgets.description': source.description,
+    ...     'form.widgets.generator:list': '/plone/biomuta',
+    ...     'form.widgets.active:list': 'selected',
+    ...     'form.buttons.save': 'Save',
+    ... }
+    >>> browser.post(portalURL + '/a-biomuta-source/@@edit', urlencode(postParams))
+
+Now for the tickle::
+
+    >>> browser.open(portalURL + '/@@updateRDF')
+
+And now for the RDF::
+
+    >>> browser.open(portalURL + '/a-biomuta-source/@@rdf')
+    >>> graph = rdflib.Graph()
+    >>> graph.parse(data=browser.contents)
+    <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
+    >>> len(graph)
+    120995
+    >>> subjects = frozenset([unicode(i) for i in graph.subjects() if unicode(i)])
+    >>> subjects = list(subjects)
+    >>> subjects.sort()
+    >>> subjects[0:3]
+    [u'urn:testing:data:biomuta:0', u'urn:testing:data:biomuta:1', u'urn:testing:data:biomuta:10']
+    >>> predicates = frozenset([unicode(i) for i in graph.predicates()])
+    >>> predicates = list(predicates)
+    >>> predicates.sort()
+    >>> predicates[1]
+    u'urn:testing:predicates:affectedProtFuncSiteCount'
+    >>> predicates[2]
+    u'urn:testing:predicates:cancerDOCount'
+    >>> predicates[3]
+    u'urn:testing:predicates:geneName'
+    >>> predicates[4]
+    u'urn:testing:predicates:mutationCount'
+    >>> predicates[5]
+    u'urn:testing:predicates:pubmedIDCount'
+    >>> predicates[6]
+    u'urn:testing:predicates:uniprotAccession'
+    >>> objects = [unicode(i) for i in graph.objects() if isinstance(i, rdflib.term.Literal)]
+    >>> objects.sort()
+    >>> objects[0:6]
+    [u'0', u'0', u'0', u'0', u'0', u'0']
+
+Woot Woot.
