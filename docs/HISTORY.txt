@@ -6,6 +6,12 @@ identifiers appear, you can find more about them by visiting this project's
 issue tracker at https://oodt.jpl.nasa.gov/jira/browse/CA.
 
 
+1.3.3 — TBD
+-----------
+
+• Fix predicate URIs for EDRN title and account name.
+
+
 1.3.2 — Ontology 1.8
 --------------------
 
