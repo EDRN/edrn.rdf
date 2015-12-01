@@ -38,6 +38,12 @@ def splitDMCCRows(horribleString):
     i = i[1:] # Skip first item, which is the empty string to the left of the first row separator
     return i
 
+_biomutaRowSep = re.compile(u'\t')
+def splitBiomutaRows(horribleString):
+    u'''Split a horrible Biomuta string into rows.  Returns an iterable.'''
+    i = _biomutaRowSep.split(horribleString)
+    return i
+
 def validateAccessibleURL(s):
     '''Ensure the unicode string ``s`` is a valid URL and one whose scheme we deem "accessible".
     "Accessible" means that we reasonably expect our network APIs to handle locally- or network-
