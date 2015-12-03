@@ -6,10 +6,13 @@ identifiers appear, you can find more about them by visiting this project's
 issue tracker at https://oodt.jpl.nasa.gov/jira/browse/CA.
 
 
-1.3.3 — TBD
------------
+1.3.3 — Predicates and Packaging
+--------------------------------
 
 • Fix predicate URIs for EDRN title and account name.
+• Obey PyPI's new restrictions on package hosting, PEP-470.
+• Added Biomuta RDF generator and source.
+• Upgrade for Travis-CI container & caching mechanisms.
 
 
 1.3.2 — Ontology 1.8
