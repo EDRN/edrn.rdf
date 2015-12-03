@@ -4,7 +4,7 @@
 
 u'''EDRN RDF Service — DMCC parser tests'''
 
-import unittest2 as unittest
+import unittest
 from edrn.rdf.utils import parseTokens
 
 

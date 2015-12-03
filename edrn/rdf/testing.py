@@ -28,6 +28,13 @@ class TestSchemeHandler(urllib2.BaseHandler):
                     req.get_full_url(),
                     200
                 )
+            elif selector == u'/biomuta.tsv':
+                return urllib2.addinfourl(
+                    pkg_resources.resource_stream(__name__, 'tests/testdata/Biomuta.tsv'),
+                    httplib.HTTPMessage(open('/dev/null')),
+                    req.get_full_url(),
+                    200
+                )
             else:
                 raise urllib2.URLError('Not found')
         except Exception:

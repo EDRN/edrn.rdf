@@ -974,7 +974,7 @@ High-performance Integrated Virtual Environment (HIVE).  They may be created any
     >>> l.click()
     >>> browser.getControl(name='form.widgets.title').value = u'Biomuta'
     >>> browser.getControl(name='form.widgets.description').value = u'Generates mutation info about EDRN biomarkers.'
-    >>> browser.getControl(name='form.widgets.webServiceURL').value = u'https://hive.biochemistry.gwu.edu/tools/biomuta/download.php?file=BioMuta_stat.csv'
+    >>> browser.getControl(name='form.widgets.webServiceURL').value = u'testscheme://localhost/biomuta.tsv'
     >>> browser.getControl(name='form.widgets.typeURI').value = u'urn:testing:types:biomuta'
     >>> browser.getControl(name='form.widgets.uriPrefix').value = u'urn:testing:data:biomuta:'
     >>> browser.getControl(name='form.widgets.geneNamePredicateURI').value = u'urn:testing:predicates:geneName'
@@ -992,7 +992,7 @@ High-performance Integrated Virtual Environment (HIVE).  They may be created any
     >>> generator.description
     u'Generates mutation info about EDRN biomarkers.'
     >>> generator.webServiceURL
-    u'https://hive.biochemistry.gwu.edu/tools/biomuta/download.php?file=BioMuta_stat.csv'
+    u'testscheme://localhost/biomuta.tsv'
     >>> generator.typeURI
     u'urn:testing:types:biomuta'
     >>> generator.uriPrefix
@@ -1040,7 +1040,7 @@ And now for the RDF::
     >>> graph.parse(data=browser.contents)
     <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
     >>> len(graph)
-    120995
+    266
     >>> subjects = frozenset([unicode(i) for i in graph.subjects() if unicode(i)])
     >>> subjects = list(subjects)
     >>> subjects.sort()

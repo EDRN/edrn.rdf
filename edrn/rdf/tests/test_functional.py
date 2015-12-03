@@ -5,7 +5,7 @@
 u'''EDRN RDF Service — functional doctests.'''
 
 import doctest
-import unittest2 as unittest
+import unittest
 from plone.testing import layered
 from edrn.rdf.testing import EDRN_RDF_FUNCTIONAL_TESTING as LAYER
 
