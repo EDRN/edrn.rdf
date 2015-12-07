@@ -84,27 +84,22 @@ class BiomutaGraphGenerator(grok.Adapter):
         context = aq_inner(self.context)
         mutations = urlopen(context.webServiceURL)
         inputPredicates = None
-        rowId = 0
         # Get the mutations
         for row in mutations:
             elements = splitBiomutaRows(row.strip())
             if not inputPredicates:
                 inputPredicates = elements
             else:
-                #geneName = elements[0].strip()
-                subjectURI = URIRef(context.uriPrefix + str(rowId))
+                geneName = elements[0].strip()
+                subjectURI = URIRef(context.uriPrefix + geneName)
                 graph.add((subjectURI, rdflib.RDF.type, URIRef(context.typeURI)))
-                #print "graph adding:"+subjectURI+", "+rdflib.RDF.type+", "+URIRef(context.typeURI)
                 for idx in range(0,len(inputPredicates)):
                     key = inputPredicates[idx]
-                    #print len(inputPredicates)
                     predicateURI = URIRef(getattr(context, _biomutaPredicates[key]))
-                    #print "graph subadding:"+subjectURI+", "+predicateURI+", "+elements[idx].strip()
                     try:
                       graph.add((subjectURI, predicateURI, Literal(elements[idx].strip())))
                     except Exception as e:
                       print str(e)
-                rowId += 1
 
         # C'est tout.
         return graph

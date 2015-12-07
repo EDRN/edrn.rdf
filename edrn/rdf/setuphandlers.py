@@ -463,7 +463,7 @@ def createBiomutaGenerator(context):
         title=u'Biomuta Generator',
         description=u'Generates graphs describing the EDRN\'s biomaker mutation statistics.',
         webServiceURL=_biomutaURL,
-        typeURI=u'http://edrn.nci.nih.gov/rdf/types.rdf#Biomuta',
+        typeURI=u'http://edrn.nci.nih.gov/rdf/rdfs/bmdb-1.0.0#Biomarker',
         uriPrefix=u'http://edrn.nci.nih.gov/data/biomuta/',
         geneNamePredicateURI=u'http://edrn.nci.nih.gov/xml/rdf/edrn.rdf#geneName',
         uniProtACPredicateURI=u'http://edrn.nci.nih.gov/xml/rdf/edrn.rdf#uniprotAccession',

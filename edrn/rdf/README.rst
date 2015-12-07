@@ -1040,12 +1040,12 @@ And now for the RDF::
     >>> graph.parse(data=browser.contents)
     <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
     >>> len(graph)
-    120995
+    120855
     >>> subjects = frozenset([unicode(i) for i in graph.subjects() if unicode(i)])
     >>> subjects = list(subjects)
     >>> subjects.sort()
     >>> subjects[0:3]
-    [u'urn:testing:data:biomuta:0', u'urn:testing:data:biomuta:1', u'urn:testing:data:biomuta:10']
+    [u'urn:testing:data:biomuta:A1BG', u'urn:testing:data:biomuta:A1CF', u'urn:testing:data:biomuta:A2M']
     >>> predicates = frozenset([unicode(i) for i in graph.predicates()])
     >>> predicates = list(predicates)
     >>> predicates.sort()
