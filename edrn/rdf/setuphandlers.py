@@ -331,9 +331,9 @@ def createPersonGenerator(context):
     createContentInContainer(
         generator,
         'edrn.rdf.literalpredicatehandler',
-        title=u'Speciality',
-        description=u'''Maps from DMCC's Speciality to EDRN-specific predicate for speciality.''',
-        predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#speciality'
+        title=u'Specialty',
+        description=u'''Maps from DMCC's Specialty to EDRN-specific predicate for specialty.''',
+        predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#specialty'
     )
     createContentInContainer(
         generator,
@@ -348,7 +348,7 @@ def createPersonGenerator(context):
         'edrn.rdf.literalpredicatehandler',
         title=u'EDRN_Title',
         description=u'''Maps from DMCC's EDRN_Title to EDRN-specific predicate for EDRN job title.''',
-        predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#EDRN_Title'
+        predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#edrnTitle'
     )
     createContentInContainer(
         generator,

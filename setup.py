@@ -9,7 +9,7 @@ import os.path
 # ------------
 
 _name            = 'edrn.rdf'
-_version         = '1.3.3'
+_version         = '1.3.4'
 _description     = 'EDRN RDF Server'
 _author          = 'Sean Kelly'
 _authorEmail     = 'sean.kelly@jpl.nasa.gov'
