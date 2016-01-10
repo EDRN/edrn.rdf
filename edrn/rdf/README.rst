@@ -1045,7 +1045,7 @@ And now for the RDF::
     >>> subjects = list(subjects)
     >>> subjects.sort()
     >>> subjects[0:3]
-    [u'urn:testing:data:biomuta:A1BG', u'urn:testing:data:biomuta:A1CF', u'urn:testing:data:biomuta:A2M']
+    [u'urn:testing:data:biomuta:ANO9', u'urn:testing:data:biomuta:ARHGAP10', u'urn:testing:data:biomuta:ARHGEF37']
     >>> predicates = frozenset([unicode(i) for i in graph.predicates()])
     >>> predicates = list(predicates)
     >>> predicates.sort()
