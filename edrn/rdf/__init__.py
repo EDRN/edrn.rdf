@@ -7,4 +7,6 @@
 
 from zope.i18nmessageid import MessageFactory
 
-_ = MessageFactory('edrn.rdf')
+PACKAGE_NAME = __name__
+DEFAULT_PROFILE = u'profile-' + PACKAGE_NAME + ':default'
+_ = MessageFactory(PACKAGE_NAME)
