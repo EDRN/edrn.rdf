@@ -12,7 +12,7 @@ from zope.app.intid.interfaces import IIntIds
 from zope.component import getUtility
 
 _dmccURL = u'https://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx?WSDL'
-_biomutaURL = u'https://hive.biochemistry.gwu.edu/tools/biomuta/download.php?file=BioMuta_stat.csv'
+_biomutaURL = u'https://hive.biochemistry.gwu.edu/prd/biomuta/content/BioMuta_stat.csv'
 
 def addDCTitle(context, key):
     createContentInContainer(

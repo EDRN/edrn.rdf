@@ -38,7 +38,7 @@ def splitDMCCRows(horribleString):
     i = i[1:] # Skip first item, which is the empty string to the left of the first row separator
     return i
 
-_biomutaRowSep = re.compile(u'\t')
+_biomutaRowSep = re.compile(u',')
 def splitBiomutaRows(horribleString):
     u'''Split a horrible Biomuta string into rows.  Returns an iterable.'''
     i = _biomutaRowSep.split(horribleString)
