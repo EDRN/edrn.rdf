@@ -5,11 +5,11 @@ What follows is a log of changes from release to release.  Where issue
 identifiers appear, you can find more about them by visiting this project's
 issue tracker at https://oodt.jpl.nasa.gov/jira/browse/CA.
 
-
 1.3.6 — TBD
 -----------
 
 • CA-1492 - Involved investigator sites not appearing on protocols
+• Fixed biomuta default data source to point to new location.
 
 
 1.3.5 — Upgrades
