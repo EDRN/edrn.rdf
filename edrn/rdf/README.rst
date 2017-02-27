@@ -905,7 +905,7 @@ And now for the RDF::
     >>> graph.parse(data=browser.contents)
     <Graph identifier=...(<class 'rdflib.graph.Graph'>)>
     >>> len(graph)
-    2518
+    4532
     >>> subjects = frozenset([unicode(i) for i in graph.subjects() if unicode(i)])
     >>> subjects = list(subjects)
     >>> subjects.sort()
@@ -925,7 +925,6 @@ CA-1031 complains that the rdf:resource links for a protocol to its sites and
 its publications are bad, consisting of a URI prefix but with no final numeric
 identifier.  Really?  Let's check::
 
-    >>> with open('/tmp/log.html', 'w') as xxx: xxx.write(browser.contents)
     >>> results = graph.query('''select ?publicationsURI where {
     ...    <urn:testing:data:protocol:155> <urn:testing:predicates:publicationsURI> ?publicationsURI .
     ... }''')
