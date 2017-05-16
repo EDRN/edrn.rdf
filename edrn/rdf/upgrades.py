@@ -43,7 +43,7 @@ def upgrade4to5(setupTool):
                     publicationsGenerator,
                     'edrn.rdf.referencepredicatehandler',
                     title=u'SiteID',
-                    description=u'''Maps from the DMCC's SiteID to the EDRN-specific predicate for site ID.'''
+                    description=u'''Maps from the DMCC's SiteID to the EDRN-specific predicate for site ID.''',
                     predicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#site',
                     uriPrefix=u'http://edrn.nci.nih.gov/data/sites/'
                 )
