@@ -599,7 +599,6 @@ class DMCCProtocolGraphGenerator(grok.Adapter):
         return relationships
     def generateGraph(self):
         graph = rdflib.Graph()
-        # studies, specifics, relationships = self.getStudies(), self.getSpecifics(), self.getRelationships()
         studies = self.getStudies()
         specifics = self.getSpecifics()
         relationships = self.getRelationships()
