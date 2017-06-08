@@ -5,7 +5,6 @@
 '''DMCC Protocol RDF Generator. An RDF generator that describes EDRN protocols using the DMCC's bungling web services.
 '''
 
-from Acquisition import aq_inner
 from edrn.rdf import _
 from five import grok
 from interfaces import IGraphGenerator
@@ -55,7 +54,6 @@ _fieldsOfResearch = {
     '7': 'Hypermethylation',
     '9': 'Other, Specify',
 }
-
 
 
 class IDMCCProtocolRDFGenerator(IRDFGenerator):
@@ -509,6 +507,7 @@ _specificsMap = {
     'Site_ID':                          'siteID',
 }
 
+
 class Specifics(_Identified):
     def __init__(self, row):
         self.identifier, self.attributes = None, {}
@@ -528,6 +527,7 @@ _relationshipsMap = {
     'Other, specify':           'hasOtherRelationshipURI',
     'provides data to':         'providesDataToURI',
 }
+
 
 class Relationship(_Identified):
     def __init__(self, row):
