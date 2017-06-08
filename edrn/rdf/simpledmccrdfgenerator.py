@@ -17,7 +17,9 @@ from Acquisition import aq_inner
 from z3c.suds import get_suds_client
 from rdflib.term import URIRef
 from utils import parseTokens, splitDMCCRows
-import rdflib
+import rdflib, logging
+
+_logger = logging.getLogger(__name__)
 
 DEFAULT_VERIFICATION_NUM = u'0' * 40960 # Why, why, why? DMCC, you so stupid!
 
@@ -70,6 +72,7 @@ class SimpleDMCCGraphGenerator(grok.Adapter):
         if not context.typeURI: raise MissingParameterError(context, 'typeURI')
         verificationNum = context.verificationNum if context.verificationNum else DEFAULT_VERIFICATION_NUM
         predicates = {}
+        unusedSlots = set()
         for objID, item in context.contentItems():
             predicates[item.title] = IAsserter(item)
         client = get_suds_client(context.webServiceURL, context)
@@ -84,6 +87,8 @@ class SimpleDMCCGraphGenerator(grok.Adapter):
                 elif key in predicates and len(value) > 0:
                     statements.extend(predicates[key].characterize(value))
                     statementsMade = True
+                elif key not in predicates:
+                    unusedSlots.add(key)
             # DMCC is giving out empty rows: they have an Identifier number, but no values in any of the columns.
             # While we may wish to generate RDF for those (essentially just saying "Disease #31 exists", for example)
             # It means we need to update EDRN Portal code to handle them, which we can't do right now.
@@ -92,6 +97,9 @@ class SimpleDMCCGraphGenerator(grok.Adapter):
                 graph.add((subjectURI, rdflib.RDF.type, URIRef(context.typeURI)))
                 for predicate, obj in statements:
                     graph.add((subjectURI, predicate, obj))
+        if unusedSlots:
+            _logger.warn(u'For %s the following slots were unused: %s', '/'.join(context.getPhysicalPath()),
+                u', '.join(unusedSlots))
         return graph
 
                         

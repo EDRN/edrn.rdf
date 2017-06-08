@@ -16,7 +16,10 @@ from utils import validateAccessibleURL
 from utils import splitDMCCRows
 from z3c.suds import get_suds_client
 from zope import schema
-import rdflib
+import rdflib, logging
+
+_logger = logging.getLogger(__name__)
+
 
 # Map from DMCC inane key to name of field that contains the corresponding predicate URI in the committees SOAP operation
 _committeePredicates = {
@@ -119,7 +122,8 @@ class DMCCCommitteeGraphGenerator(grok.Adapter):
         client = get_suds_client(context.webServiceURL, context)
         committees = getattr(client.service, context.committeeOperation)
         members = getattr(client.service, context.membershipOperation)
-        
+        unusedSlots = set()
+
         # Get the committees
         horribleCommittees = committees(verificationNum)
         for row in splitDMCCRows(horribleCommittees):
@@ -132,6 +136,8 @@ class DMCCCommitteeGraphGenerator(grok.Adapter):
                 elif key in _committeePredicates and len(value) > 0:
                     predicateURI = URIRef(getattr(context, _committeePredicates[key]))
                     statements[predicateURI] = Literal(value)
+                else:
+                    unusedSlots.add(key)
             for predicateURI, obj in statements.iteritems():
                 graph.add((subjectURI, predicateURI, obj))
         
@@ -150,6 +156,10 @@ class DMCCCommitteeGraphGenerator(grok.Adapter):
                     predicateURI = URIRef(getattr(context, _roleNamePredicates[value]))
             if subjectURI and predicateURI and obj:
                 graph.add((subjectURI, predicateURI, obj))
-        
+
+        if unusedSlots:
+            _logger.warn(u'For %s the following slots were unused: %s', '/'.join(context.getPhysicalPath()),
+                u', '.join(unusedSlots))
+
         # C'est tout.
         return graph

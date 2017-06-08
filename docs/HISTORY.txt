@@ -13,6 +13,7 @@ issue tracker at https://oodt.jpl.nasa.gov/jira/browse/CA.
 • Fixed biomuta default data source to point to new location.
 • CA-1525: RDF Server needs to provide current employment status on person feed
 • CA-1526: Provide site ID in publications RDF
+• CA-1547: Have EDRN RDF server log unused slots
 
 
 1.3.5 — Upgrades
