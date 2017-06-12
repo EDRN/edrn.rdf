@@ -73,6 +73,7 @@ class SimpleDMCCGraphGenerator(grok.Adapter):
         verificationNum = context.verificationNum if context.verificationNum else DEFAULT_VERIFICATION_NUM
         predicates = {}
         unusedSlots = set()
+        usedSlots = set()
         for objID, item in context.contentItems():
             predicates[item.title] = IAsserter(item)
         client = get_suds_client(context.webServiceURL, context)
@@ -82,6 +83,7 @@ class SimpleDMCCGraphGenerator(grok.Adapter):
         for row in splitDMCCRows(horribleString):
             subjectURI, statements, statementsMade = None, [], False
             for key, value in parseTokens(row):
+                usedSlots.add(key)
                 if key == context.identifyingKey and not subjectURI:
                     subjectURI = URIRef(context.uriPrefix + value)
                 elif key in predicates and len(value) > 0:
@@ -100,6 +102,7 @@ class SimpleDMCCGraphGenerator(grok.Adapter):
         if unusedSlots:
             _logger.warn(u'For %s the following slots were unused: %s', '/'.join(context.getPhysicalPath()),
                 u', '.join(unusedSlots))
+        _logger.critical(u'And the used slots are %s', u', '.join(usedSlots))
         return graph
 
                         
