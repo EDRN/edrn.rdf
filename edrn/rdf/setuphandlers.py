@@ -13,6 +13,7 @@ from zope.component import getUtility
 
 _dmccURL = u'https://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx?WSDL'
 _biomutaURL = u'https://hive.biochemistry.gwu.edu/prd/biomuta/content/BioMuta_stat.csv'
+_edrnlabcasURL = u'https://edrn-labcas.jpl.nasa.gov/solr/collections'
 
 def addDCTitle(context, key):
     createContentInContainer(
@@ -456,6 +457,66 @@ def createPersonGenerator(context):
         )
     return generator
 
+def createEDRNLabcasGenerator(context):
+    return createContentInContainer(
+        context,
+        'edrn.rdf.edrnlabcasrdfgenerator',
+        title=u'EDRN Labcas Generator',
+        description=u'Generates rdf describing the EDRN\'s labcas science data.',
+        webServiceURL=_edrnlabcasURL,
+        typeURI=u'urn:edrn:',
+        uriPrefix=u'https://mcl-labcas.jpl.nasa.gov/ui/c/',
+        AnalyticMethodsPredicateURI=u'urn:edrn:AnalyticMethods',
+        AnalyticResultsPredicateURI=u'urn:edrn:AnalyticResults',
+        CollaborativeGroupPredicateURI=u'urn:edrn:CollaborativeGroup',
+        DataCustodianPredicateURI=u'urn:edrn:DataCustodian',
+        DataCustodianEmailPredicateURI=u'urn:edrn:DataCustodianEmail',
+        DataCustodianPhonePredicateURI=u'urn:edrn:DataCustodianPhone',
+        DataDisclaimerPredicateURI=u'urn:edrn:DataDisclaimer',
+        DataSetNamePredicateURI=u'urn:edrn:DataSetName',
+        ConsortiumPredicateURI=u'urn:edrn:ConsortiumPredicateURI',
+        DatasetDescriptionPredicateURI=u'urn:edrn:DatasetDescription',
+        DatasetIdPredicateURI=u'urn:edrn:DatasetId',
+        DatasetURLPredicateURI=u'urn:edrn:DatasetURL',
+        DatePredicateURI=u'urn:edrn:Date',
+        DateDatasetFrozenPredicateURI=u'urn:edrn:DateDatasetFrozen',
+        DescriptionPredicateURI=u'urn:edrn:Description',
+        DisciplinePredicateURI=u'urn:edrn:Discipline',
+        EligibilityCriteriaPredicateURI=u'urn:edrn:EligibilityCriteria',
+        GrantSupportPredicateURI=u'urn:edrn:GrantSupport',
+        InstrumentDetailsPredicateURI=u'urn:edrn:InstrumentDetails',
+        InvestigatorNamePredicateURI=u'urn:edrn:InvestigatorName',
+        LeadPIPredicateURI=u'urn:edrn:LeadPI',
+        LeadPI_fullnamePredicateURI=u'urn:edrn:LeadPI_fullname',
+        MethodDetailsPredicateURI=u'urn:edrn:MethodDetails',
+        PlannedSampleSizePredicateURI=u'urn:edrn:PlannedSampleSize',
+        ProteomicsExperimentTypePredicateURI=u'urn:edrn:ProteomicsExperimentType',
+        ProtocolIDPredicateURI=u'urn:edrn:ProtocolID',
+        PubMedIDPredicateURI=u'urn:edrn:PubMedID',
+        PublishStatePredicateURI=u'urn:edrn:PublishState',
+        RecommendedSoftwarePredicateURI=u'urn:edrn:RecommendedSoftware',
+        ResearchSupportPredicateURI=u'urn:edrn:ResearchSupport',
+        ResultsAndConclusionSummaryPredicateURI=u'urn:edrn:ResultsAndConclusionSummary',
+        SiteIDPredicateURI=u'urn:edrn:SiteID',
+        SpeciesPredicateURI=u'urn:edrn:Species',
+        SpecificAimsPredicateURI=u'urn:edrn:SpecificAims',
+        SpecimenTypePredicateURI=u'urn:edrn:SpecimenType',
+        StudyBackgroundPredicateURI=u'urn:edrn:StudyBackground',
+        StudyConclusionPredicateURI=u'urn:edrn:StudyConclusion',
+        StudyDescriptionPredicateURI=u'urn:edrn:StudyDescription',
+        StudyDesignPredicateURI=u'urn:edrn:StudyDesign',
+        StudyIdPredicateURI=u'urn:edrn:StudyId',
+        StudyMethodsPredicateURI=u'urn:edrn:StudyMethods',
+        StudyNamePredicateURI=u'urn:edrn:StudyName',
+        StudyObjectivePredicateURI=u'urn:edrn:StudyObjective',
+        StudyResultsPredicateURI=u'urn:edrn:StudyResults',
+        TechnologyPredicateURI=u'urn:edrn:Technology',
+        AccessGrantedToPredicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#AccessGrantedTo',
+        QAStatePredicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#QAState',
+        organPredicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#organ',
+        protocolPredicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#protocol',
+        sitePredicateURI=u'http://edrn.nci.nih.gov/rdf/schema.rdf#site'
+    )
 def createBiomutaGenerator(context):
     return createContentInContainer(
         context,
@@ -572,6 +633,7 @@ def createRDFGenerators(context):
     generators['registered-person'] = createPersonGenerator(folder)
     generators['sites']             = createSiteGenerator(folder)
     generators['biomuta']           = createBiomutaGenerator(folder)
+    generators['edrnlabcas']        = createEDRNLabcasGenerator(folder)
 
     return generators
 
@@ -587,6 +649,7 @@ def createRDFSources(context, generators):
         ('registered-person', u'Registered Person', u'Source of RDF for EDRN\'s people.'),
         ('committees', u'Committees', u'Source of RDF for committees and working groups in EDRN.'),
         ('biomuta', u'Biomuta', u'Source of RDF for biomarker mutation statistics in EDRN.'),
+        ('edrnlabcas', u'EDRNLabcas', u'Source of RDF for Labcas science data in EDRN.'),
         ('protocols', u'Protocols', u'Source of RDF for EDRN\'s various protocols and studies.')
     ):
         generator = RelationValue(generators[objID])

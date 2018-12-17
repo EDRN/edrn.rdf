@@ -45,7 +45,11 @@ class RDFUpdater(grok.Adapter):
                 raise NoUpdateRequired(context)
         # Create a new file and set it active
         # TODO: Add validation steps here
-        serialized = graph.serialize()
+        serialized = None
+        if "edrn-labcas-generator" in str(context.generator.to_object):
+            serialized = graph.serialize(format='pretty-xml')
+        else:
+            serialized = graph.serialize()
         timestamp = datetime.datetime.utcnow().isoformat()
         newFile = context[context.invokeFactory(
             'File',
