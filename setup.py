@@ -25,6 +25,7 @@ _entryPoints     = {
 }
 _requirements = [
     'collective.autopermission',
+    'mysolr',
     'Pillow',
     'plone.app.dexterity [grok, relations]',
     'plone.app.relationfield',
