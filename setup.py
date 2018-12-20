@@ -27,12 +27,12 @@ _requirements = [
     'collective.autopermission',
     'Pillow',
     'plone.app.dexterity [grok, relations]',
-    'z3c.relationfield',
     'plone.app.relationfield',
     'plone.behavior',
     'Products.CMFPlone',
     'rdflib',
     'setuptools',
+    'z3c.relationfield',
     'z3c.suds',
 ]
 _extras = {
