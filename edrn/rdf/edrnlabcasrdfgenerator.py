@@ -117,7 +117,7 @@ class EDRNLabcasGraphGenerator(grok.Adapter):
         graph.bind('x',edrnURIPrefix)
         # Get the mutations
         for datasetid in results.keys():
-            datasetid_friendly = datasetid.replace("(","_").replace(")","_").replace("+","_").replace(",","_").replace(".","")
+            datasetid_friendly = datasetid.replace("(","_").replace(")","_").replace("+","_").replace(",","_").replace(".","").replace("'","").replace('"',"")
             subjectURI = URIRef(context.typeURI + datasetid_friendly)
             graph.add((subjectURI, rdflib.RDF.type, URIRef("{}{}".format(context.typeURI,datasetid_friendly))))
             for key in results[datasetid].keys():
