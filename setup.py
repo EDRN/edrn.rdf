@@ -9,7 +9,7 @@ import os.path
 # ------------
 
 _name            = 'edrn.rdf'
-_version         = '1.3.7'
+_version         = '1.3.8'
 _description     = 'EDRN RDF Server'
 _author          = 'Sean Kelly'
 _authorEmail     = 'sean.kelly@jpl.nasa.gov'
@@ -25,14 +25,15 @@ _entryPoints     = {
 }
 _requirements = [
     'collective.autopermission',
+    'mysolr',
     'Pillow',
     'plone.app.dexterity [grok, relations]',
-    'z3c.relationfield',
     'plone.app.relationfield',
     'plone.behavior',
     'Products.CMFPlone',
     'rdflib',
     'setuptools',
+    'z3c.relationfield',
     'z3c.suds',
 ]
 _extras = {
