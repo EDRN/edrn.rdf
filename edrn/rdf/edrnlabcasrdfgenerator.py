@@ -15,6 +15,7 @@ from utils import validateAccessibleURL
 from urllib2 import urlopen
 from zope import schema
 from mysolr import Solr
+import six
 
 import rdflib
 
@@ -29,10 +30,10 @@ _edrnlabcasPredicates = {
     u'DataCustodianEmail': 'DataCustodianEmailPredicateURI',
     u'DataCustodianPhone': 'DataCustodianPhonePredicateURI',
     u'DataDisclaimer': 'DataDisclaimerPredicateURI',
-    u'DataSetName': 'DataSetNamePredicateURI',
-    u'DatasetDescription': 'DatasetDescriptionPredicateURI',
-    u'DatasetId': 'DatasetIdPredicateURI',
-    u'DatasetURL': 'DatasetURLPredicateURI',
+    u'CollectionName': 'DataSetNamePredicateURI',
+    u'CollectionDescription': 'DatasetDescriptionPredicateURI',
+    u'CollectionId': 'DatasetIdPredicateURI',
+    u'sourceurl': 'DatasetURLPredicateURI',
     u'Date': 'DatePredicateURI',
     u'DateDatasetFrozen': 'DateDatasetFrozenPredicateURI',
     u'Description': 'DescriptionPredicateURI',
@@ -111,21 +112,30 @@ class EDRNLabcasGraphGenerator(grok.Adapter):
         solr_response = solr_conn.search(**solr_query)
         results = {}
         for obj in solr_response.documents:
-            obj['sourceurl'] = context.uriPrefix + obj.get("id")
+            if 'sourceurl' not in obj:
+                obj['sourceurl'] = context.uriPrefix + obj.get("id")
             results[obj.get("id")] = obj
         graph.bind('edrn',ecasURIPrefix)
         graph.bind('x',edrnURIPrefix)
+        with open("/tmp/labcas.txt","wb") as tmpout:
+            tmpout.write(str(results))
         # Get the mutations
         for datasetid in results.keys():
             datasetid_friendly = datasetid.replace("(","_").replace(")","_").replace("+","_").replace(",","_").replace(".","").replace("'","").replace('"',"")
-            subjectURI = URIRef(context.typeURI + datasetid_friendly)
+            subjectURI = results[datasetid]['sourceurl']
+            #subjectURI = URIRef(results[datasetid]['sourceurl'])
             graph.add((subjectURI, rdflib.RDF.type, URIRef("{}{}".format(context.typeURI,datasetid_friendly))))
             for key in results[datasetid].keys():
                 if key not in _edrnlabcasPredicates.keys():
                     continue
                 predicateURI = URIRef(getattr(context, _edrnlabcasPredicates[key]))
                 try:
-                  graph.add((subjectURI, predicateURI, Literal(results[datasetid][key][0].strip())))
+                  if isinstance(results[datasetid][key],list):
+                      graph.add((subjectURI, predicateURI, Literal(results[datasetid][key][0].strip())))
+                  elif isinstance(results[datasetid][key],six.string_types):
+                      graph.add((subjectURI, predicateURI, Literal(results[datasetid][key].strip())))
+                  else:
+                      raise Exception("Not sure what type of data this entry is, please adjust code to ingest this type of data: Datasetid: {}, Key {}, Val {}".format(datasetid,key,str(results[datasetid][key])))
                   if key in _graph_obj_mapping.keys():
                       predicateURI = URIRef(getattr(context, _graph_obj_mapping[key][0]))
                       #Watch out for text that isn't equivalent to protocols in labcas

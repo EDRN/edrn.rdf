@@ -14,6 +14,7 @@ from zope.component import getUtility
 _dmccURL = u'https://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx?WSDL'
 _biomutaURL = u'https://hive.biochemistry.gwu.edu/prd/biomuta/content/BioMuta_stat.csv'
 _edrnlabcasURL = u'https://edrn-labcas.jpl.nasa.gov/solr/collections'
+_edrnlabcasprefixURL = u'https://mcl-labcas.jpl.nasa.gov/ui/c/'
 
 def addDCTitle(context, key):
     createContentInContainer(
@@ -464,8 +465,8 @@ def createEDRNLabcasGenerator(context):
         title=u'EDRN Labcas Generator',
         description=u'Generates rdf describing the EDRN\'s labcas science data.',
         webServiceURL=_edrnlabcasURL,
-        typeURI=u'urn:edrn:',
-        uriPrefix=u'https://mcl-labcas.jpl.nasa.gov/ui/c/',
+        typeURI="urn:edrn:",
+        uriPrefix=_edrnlabcasprefixURL,
         AnalyticMethodsPredicateURI=u'urn:edrn:AnalyticMethods',
         AnalyticResultsPredicateURI=u'urn:edrn:AnalyticResults',
         CollaborativeGroupPredicateURI=u'urn:edrn:CollaborativeGroup',
