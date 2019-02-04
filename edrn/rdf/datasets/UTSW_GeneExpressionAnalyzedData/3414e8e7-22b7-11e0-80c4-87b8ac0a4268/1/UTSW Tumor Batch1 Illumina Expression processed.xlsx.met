@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>3414e8e7-22b7-11e0-80c4-87b8ac0a4268</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>UTSW+Tumor+Batch1+Illumina+Expression+processed.xlsx</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>UTSW_GeneExpressionAnalyzedData</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fcanary%2FUTSW_GeneExpressionAnalyzedData%2F06L57</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2011-01-17T19%3A58%3A26.926-08%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>UTSW+Tumor+Batch1+Illumina+Expression+processed.xlsx</val>
+</keyval>
+</cas:metadata>

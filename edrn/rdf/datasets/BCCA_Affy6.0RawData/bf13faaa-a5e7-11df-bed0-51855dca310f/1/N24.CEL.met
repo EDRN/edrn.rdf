@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>bf13faaa-a5e7-11df-bed0-51855dca310f</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>N24.CEL</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>BCCA_Affy6.0RawData</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fcanary%2FBCCA_Affy6.0RawData%2F06L20</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2010-08-12T01%3A01%3A00.619-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>N24.CEL</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_METADATA_BCCAAffy6.0RawData</key>
+<val></val>
+</keyval>
+</cas:metadata>

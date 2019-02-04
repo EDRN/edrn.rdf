@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>d5fd98e2-5e65-11e1-b478-1df722c21187</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>Aliu_arrays.tsv</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>wash</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>UWashProstateAlvinLiu</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Farchive%2Fwash%2F120223%2Fprostate%2Fimmuno</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2012-02-23T13%3A32%3A07.271-08%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenType</key>
+<val>Unknown</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>Aliu_arrays.tsv</val>
+</keyval>
+</cas:metadata>

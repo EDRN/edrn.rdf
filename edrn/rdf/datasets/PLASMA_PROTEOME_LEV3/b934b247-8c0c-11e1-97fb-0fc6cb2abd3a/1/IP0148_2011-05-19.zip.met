@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>SPECIMEN_SPECOLL_SOURCE_TEXT</key>
+<val>LHS</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_STUDY_PROTOCOL_CCDATACOMMENT_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>sampleId</key>
+<val>8704372+Plasma</val>
+</keyval>
+<keyval type="vector">
+<key>collectedId</key>
+<val>8704372+Plasma</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_METADATA_PLASMA_PROTEOME_LEV3</key>
+<val>https%3A%2F%2Fcanary.hosting.genologics.com%2Fbiochronicle-fileupload-s3%2Fs3%2F2011-05-24%2F9B7A1124-C251-495A-AEFF-D3B21DCC2C1B%2FeCASMetadataWorksheet___Plasma___Proteome___2011_05_23_2011-05-24.doc</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>IP0148_2011-05-19.zip</val>
+</keyval>
+<keyval type="vector">
+<key>collectedDate</key>
+<val>0001-01-01</val>
+</keyval>
+<keyval type="vector">
+<key>LabAnalyticMethods</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>STUDY_PROTOCOL_SPECIMEN-ID-SITE_TEXT</key>
+<val>8704372+Plasma</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_EGFRRESULT_CODE</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>DataStage</key>
+<val>Processed</val>
+</keyval>
+<keyval type="vector">
+<key>PRESENTATION_DATA</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_KRASRESULT_CODE</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_AGE-COLLECTED_VALUE</key>
+<val>67.000000</val>
+</keyval>
+<keyval type="vector">
+<key>InstrumentDetails</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_FREEZE-THAW-VALUE</key>
+<val>0.000000</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2012-04-21T16%3A50%3A07.257-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_TUMORNORMAL_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_STUDY_PROTOCOL_COMMENTS_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>b934b247-8c0c-11e1-97fb-0fc6cb2abd3a</val>
+</keyval>
+<keyval type="vector">
+<key>ProductTitle</key>
+<val>Level+3%3A+%3CIPxxxx%3E.zip%0A%09%3CIPxxxx%3E_bigSearch.txt%0A%09%3CIPxxxx%3E_combQ3.allQuant.txt</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_STORED_CODE</key>
+<val>3.000000</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_KRASRESULT_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>ProductDescription</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>FHCRC</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_EGFRRESULT_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>banked</key>
+<val>true</val>
+</keyval>
+<keyval type="vector">
+<key>DateProductFrozen</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>subjectId</key>
+<val>9705387</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>IP0148_2011-05-19.zip</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_SPECOLL_LABEL2_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>PLASMA_PROTEOME_LEV3</val>
+</keyval>
+<keyval type="vector">
+<key>ProductFunction</key>
+<val>Level+3%3A%0A%3CIPxxxx%3E_bigSearch.txt+-+peptides+and+proteins+identification%0A%3CIPxxxx%3E_combQ3.allQuant.txt+-+proteins+quantitation%0A%0AIP0147%0AYoung+Female%0AControl%3A+8704220%2C+8704323%2C+8704417%2C+8704425%2C+8704430%0ACase%3A+0003003%2C+0003007%2C+0003012%2C+0003013%2C+86071006%0A%0AIP0148%0AMiddle+Female%0AControl%3A+8704311%2C+8704372%2C+8704375%2C+8704394%2C+8704418%2C+8704444%0ACase%3A+0003014%2C+0003015%2C+82052012%2C+82062011%2C+82062021%2C+86071044%0A%0AIP0149%0AOld+Female%0AControl%3A+8704101%2C+8704203%2C+8704261%2C+8704316%2C+8704414%2C+8704419%0ACase%3A+0003020%2C+82062010%2C+82062042%2C+82062053%2C+86071031%2C+87070069%0A%0AIP0150%0AMale%0AControl%3A+8704233%2C+8704272%2C+8704322%2C+8704392%2C+8704448%2C+8704481%0ACase%3A+0003021%2C+0003023%2C+0003024%2C+0003028%2C+82052025%2C+86071027%0A%0AIP0180%0AFemale+%28Non-smoker%29%0AControl%3A+BM08-0119%2C+BM08-0073%2C+BM080108%2C+BM07-0020%2C+BM07-0012%0ACase%3A+86071037%2C+0003031%2C+0003032%2C+0003033%2C+0003039%0A%0AIP0140%0Apulmonary+venous+effluent+vs+systemic+radial+artery+blood+proteome+%28smoker%29%0AControl%3A+P004B%2C+P010B%2C+P012B%2C+P016B%2C+P022B%0ACase%3A+P004A%2C+P010A%2C+P012A%2C+P016A%2C+P022A%0A%0AIP0141%0Apulmonary+venous+effluent+vs+systemic+radial+artery+blood+proteome+%28non-smoker%29%0AControl%3A+P003B%2C+P020B%2C+P031B%2C+P068B%2C+P106B%0ACase%3A+P003A%2C+P020A%2C+P031A%2C+P068A%2C+P106A%0A%0AIP0143%0Apulmonary+venous+effluent+vs+systemic+radial+artery+blood+proteome+%28smoker%29%0AControl%3A+P044B%2C+P086B%2C+P099B%0ACase%3A+P044A%2C+P086A%2C+P099A%0A%0AIP0144%0Apulmonary+venous+effluent+vs+systemic+radial+artery+blood+proteome+%28non-smoker%29%0AControl%3A+P117B%2C+P124B%2C+P139B%2C+P142B%0ACase%3A+P117A%2C+P124A%2C+P139A%2C+P142A</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_COLLECTION_DATE</key>
+<val>2009-01-16</val>
+</keyval>
+<keyval type="vector">
+<key>STUDY_SITE_SPECIMENREC_ID</key>
+<val>151.000000</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fcanary%2FPLASMA_PROTEOME_LEV3%2F9705387</val>
+</keyval>
+<keyval type="vector">
+<key>MethodDetails</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenType</key>
+<val>Plasma</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_TUMORNORMAL_CODE</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_PROCESS_TIMECOLLECTTOFINAL_CODE</key>
+<val>0.000000</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_STORED_CODE_TEXT</key>
+<val>Plasma</val>
+</keyval>
+</cas:metadata>

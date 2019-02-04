@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>SPECIMEN_SPECOLL_SOURCE_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_STUDY_PROTOCOL_CCDATACOMMENT_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>sampleId</key>
+<val>DFCI032+Cell+Line</val>
+</keyval>
+<keyval type="vector">
+<key>collectedId</key>
+<val>DFCI032+Cell+Line</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>DFC1032_2011-03-23.zip</val>
+</keyval>
+<keyval type="vector">
+<key>collectedDate</key>
+<val>0001-01-01</val>
+</keyval>
+<keyval type="vector">
+<key>LabAnalyticMethods</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>STUDY_PROTOCOL_SPECIMEN-ID-SITE_TEXT</key>
+<val>DFCI032+Cell+Line</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_EGFRRESULT_CODE</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>DataStage</key>
+<val>Unprocessed+%28except+for+Normalized+Data%29</val>
+</keyval>
+<keyval type="vector">
+<key>PRESENTATION_DATA</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_KRASRESULT_CODE</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_AGE-COLLECTED_VALUE</key>
+<val>60.000000</val>
+</keyval>
+<keyval type="vector">
+<key>InstrumentDetails</key>
+<val>Roche+Lightcycler+480</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_FREEZE-THAW-VALUE</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2012-04-21T16%3A42%3A45.875-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_TUMORNORMAL_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_STUDY_PROTOCOL_COMMENTS_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>b21f4c5e-8c0b-11e1-97fb-0fc6cb2abd3a</val>
+</keyval>
+<keyval type="vector">
+<key>ProductTitle</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_STORED_CODE</key>
+<val>45.000000</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_KRASRESULT_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>ProductDescription</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>FHCRC</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_EGFRRESULT_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>banked</key>
+<val>true</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_METADATA_MIRNA_EXPRESSION_LEV1</key>
+<val>https%3A%2F%2Fcanary.hosting.genologics.com%2Fbiochronicle-fileupload-s3%2Fs3%2Fmanual-uploads%2F2011-04-07%2FeCASMetadataWorksheet_for_KG.doc</val>
+</keyval>
+<keyval type="vector">
+<key>DateProductFrozen</key>
+<val>May+5%2C+2010</val>
+</keyval>
+<keyval type="vector">
+<key>subjectId</key>
+<val>282DFCI032</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>DFC1032_2011-03-23.zip</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_SPECOLL_LABEL2_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>MIRNA_EXPRESSION_LEV1</val>
+</keyval>
+<keyval type="vector">
+<key>ProductFunction</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_COLLECTION_DATE</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>STUDY_SITE_SPECIMENREC_ID</key>
+<val>86.000000</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fcanary%2FMIRNA_EXPRESSION_LEV1%2F282DFCI032</val>
+</keyval>
+<keyval type="vector">
+<key>MethodDetails</key>
+<val>Samples+were+profiled+for+the+relative+abundance+of+375+miRNAs+using+microRNA+Ready-to-Use+PCR%2C+Human+panel+I%2C+V2.M+qRT-PCR+arrays+%28Exiqon%29.+13+</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenType</key>
+<val>Lung+Cancer+Cell+Lines</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_TUMORNORMAL_CODE</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_PROCESS_TIMECOLLECTTOFINAL_CODE</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_STORED_CODE_TEXT</key>
+<val>Cell+Line</val>
+</keyval>
+</cas:metadata>

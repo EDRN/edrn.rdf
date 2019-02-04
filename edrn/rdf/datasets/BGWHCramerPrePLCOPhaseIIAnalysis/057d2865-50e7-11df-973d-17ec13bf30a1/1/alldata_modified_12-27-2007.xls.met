@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>ProductTitle</key>
+<val>Alldata_modified_12-27-2007.xls</val>
+<val>Alldata_modified_12-27-2007.xls</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>057d2865-50e7-11df-973d-17ec13bf30a1</val>
+</keyval>
+<keyval type="vector">
+<key>ProductDescription</key>
+<val>Pre-PLCO+dataset.+Mark+Thornquist+used+this+dataset+to+create+the+Final_data_set_unblinded_1-14-2008_a.xls+%0A++and+Final_data_set_unblinded_3-13-2008_a.xls+datasets+which+were+given+out+to+the+investigators.++This+dataset+%0A++contains+the+markers+from+all+sites+and+all+records+are+unblinded.%0A++</val>
+<val>Pre-PLCO+dataset.+Mark+Thornquist+used+this+dataset+to+create+the+Final_data_set_unblinded_1-14-2008_a.xls+%0A++and+Final_data_set_unblinded_3-13-2008_a.xls+datasets+which+were+given+out+to+the+investigators.++This+dataset+%0A++contains+the+markers+from+all+sites+and+all+records+are+unblinded.%0A++</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>bgwm</val>
+</keyval>
+<keyval type="vector">
+<key>DateProductFrozen</key>
+<val>N%2FA</val>
+<val>N%2FA</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>alldata_modified_12-27-2007.xls</val>
+</keyval>
+<keyval type="vector">
+<key>LabAnalyticMethods</key>
+<val>See+Method+Details</val>
+<val>See+Method+Details</val>
+</keyval>
+<keyval type="vector">
+<key>DataStage</key>
+<val>Processed</val>
+<val>Processed</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>alldata_modified_12-27-2007.xls</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>BGWHCramerPrePLCOPhaseIIAnalysis</val>
+</keyval>
+<keyval type="vector">
+<key>ProductFunction</key>
+<val>The+investigators+used+this+dataset+to+develop+multi-marker+algorithms+to+identify+cases.++The+markers+that+were+developed+were+%0A++later+tested+in+the+testing+half+of+the+dataset.%0A++</val>
+<val>The+investigators+used+this+dataset+to+develop+multi-marker+algorithms+to+identify+cases.++The+markers+that+were+developed+were+%0A++later+tested+in+the+testing+half+of+the+dataset.%0A++</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fpreplco%2Falldata</val>
+</keyval>
+<keyval type="vector">
+<key>InstrumentDetails</key>
+<val>N%2FA</val>
+<val>N%2FA</val>
+</keyval>
+<keyval type="vector">
+<key>MethodDetails</key>
+<val>The+marker+values+in+this+dataset+are+in+their+original+scale+%28so+they+are%0A++not+log+transformed+and+centered+and+scaled%29.+The+columns+for+HE4%231%2C+HE4%232%2C%0A++SMRP+%232%2C+YKL40.%231%2C+IGF2+%231%2C+IGF2+%232%2C+DD-O110+%231%2C+DD-O110+%232%2C%0A++DD-C248+%231%2C+DD-C248+%232%2C+DD-P108+%231%2C+DD-P108+%232%2C+DD-X065+%231%2C+%0A++DD-X065+%232+should+be+removed.+These+markers+were+measured+twice+by+the+Parnters+lab+and%0A++only+the+means+were+supposed+to+have+been+reported.+The+means+for+these+markers+are+in+the%0A++columns+called+HE4+mean%2C+SMRP+mean%2C+YKL40+mean%2C+IGF2+mean%2C+DD-O110+mean%2C+DD-C248+mean%2C+DD-P108+mean.%0A++Dataset+created+by+Mark+Thornquist.%0A++</val>
+<val>The+marker+values+in+this+dataset+are+in+their+original+scale+%28so+they+are%0A++not+log+transformed+and+centered+and+scaled%29.+The+columns+for+HE4%231%2C+HE4%232%2C%0A++SMRP+%232%2C+YKL40.%231%2C+IGF2+%231%2C+IGF2+%232%2C+DD-O110+%231%2C+DD-O110+%232%2C%0A++DD-C248+%231%2C+DD-C248+%232%2C+DD-P108+%231%2C+DD-P108+%232%2C+DD-X065+%231%2C+%0A++DD-X065+%232+should+be+removed.+These+markers+were+measured+twice+by+the+Parnters+lab+and%0A++only+the+means+were+supposed+to+have+been+reported.+The+means+for+these+markers+are+in+the%0A++columns+called+HE4+mean%2C+SMRP+mean%2C+YKL40+mean%2C+IGF2+mean%2C+DD-O110+mean%2C+DD-C248+mean%2C+DD-P108+mean.%0A++Dataset+created+by+Mark+Thornquist.%0A++</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2010-04-25T20%3A51%3A40.417-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenType</key>
+<val>Serum</val>
+<val>Serum</val>
+</keyval>
+</cas:metadata>

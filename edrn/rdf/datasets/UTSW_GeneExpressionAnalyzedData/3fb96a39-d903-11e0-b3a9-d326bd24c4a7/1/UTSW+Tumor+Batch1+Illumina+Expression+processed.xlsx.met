@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>SpecimenStoredCode</key>
+<val>9.000000</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>3fb96a39-d903-11e0-b3a9-d326bd24c4a7</val>
+</keyval>
+<keyval type="vector">
+<key>SubjectId</key>
+<val>06L52</val>
+</keyval>
+<keyval type="vector">
+<key>CollectedDate</key>
+<val>0001-01-01</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>UTSW</val>
+</keyval>
+<keyval type="vector">
+<key>StudySiteSpecimenRecId</key>
+<val>74.000000</val>
+</keyval>
+<keyval type="vector">
+<key>SampleId</key>
+<val>06L52_N+RNA</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenAgeCollectedValue</key>
+<val>70.000000</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenTissueTumorNormalText</key>
+<val>Normal</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>UTSW%2BTumor%2BBatch1%2BIllumina%2BExpression%2Bprocessed.xlsx</val>
+</keyval>
+<keyval type="vector">
+<key>StudyProtocolSpecimenIdSiteText</key>
+<val>06L52_N+RNA</val>
+</keyval>
+<keyval type="vector">
+<key>Banked</key>
+<val>true</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>06L52__UTSW+Tumor+Batch1+Illumina+Expression+processed</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenSpecollLabel2Text</key>
+<val>Batch1</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>UTSW_GeneExpressionAnalyzedData</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fcanary%2F06.18.2011%2FUTSW_GeneExpressionAnalyzedData%2F06L52</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenStoredCodeText</key>
+<val>RNA</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2011-09-06T20%3A41%3A19.837-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>CollectedId</key>
+<val>06L52_N+RNA</val>
+</keyval>
+</cas:metadata>

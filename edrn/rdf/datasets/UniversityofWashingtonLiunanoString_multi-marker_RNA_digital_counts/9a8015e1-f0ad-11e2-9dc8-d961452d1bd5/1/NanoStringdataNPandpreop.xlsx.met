@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>ProductTitle</key>
+<val>Multiplex+Urine+nanoString+Data+-+Processed</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>9a8015e1-f0ad-11e2-9dc8-d961452d1bd5</val>
+</keyval>
+<keyval type="vector">
+<key>ProductDescription</key>
+<val>Digital+gene+counts+of+multiple+RNA+species+in+urine+from+cells+%28e.g.%2C+prostate+cancer+cells%29+released+from+organs+sited+along+the+urinary+tract.+Counts+of+prostate+cancer+genes+would+indicate+the+presence+of+cancer.+High+counts+and+counts+of+genes+associated+with+higher+grade+disease+are+indicative+of+higher+grade+cancer.</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>UW</val>
+</keyval>
+<keyval type="vector">
+<key>DateProductFrozen</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>NanoStringdataNPandpreop.xlsx</val>
+</keyval>
+<keyval type="vector">
+<key>LabAnalyticMethods</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>DataStage</key>
+<val>Processed</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>NanoStringdataNPandpreop.xlsx</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>UniversityofWashingtonLiunanoString_multi-marker_RNA_digital_counts</val>
+</keyval>
+<keyval type="vector">
+<key>ProductFunction</key>
+<val>Counts+of+various+genes+%28RNA%29+are+compared+with+that+of+B2M+%28beta-2-microglobulin%29%2C+a+gene+expressed+by+virtually+all+cell+types.+Background+counts+are+20-30.+Counts+are+equivalent+to+abundance.</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Farchive%2FUW%2F130719%2FProstate%2FUnknown</val>
+</keyval>
+<keyval type="vector">
+<key>InstrumentDetails</key>
+<val>The+nanoString+nCounter+measures+RNA+quantities+%28max.+800+RNA+species%29+in+biosamples+through+solution+hybridization+of+RNA+transcripts+and+probeset+pairs+%E2%80%93+a+biotinylated+oligonucleotide+for+capture+and+a+color-coded+oligonucleotide+for+detection.+The+RNA%2Fprobepairs+are+aligned+in+an+electric+field+and+counted+by+their+color+codes.+Each+color+string+represents+a+specific+RNA+molecule.+The+data+output+%28in+Excel+format%29+is+digital+and+is+superior+to+analog+data+types+such+as+RT-PCR.</val>
+</keyval>
+<keyval type="vector">
+<key>MethodDetails</key>
+<val>Voided+urine+samples+are+centrifuged%2C+cells+in+the+pellet+are+lysed+for+nucleic+acid%2C+RNA+is+amplified+via+in+vitro+transcription%2C+amplified+RNA+is+hybridized+to+the+nCounter+codeset+%28designed+for+specific+application+%E2%80%93+detection+of+prostate+cancer%29</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2013-07-19T12%3A58%3A38.667-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenType</key>
+<val>Whole+Urine</val>
+</keyval>
+</cas:metadata>

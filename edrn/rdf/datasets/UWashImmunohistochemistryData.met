@@ -1,0 +1,181 @@
+  <type id="urn:edrn:UWashImmunohistochemistryData" name="UWashImmunohistochemistryData">
+   <repository path="file://[EDRN_REPO_HOME]/archive" />
+   <versioner class="gov.nasa.jpl.edrn.ecas.versioning.EDRNProductVersioner" />
+    <description>Data capturing investigation of the molecular basis of cell-cell interaction in the differentiation 
+    of epithelial cells of the human bladder. The approach involves cell-type identification by CD cell surface molecules,
+    isolation of specific cell populations, gene expression analysis, and functional 
+    test of candidate genes in a cell culture system.</description>
+    <metExtractors>
+      <extractor
+        class="org.apache.oodt.cas.filemgr.metadata.extractors.CoreMetExtractor">
+        <configuration>
+          <!--  you can optionally include the envReplace tag to turn on/off environment var replacement -->
+          <property name="nsAware" value="true" />
+          <property name="elementNs" value="CAS" />
+          <property name="elements"
+            value="ProductReceivedTime,ProductName,ProductId" />
+        </configuration>
+      </extractor>
+      <extractor class="org.apache.oodt.cas.filemgr.metadata.extractors.examples.MimeTypeExtractor" />
+      <extractor class="org.apache.oodt.cas.filemgr.metadata.extractors.examples.FinalFileLocationExtractor">
+        <configuration>
+          <!-- this property specifies whether you want the FILE_LOCATION field
+               computed by this extractor to replace any other FILE_LOCATION met 
+               attribute.
+           -->
+           <property name="replace" value="true"/>
+        </configuration>
+      </extractor>   
+    </metExtractors>
+    <metadata>
+      <keyval>
+        <key>DataSetName</key>
+        <val>University of Washington Immunohistochemistry Data</val>
+      </keyval>
+      <keyval>
+        <key>Date</key>
+        <val>2008-06-24T20:12:00.000Z</val>
+      </keyval>
+      <keyval>
+        <key>LeadPI</key>
+        <val>Alvin Liu</val>
+      </keyval>
+      <keyval>
+        <key>CollaborativeGroup</key>
+        <val>Prostate and Urologic</val>
+      </keyval>
+      <keyval>
+        <key>DataCustodian</key>
+        <val>Tina Xiao</val>
+      </keyval>
+      
+      <keyval>
+        <key>DataCustodianPhone</key>
+        <val>TBD</val>
+      </keyval>
+      <keyval>
+        <key>DataCustodianEmail</key>
+        <val>TBD</val>
+      </keyval>
+      <keyval>
+        <key>MethodDetails</key>
+        <val>TBD</val>
+      </keyval>
+      <keyval>
+        <key>AnalyticMethods</key>
+        <val>TBD</val>
+      </keyval>
+      <keyval>
+        <key>StudyDesign</key>
+        <val>TBD</val>
+      </keyval>
+      <keyval>
+        <key>EligibilityCriteria</key>
+        <val>TBD</val>
+      </keyval>
+      <keyval>
+        <key>ResultsAndConclusionSummary</key>
+        <val>TBD</val>
+      </keyval>
+  
+      <keyval>
+        <key>StudyDescription</key>
+        <val><![CDATA[We are investigating the molecular basis of cell-cell interaction in the 
+        differentiation of epithelial cells of the human bladder. Our approach involves 
+        cell-type identification by CD cell surface molecules, isolation of specific cell 
+        populations, gene expression analysis, and functional test of candidate genes in a 
+        cell culture system.]]>
+        </val>
+     </keyval>
+     <keyval>
+        <key>StudyBackground</key>
+        <val><![CDATA[Stromal mesenchyme cells play an important role in epithelial differentiation 
+        and likely in cancer as well. Induction of epithelial differentiation is organ-specific, and 
+        the genes responsible could be identified through a comparative genomic analysis of the stromal 
+        cells from two different organs. These genes might be aberrantly expressed in cancer since cancer 
+        could be viewed as due to a defect in stromal signaling. We propose to identify the prostate stromal 
+        genes by analysis of differentially expressed genes between prostate and bladder stromal cells, and 
+        to examine their expression in prostate cancer.]]>
+        </val>
+     </keyval>
+     <keyval>
+        <key>StudyMethods</key>
+        <val><![CDATA[Immunohistochemistry using antibodies to cluster designation (CD) cell surface antigens was 
+        first used to characterize the stromas of the prostate and bladder. Stromal cells were prepared from 
+        either prostate or bladder tissue for cell culture. RNA was isolated from the cultured cells and analyzed 
+        by DNA microarrays. Expression of candidate genes in normal prostate and prostate cancer was examined by RT-PCR.]]>
+        </val>
+     </keyval>
+     <keyval>
+        <key>StudyResults</key>
+        <val><![CDATA[The bladder stroma was phenotypically different from that of the prostate. Most notable was the presence 
+        of a layer of CD13+ cells adjacent to the urothelium. This structural feature was also seen in the mouse bladder. The 
+        prostate stroma was uniformly CD13-. A number of differentially expressed genes between prostate and bladder stromal 
+        cells were identified. One prostate gene, proenkephalin (PENK), was of interest because it encodes a hormone. Secreted 
+        proteins such as hormones and bioactive peptides are known to mediate cell-cell signaling. Prostate stromal expression 
+        of PENK was verified by an antibody raised against a PENK peptide, by RT-PCR analysis of laser-capture microdissected 
+        stromal cells, and by database analysis. Gene expression analysis showed that PENK expression was down-regulated in prostate cancer.]]>
+        </val>
+     </keyval>
+     <keyval>
+        <key>StudyConclusion</key>
+        <val><![CDATA[Our findings show that the histologically similar stromas of the prostate and bladder are phenotypically different, 
+        and express organ-specific genes. The importance of these genes in epithelial development is suggested by their abnormal 
+        expression in cancer. Among the candidates is the hormone PENK and the down-regulation of PENK expression in cancer suggests 
+        a possible association with cancer development.]]>
+        </val>
+      </keyval>
+      <keyval>
+         <key>ResearchSupport</key>
+         <val>N.I.H., Extramural</val>
+      </keyval>
+      <keyval>
+         <key>GrantSupport</key>
+         <val>CA85859/CA/NCI</val>
+         <val>CA98699/CA/NCI</val>
+         <val>DK63630/DK/NIDDK</val>
+         <val>DK65260/DK/NIDDK</val>
+      </keyval>
+      <keyval>
+        <key>ProtocolName</key>
+        <val>201</val>
+      </keyval>
+      <keyval>
+        <key>ProtocolId</key>
+        <val>201</val>
+      </keyval>
+      <keyval>
+        <key>DatasetId</key>
+        <val>urn:edrn:UWashImmunohistochemistryData</val>
+      </keyval>
+      <keyval>
+        <key>SiteName</key>
+        <val>192</val>
+      </keyval>
+      <keyval>
+        <key>OrganSite</key>
+        <val>Prostate</val>
+      </keyval>
+    <keyval>
+    	<key>PublishState</key>
+    	<val>yes</val>
+    </keyval>
+    <keyval> 
+       <key>QAState</key>
+       <val>Accepted</val>
+    </keyval>
+    <keyval type="vector">
+       <key>AccessGrantedTo</key>
+       <val>Prostate and Urologic</val>
+       <val>Super User</val>
+    </keyval>
+      <keyval>
+      	<key>DataDisclaimer</key>
+      	<val>Data and information released from the National Cancer Institute (NCI) are provided on an "AS IS" basis, without warranty of any kind, including without limitation the warranties of merchantability, fitness for a particular purpose and non-infringement. Availability of this data and information does not constitute scientific publication. Data and/or information may contain errors or be incomplete.
+NCI and its employees make no representation or warranty, express or implied, including without limitation any warranties of merchantability or fitness for a particular purpose or warranties as to the identity or ownership of data or information, the quality, accuracy or completeness of data or information, or that the use of such data or information will not infringe any patent, intellectual property or proprietary rights of any party.
+NCI shall not be liable for any claim for any loss, harm, illness or other damage or injury arising from access to or use of data or information, including without limitation any direct, indirect, incidental, exemplary, special or consequential damages, even if advised of the possibility of such damages.
+In accordance with scientific standards, appropriate acknowledgment of NCI should be made in any publications or other disclosures concerning data or information made available by NCI. 
+      	</val>
+      </keyval>
+    </metadata>
+  </type>

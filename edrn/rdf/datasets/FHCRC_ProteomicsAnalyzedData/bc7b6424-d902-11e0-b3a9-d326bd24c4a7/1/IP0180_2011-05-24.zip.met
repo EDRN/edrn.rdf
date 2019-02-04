@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>SpecimenStoredCode</key>
+<val>3.000000</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>bc7b6424-d902-11e0-b3a9-d326bd24c4a7</val>
+</keyval>
+<keyval type="vector">
+<key>SubjectId</key>
+<val>07L28</val>
+</keyval>
+<keyval type="vector">
+<key>CollectedDate</key>
+<val>0001-01-01</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>FHCRC</val>
+</keyval>
+<keyval type="vector">
+<key>StudySiteSpecimenRecId</key>
+<val>151.000000</val>
+</keyval>
+<keyval type="vector">
+<key>SampleId</key>
+<val>86071037+Plasma</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenAgeCollectedValue</key>
+<val>65.000000</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>IP0180_2011-05-24.zip</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenFreezeThawValue</key>
+<val>0.000000</val>
+</keyval>
+<keyval type="vector">
+<key>StudyProtocolSpecimenIdSiteText</key>
+<val>86071037+Plasma</val>
+</keyval>
+<keyval type="vector">
+<key>Banked</key>
+<val>true</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>07L28__IP0180_2011-05-24</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>FHCRC_ProteomicsAnalyzedData</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenCollectionDate</key>
+<val>2007-05-16</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fcanary%2F06.18.2011%2FFHCRC_ProteomicsAnalyzedData%2F07L28</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenStoredCodeText</key>
+<val>Plasma</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2011-09-06T20%3A37%3A39.650-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>CollectedId</key>
+<val>86071037+Plasma</val>
+</keyval>
+</cas:metadata>

@@ -117,8 +117,6 @@ class EDRNLabcasGraphGenerator(grok.Adapter):
             results[obj.get("id")] = obj
         graph.bind('edrn',ecasURIPrefix)
         graph.bind('x',edrnURIPrefix)
-        with open("/tmp/labcas.txt","wb") as tmpout:
-            tmpout.write(str(results))
         # Get the mutations
         for datasetid in results.keys():
             datasetid_friendly = datasetid.replace("(","_").replace(")","_").replace("+","_").replace(",","_").replace(".","").replace("'","").replace('"',"")

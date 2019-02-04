@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>f82814b9-22a1-11e0-80c4-87b8ac0a4268</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>H2122+Efficiencies.xlsx</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>FHCRC_TEWARI_Efficiencies</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fcanary%2FFHCRC_TEWARIEfficiencies%2F282H2122</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2011-01-17T17%3A26%3A26.958-08%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>H2122+Efficiencies.xlsx</val>
+</keyval>
+</cas:metadata>

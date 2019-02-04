@@ -14,7 +14,7 @@ from zope.component import getUtility
 _dmccURL = u'https://www.compass.fhcrc.org/edrn_ws/ws_newcompass.asmx?WSDL'
 _biomutaURL = u'https://hive.biochemistry.gwu.edu/prd/biomuta/content/BioMuta_stat.csv'
 _edrnlabcasURL = u'https://edrn-labcas.jpl.nasa.gov/solr/collections'
-_edrnlabcasprefixURL = u'https://mcl-labcas.jpl.nasa.gov/ui/c/'
+_edrnlabcasprefixURL = u'https://edrn-labcas.jpl.nasa.gov/ui/c/'
 
 def addDCTitle(context, key):
     createContentInContainer(

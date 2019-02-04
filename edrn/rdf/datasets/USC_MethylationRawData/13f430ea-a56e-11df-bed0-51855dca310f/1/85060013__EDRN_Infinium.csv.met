@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>SPECIMEN_METADATA_USCMethylationRawData</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>13f430ea-a56e-11df-bed0-51855dca310f</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>85060013__EDRN_Infinium.csv</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>USC_MethylationRawData</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fcanary%2FUSC_MethylationRawData%2F06L3</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2010-08-11T10%3A30%3A04.417-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>85060013__EDRN_Infinium.csv</val>
+</keyval>
+</cas:metadata>

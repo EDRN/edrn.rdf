@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>ProductTitle</key>
+<val>File+Relationships</val>
+</keyval>
+<keyval type="vector">
+<key>ProductDescription</key>
+<val>Describes+the+relationships+between+the+NIST+miRNA+data+files+%28platform%2C+technology%2C+sample+and+round%29</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>NIST</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>file+relationships.pdf</val>
+</keyval>
+<keyval type="vector">
+<key>DataStage</key>
+<val>Processed</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>miRNAStudyPine</val>
+</keyval>
+<keyval type="vector">
+<key>ProductFunction</key>
+<val>Documentation</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fnist_pine</val>
+</keyval>
+<keyval type="vector">
+<key>InstrumentDetails</key>
+<val>%0A%09%09NA%0A%09%09</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenType</key>
+<val>NA</val>
+</keyval>
+<keyval type="vector">
+<key>MethodDetails</key>
+<val>NA</val>
+</keyval>
+<keyval type="vector">
+<key>ProtocolId</key>
+<val>410</val>
+</keyval>
+<keyval type="vector">
+<key>DatasetId</key>
+<val>urn%3Aedrn%3AmiRNAStudyPine</val>
+</keyval>
+</cas:metadata>

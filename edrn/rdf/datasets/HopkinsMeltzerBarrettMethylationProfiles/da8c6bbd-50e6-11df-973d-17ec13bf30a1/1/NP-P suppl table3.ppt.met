@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>ProductTitle</key>
+<val>Univariate+analysis+for+eight+methylation+biomarkers.</val>
+<val>Univariate+analysis+for+eight+methylation+biomarkers.</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>da8c6bbd-50e6-11df-973d-17ec13bf30a1</val>
+</keyval>
+<keyval type="vector">
+<key>ProductDescription</key>
+<val>Data+table+containing+univariate+analysis+results+for+the+eight+methylation+biomarkers+in+%0A++50+progressors+and+145+non-progressors%0A++</val>
+<val>Data+table+containing+univariate+analysis+results+for+the+eight+methylation+biomarkers+in+%0A++50+progressors+and+145+non-progressors%0A++</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>hkns</val>
+</keyval>
+<keyval type="vector">
+<key>DateProductFrozen</key>
+<val>N%2FA</val>
+<val>N%2FA</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>NP-P+suppl+table3.ppt</val>
+</keyval>
+<keyval type="vector">
+<key>LabAnalyticMethods</key>
+<val>One+hundred+ninety-five+Barrett%27s+Esophagus+%28BE%29+biopsies+%28145+nonprogressors+and+50+progressors%29+were+%0A++obtained+from+five+participating+centers%3A+the+Mayo+Clinic+at+Rochester%2FJacksonville%2C+the+University+of+Arizona%2C+%0A++the+University+of+North+Carolina%2C+and+Johns+Hopkins+University.+Bisulfite+treatment+was+performed+and+promoter%0A++methylation+levels+of+8+genes+%28p16%2C+HPP1%2C+RUNX3%2C+CDH13%2C+TAC1%2C+NELL1%2C+AKAP12+and+SST%29+were+determined+by+qMSP+on+an+%0A++ABI+7900+Sequence+Detection+%28Taqman%29+System.+beta-actin+was+used+for+normalization.+A+standard+curve+was+generated+%0A++using+serial+dilutions+of+CpGenome+Universal+Methylated+DNA+%28CHEMICON%2C+Temecula%2C+CA%29.+A+normalized+methylation+value+%0A++%28NMV%29+for+each+gene+of+interest+was+defined+as+described.%2811%29+Wetlab+analysts+%28ZJ+and+YC%29+and+all+SJM+laboratory+personnel+%0A++were+blinded+to+specimen+progressor+or+nonprogressor+status.%0A++</val>
+<val>One+hundred+ninety-five+Barrett%27s+Esophagus+%28BE%29+biopsies+%28145+nonprogressors+and+50+progressors%29+were+%0A++obtained+from+five+participating+centers%3A+the+Mayo+Clinic+at+Rochester%2FJacksonville%2C+the+University+of+Arizona%2C+%0A++the+University+of+North+Carolina%2C+and+Johns+Hopkins+University.+Bisulfite+treatment+was+performed+and+promoter%0A++methylation+levels+of+8+genes+%28p16%2C+HPP1%2C+RUNX3%2C+CDH13%2C+TAC1%2C+NELL1%2C+AKAP12+and+SST%29+were+determined+by+qMSP+on+an+%0A++ABI+7900+Sequence+Detection+%28Taqman%29+System.+beta-actin+was+used+for+normalization.+A+standard+curve+was+generated+%0A++using+serial+dilutions+of+CpGenome+Universal+Methylated+DNA+%28CHEMICON%2C+Temecula%2C+CA%29.+A+normalized+methylation+value+%0A++%28NMV%29+for+each+gene+of+interest+was+defined+as+described.%2811%29+Wetlab+analysts+%28ZJ+and+YC%29+and+all+SJM+laboratory+personnel+%0A++were+blinded+to+specimen+progressor+or+nonprogressor+status.%0A++</val>
+</keyval>
+<keyval type="vector">
+<key>DataStage</key>
+<val>Processed</val>
+<val>Processed</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>NP-P+suppl+table3.ppt</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>HopkinsMeltzerBarrettMethylationProfiles</val>
+</keyval>
+<keyval type="vector">
+<key>ProductFunction</key>
+<val>To+describe+the+univariate+analysis+for+the+eight+methylation+biomarkers+in+this+study.%0A++</val>
+<val>To+describe+the+univariate+analysis+for+the+eight+methylation+biomarkers+in+this+study.%0A++</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fbarrett%2Ftable3</val>
+</keyval>
+<keyval type="vector">
+<key>InstrumentDetails</key>
+<val>N%2FA</val>
+<val>N%2FA</val>
+</keyval>
+<keyval type="vector">
+<key>MethodDetails</key>
+<val>Associations+between+progression+status+and+patient+characteristics+were+tested+using+Student%27s+t-test+or+Chi-squared+testing.+%0A++Relationships+between+biomarkers+and+patient+progression+status+were+examined+using+Wilcoxon+rank-sum+testing.+To+evaluate+the+predictive+%0A++utility+of+the+markers%2C+we+constructed+receiver+operating+characteristic+%28ROC%29+curves.+ROC+curve+analyses+were+first+conducted+on+individual+%0A++markers%2C+then+in+combination+to+determine+whether+a+panel+performed+better+than+any+single+marker.+Our+algorithm+rendered+a+single+composite+%0A++score%2C+using+the+linear+predictor+from+a+binary+regression+model+justified+under+the+linearity+assumption.+The+predictive+accuracy+of+composite+%0A++scores+was+evaluated+based+on+a+resampling+algorithm%3A+we+randomly+split+data+into+a+learning+set+containing+2%2F3+and+a+test+set+including+1%2F3+of+%0A++observations.+The+combination+rule+derived+from+the+learning+set+produced+two+ROC+curves%2C+from+the+learning+and+test+sets%2C+respectively.+Vertical+%0A++differences+between+these+two+ROC+curves+yielded+the+overestimation+of+sensitivities+at+given+specificities.+This+procedure+was+repeated+200+times%2C+%0A++and+these+200+differences+were+averaged+to+estimate+the+expected+overfitting.+We+also+utilized+predictiveness+curves+to+display+risk+distribution+%0A++as+a+function+of+the+combined+marker+in+the+population.+This+curve+represents+a+plot+of+risk+associated+with+the+vth+quantile+of+the+marker%2C+%0A++P%7BD%3D1%7CY+%3DF-1%28v%29%7D+vs.+v%2C+with+F%28%C2%B7%29+the+cumulative+distribution+of+the+marker.+These+plots+display+population+proportions+at+different+risk+levels+more+%0A++clearly+than+do+other+metrics+%28like+ROC+curves%29.+Since+a+case-control+sample+was+studied%2C+we+used+an+external+progression+prevalence+rate+to+calculate+%0A++risk+in+the+targeted+screening+population.+To+calibrate+for+future+samples%2C+a+shrinkage+coefficient+estimated+from+the+logistic+regression+model+was+applied+to+the+%0A++linear+predictors+from+which+risk+was+calculated.+All+analyses+were+performed+in+R+%28http%3A%2F%2Fwww.r-project.org%29.+Statistical+data+analysts+%28Y.Z.%2C+W.G.%2C+and+Z.F.%29+%0A++were+blinded+to+the+identities+of+the+8+biomarkers.%0A++</val>
+<val>Associations+between+progression+status+and+patient+characteristics+were+tested+using+Student%27s+t-test+or+Chi-squared+testing.+%0A++Relationships+between+biomarkers+and+patient+progression+status+were+examined+using+Wilcoxon+rank-sum+testing.+To+evaluate+the+predictive+%0A++utility+of+the+markers%2C+we+constructed+receiver+operating+characteristic+%28ROC%29+curves.+ROC+curve+analyses+were+first+conducted+on+individual+%0A++markers%2C+then+in+combination+to+determine+whether+a+panel+performed+better+than+any+single+marker.+Our+algorithm+rendered+a+single+composite+%0A++score%2C+using+the+linear+predictor+from+a+binary+regression+model+justified+under+the+linearity+assumption.+The+predictive+accuracy+of+composite+%0A++scores+was+evaluated+based+on+a+resampling+algorithm%3A+we+randomly+split+data+into+a+learning+set+containing+2%2F3+and+a+test+set+including+1%2F3+of+%0A++observations.+The+combination+rule+derived+from+the+learning+set+produced+two+ROC+curves%2C+from+the+learning+and+test+sets%2C+respectively.+Vertical+%0A++differences+between+these+two+ROC+curves+yielded+the+overestimation+of+sensitivities+at+given+specificities.+This+procedure+was+repeated+200+times%2C+%0A++and+these+200+differences+were+averaged+to+estimate+the+expected+overfitting.+We+also+utilized+predictiveness+curves+to+display+risk+distribution+%0A++as+a+function+of+the+combined+marker+in+the+population.+This+curve+represents+a+plot+of+risk+associated+with+the+vth+quantile+of+the+marker%2C+%0A++P%7BD%3D1%7CY+%3DF-1%28v%29%7D+vs.+v%2C+with+F%28%C2%B7%29+the+cumulative+distribution+of+the+marker.+These+plots+display+population+proportions+at+different+risk+levels+more+%0A++clearly+than+do+other+metrics+%28like+ROC+curves%29.+Since+a+case-control+sample+was+studied%2C+we+used+an+external+progression+prevalence+rate+to+calculate+%0A++risk+in+the+targeted+screening+population.+To+calibrate+for+future+samples%2C+a+shrinkage+coefficient+estimated+from+the+logistic+regression+model+was+applied+to+the+%0A++linear+predictors+from+which+risk+was+calculated.+All+analyses+were+performed+in+R+%28http%3A%2F%2Fwww.r-project.org%29.+Statistical+data+analysts+%28Y.Z.%2C+W.G.%2C+and+Z.F.%29+%0A++were+blinded+to+the+identities+of+the+8+biomarkers.%0A++</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2010-04-25T20%3A50%3A28.374-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenType</key>
+<val>Tissue+biopsy</val>
+<val>Tissue+biopsy</val>
+</keyval>
+</cas:metadata>

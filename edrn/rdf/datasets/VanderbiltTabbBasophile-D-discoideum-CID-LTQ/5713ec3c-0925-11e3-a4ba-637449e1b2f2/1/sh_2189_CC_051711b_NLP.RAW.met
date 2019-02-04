@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>ProductTitle</key>
+<val>sh_2189_CC_051711b_NLP.RAW</val>
+</keyval>
+<keyval type="vector">
+<key>ProductDescription</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>Vanderbilt</val>
+</keyval>
+<keyval type="vector">
+<key>DateProductFrozen</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>sh_2189_CC_051711b_NLP.RAW</val>
+</keyval>
+<keyval type="vector">
+<key>LabAnalyticMethods</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>DataStage</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>VanderbiltTabbBasophile-D-discoideum-CID-LTQ</val>
+</keyval>
+<keyval type="vector">
+<key>ProductFunction</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata-cancer-vm%2Fingest%2Fdtabb%2FDavidTabb%2FBasophile-D-discoideum-CID-LTQ%2F20110420</val>
+</keyval>
+<keyval type="vector">
+<key>InstrumentDetails</key>
+<val>Unknown</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenType</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>MethodDetails</key>
+<val>TBD</val>
+</keyval>
+</cas:metadata>

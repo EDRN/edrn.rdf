@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>360e9ddd-22b4-11e0-80c4-87b8ac0a4268</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>UTSW+Tumor+Batch1+Copy+Number+and+Mutation+Data.xlsx</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>UTSW_CopyNumberData</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fcanary%2FUTSW_CopyNumberData%2F06L50</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2011-01-17T19%3A37%3A01.751-08%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>UTSW+Tumor+Batch1+Copy+Number+and+Mutation+Data.xlsx</val>
+</keyval>
+</cas:metadata>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>ProductTitle</key>
+<val>Final_data_set_unblinded_1-14-2008_a.xls</val>
+<val>Final_data_set_unblinded_1-14-2008_a.xls</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>084d5f66-50e7-11df-973d-17ec13bf30a1</val>
+</keyval>
+<keyval type="vector">
+<key>ProductDescription</key>
+<val>Pre-PLCO+dataset%2C+training+half+of+dataset+unblinded+as+of+1-14-2008%2C+testing+half+of+dataset+remained+blinded.+%0A++++++It+contains+the+following+four+tabs%3A+Biomarker+Data%2C+Demographic+Data%2C+Ppt+Cancer+Hx%2C+Family+Cancer+Hx%0A++</val>
+<val>Pre-PLCO+dataset%2C+training+half+of+dataset+unblinded+as+of+1-14-2008%2C+testing+half+of+dataset+remained+blinded.+%0A++++++It+contains+the+following+four+tabs%3A+Biomarker+Data%2C+Demographic+Data%2C+Ppt+Cancer+Hx%2C+Family+Cancer+Hx%0A++</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>bgwm</val>
+</keyval>
+<keyval type="vector">
+<key>DateProductFrozen</key>
+<val>1-14-2008</val>
+<val>1-14-2008</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>final_data_set_unblinded_1-14-2008_a.xls</val>
+</keyval>
+<keyval type="vector">
+<key>LabAnalyticMethods</key>
+<val>See+Method+Details</val>
+<val>See+Method+Details</val>
+</keyval>
+<keyval type="vector">
+<key>DataStage</key>
+<val>Processed</val>
+<val>Processed</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>final_data_set_unblinded_1-14-2008_a.xls</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>BGWHCramerPrePLCOPhaseIIAnalysis</val>
+</keyval>
+<keyval type="vector">
+<key>ProductFunction</key>
+<val>The+investigators+used+this+dataset+to+develop+multi-marker+algorithms+to+identify+cases.++The+markers+that+were+developed+were+%0A++later+tested+in+the+testing+half+of+the+dataset.%0A++</val>
+<val>The+investigators+used+this+dataset+to+develop+multi-marker+algorithms+to+identify+cases.++The+markers+that+were+developed+were+%0A++later+tested+in+the+testing+half+of+the+dataset.%0A++</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fpreplco%2Fjan14</val>
+</keyval>
+<keyval type="vector">
+<key>InstrumentDetails</key>
+<val>N%2FA</val>
+<val>N%2FA</val>
+</keyval>
+<keyval type="vector">
+<key>MethodDetails</key>
+<val>This+dataset+contains+records+for+all+subjects%2C+but+only+those+in+the+training+half+are+unblinded.++The+remaining+half+in+the+%0A++testing+set+are+missing+case+status.++The+marker+values+have+been+standardized+%28Each+marker+was+first+log+transformed+to+yield+a+normal+%0A++distribution+in+the+controls+and+then+each+was+centered+and+scaled+so+that+the+controls+had+a+mean+of+0+and+a+standard+deviation+of+1%29.%0A++This+dataset+was+distributed+to+the+group+by+Mark+Thornquist.%0A++</val>
+<val>This+dataset+contains+records+for+all+subjects%2C+but+only+those+in+the+training+half+are+unblinded.++The+remaining+half+in+the+%0A++testing+set+are+missing+case+status.++The+marker+values+have+been+standardized+%28Each+marker+was+first+log+transformed+to+yield+a+normal+%0A++distribution+in+the+controls+and+then+each+was+centered+and+scaled+so+that+the+controls+had+a+mean+of+0+and+a+standard+deviation+of+1%29.%0A++This+dataset+was+distributed+to+the+group+by+Mark+Thornquist.%0A++</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2010-04-25T20%3A51%3A45.137-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenType</key>
+<val>Serum</val>
+<val>Serum</val>
+</keyval>
+</cas:metadata>

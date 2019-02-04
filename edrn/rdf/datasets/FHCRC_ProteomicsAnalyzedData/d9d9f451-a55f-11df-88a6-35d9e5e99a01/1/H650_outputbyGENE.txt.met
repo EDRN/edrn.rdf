@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>d9d9f451-a55f-11df-88a6-35d9e5e99a01</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>H650_outputbyGENE.txt</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>FHCRC_ProteomicsAnalyzedData</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_METADATA_FHCRCProteomicsAnalyzedData</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fcanary%2FFHCRC_ProteomicsAnalyzedData%2F282H650</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2010-08-11T08%3A48%3A13.983-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>H650_outputbyGENE.txt</val>
+</keyval>
+</cas:metadata>

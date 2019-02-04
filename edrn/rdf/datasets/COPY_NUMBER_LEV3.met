@@ -1,0 +1,103 @@
+<type id="urn:edrn:COPY_NUMBER_LEV3" name="COPY_NUMBER_LEV3">
+  <repository path="file://[EDRN_REPO_HOME]/archive"/>
+  <versioner class="gov.nasa.jpl.edrn.ecas.versioning.EDRNProductVersioner"/>
+  <description> EDRN Tumor Copy Number Data </description>
+  <metExtractors>
+    <extractor class="org.apache.oodt.cas.filemgr.metadata.extractors.CoreMetExtractor">
+    <configuration>
+      <!-- you can optionally include the envReplace tag to turn on/off environment var replacement -->
+      <property name="nsAware" value="true"  />
+      <property name="elementNs" value="CAS" />
+      <property name="elements"  value="ProductType,ProductReceivedTime,ProductName,ProductId" />
+    </configuration>
+    </extractor>
+  </metExtractors>
+
+  <metadata>
+    <keyval>
+      <key>ProtocolID</key>
+      <val>282</val>
+    </keyval>
+    <keyval>
+      <key>ProtocolName</key>
+      <val>282</val>
+    </keyval>
+    <keyval>
+      <key>DatasetDescription</key>
+      <val>EDRN Tumor Copy Number Data</val>
+    </keyval>
+    <keyval>
+      <key>DataSetName</key>
+      <val>COPY_NUMBER_LEV3</val>
+    </keyval>
+    <keyval>
+      <key>DatasetId</key>
+      <val>urn:edrn:COPY_NUMBER_LEV3</val>
+    </keyval>
+    <keyval>
+      <key>DateDatasetFrozen</key>
+      <val></val>
+    </keyval>
+    <keyval>
+      <key>LeadPI</key>
+      <val>Wan Lam</val>
+    </keyval>
+    <keyval>
+      <key>SiteName</key>
+      <val>519</val>
+    </keyval>
+    <keyval>
+      <key>SiteID</key>
+      <val>519</val>
+    </keyval>
+    <keyval>
+      <key>DataCustodian</key>
+      <val>Kelsie Thu</val>
+    </keyval>
+    <keyval>
+      <key>DataCustodianEmail</key>
+      <val>kthu@bccrc.ca</val>
+    </keyval>
+    <keyval>
+      <key>OrganSite</key>
+      <val>Lung</val>
+    </keyval>
+    <keyval>
+      <key>CollaborativeGroup</key>
+      <val>Lung and Upper Aerodigestive</val>
+    </keyval>
+    <keyval>
+      <key>PubMedID</key>
+      <val></val>
+    </keyval>
+    <keyval>
+      <key>QAState</key>
+      <val>Under Review</val>
+    </keyval>
+    <keyval>
+      <key>AccessGrantedTo</key>
+      <val>Lam British Columbia Cancer Research Centre/Cancer Genetics and Development Biology</val>
+      <val>Lung and Upper Aerodigestive</val>
+      <val>Super User</val>
+    </keyval>
+    <keyval>
+      <key>MethodDetails</key>
+      <val>41 cell lines
+Raw SNP array data (CEL files = level 1) were imported and processed in Partek Genomics Suite software. Partek normalization includes background subtraction, probe length adjustment, fragment length adjustment, and GC content adjustment.  Analysis was performed following the &quot;Copy Number&quot; workflow using SNP array data for 72 normal HapMap individuals to create a baseline for copy number.  A matrix of normalized log2 intensity ratios (tumor cell line:HapMap baseline) for each probe in each sample was generated (level 2 data).  Genomic segmentation was performed in Partek to generate a list of segmental copy number alterations in each sample using a 50 marker minimum and a p-value threshold of 10-6 to define copy number altered regions. Segmentation data was parsed into a gene-centric matrix with estimated copy number values for each gene (level 3 data).  A copy number = 2 is copy neutral; copy number &lt; 2 is a loss and copy number &gt; 2 is a copy gain. Genes were mapped using base pair coordinates from a table of RefSeq annotated genes downloaded from the UCSC genome browser (March 2006 genome build). Gene accessions with ambiguous mapping were removed from the RefSeq table. For genes with multiple accessions, the accession with the longest transcript was used for mapping.
+
+60 matched tumor normal pairs
+Raw SNP array data (CEL files = level 1) were imported and processed in Partek Genomics Suite software.  Partek normalization includes background subtraction, probe length adjustment, fragment length adjustment, and GC content adjustment.   Analysis was performed following the &quot;Copy Number&quot; workflow using a paired analysis.  A matrix of normalized log2 intensity ratios (tumor:normal) for each probe in each sample was generated (level 2 data).  Genomic segmentation was performed in Partek to generate a list of segmental copy number alterations in each sample using a 50 marker minimum and a p-value threshold of 10-6 to define copy number altered regions.  This data was parsed into a gene-centric matrix with estimated copy number values for each gene (level 3 data).  A copy number = 2 is copy neutral; copy number &lt; 2 is a loss and copy number &gt; 2 is a copy gain. Genes were mapped using base pair coordinates from a table of RefSeq annotated genes downloaded from the UCSC genome browser (March 2006 genome build). Gene accessions with ambiguous mapping were removed from the RefSeq table. For genes with multiple accessions, the accession with the longest transcript was used for mapping.</val>
+    </keyval>
+    <keyval>
+      <key>AnalyticResults</key>
+      <val>This dataset includes copy number data for 60 lung adenocarcinoma tumors and 41 lung cancer cell lines.</val>
+    </keyval>
+    <keyval>
+      <key>DataDisclaimer</key>
+      <val>Data and information released from the National Cancer Institute (NCI) are provided on an &quot;AS IS&quot; basis, without warranty of any kind, including without limitation the warranties of merchantability, fitness for a particular purpose and non-infringement. Availability of this data and information does not constitute scientific publication. Data and/or information may contain errors or be incomplete.
+        NCI and its employees make no representation or warranty, express or implied, including without limitation any warranties of merchantability or fitness for a particular purpose or warranties as to the identity or ownership of data or information, the quality, accuracy or completeness of data or information, or that the use of such data or information will not infringe any patent, intellectual property or proprietary rights of any party.
+        NCI shall not be liable for any claim for any loss, harm, illness or other damage or injury arising from access to or use of data or information, including without limitation any direct, indirect, incidental, exemplary, special or consequential damages, even if advised of the possibility of such damages.
+        In accordance with scientific standards, appropriate acknowledgment of NCI should be made in any publications or other disclosures concerning data or information made available by NCI.</val>
+    </keyval>
+  </metadata>
+</type>

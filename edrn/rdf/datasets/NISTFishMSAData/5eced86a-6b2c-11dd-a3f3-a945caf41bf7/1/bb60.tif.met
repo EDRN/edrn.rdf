@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>5eced86a-6b2c-11dd-a3f3-a945caf41bf7</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>bb60.tif</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>nist</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>NISTFishMSAData</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fmisc_pi%2FFish%2FImages</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2008-08-15T17%3A43%3A40.434-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>bb60.tif</val>
+</keyval>
+</cas:metadata>

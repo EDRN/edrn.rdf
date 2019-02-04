@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>ProductTitle</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>2b6512de-6252-11e1-a489-edc6c885ad8b</val>
+</keyval>
+<keyval type="vector">
+<key>ProductDescription</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>fhcrc</val>
+</keyval>
+<keyval type="vector">
+<key>DateProductFrozen</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>hui_mix2.mzXML</val>
+</keyval>
+<keyval type="vector">
+<key>LabAnalyticMethods</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>DataStage</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>hui_mix2.mzXML</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>WHIColonFredHutchinsonCancerResearchCenterHanash</val>
+</keyval>
+<keyval type="vector">
+<key>ProductFunction</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Farchive%2Ffhcrc%2F120228%2Fcolon%2FUnknown</val>
+</keyval>
+<keyval type="vector">
+<key>InstrumentDetails</key>
+<val>Unknown</val>
+</keyval>
+<keyval type="vector">
+<key>MethodDetails</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2012-02-28T13%3A21%3A25.272-08%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenType</key>
+<val>Plasma</val>
+</keyval>
+</cas:metadata>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>b9c92602-c5b0-11e3-95bd-e142489543a9</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>167-Lokshin-1-Immunoassay-Ovarian-1.xls</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>pitt</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>UPittLabMAPOvarianData</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Farchive%2Fpitt%2F140416%2FPancreas%2Flabmap</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2014-04-16T14%3A47%3A37.314-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>167-Lokshin-1-Immunoassay-Ovarian-1.xls</val>
+</keyval>
+<keyval type="vector">
+<key>ProtocolId</key>
+<val>Luminex</val>
+</keyval>
+</cas:metadata>

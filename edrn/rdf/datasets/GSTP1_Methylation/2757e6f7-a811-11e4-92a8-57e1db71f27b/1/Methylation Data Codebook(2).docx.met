@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>ProductTitle</key>
+<val>Methylation+Data+Codebook</val>
+</keyval>
+<keyval type="vector">
+<key>ProductDescription</key>
+<val>Methylation+Data+Codebook</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>JHUSOM</val>
+</keyval>
+<keyval type="vector">
+<key>DateProductFrozen</key>
+<val>NA</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>Methylation+Data+Codebook%282%29.docx</val>
+</keyval>
+<keyval type="vector">
+<key>LabAnalyticMethods</key>
+<val>NA</val>
+</keyval>
+<keyval type="vector">
+<key>DataStage</key>
+<val>Processed</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>GSTP1_Methylation</val>
+</keyval>
+<keyval type="vector">
+<key>ProductFunction</key>
+<val>Variable+Definitions</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fsidransky</val>
+</keyval>
+<keyval type="vector">
+<key>InstrumentDetails</key>
+<val>%0A%09%097900HT+sequence+detector+%28Applied+Biosystems%C2%AE%29.+%0A%09%09SDS+2.4+software+for+methylation+analysis.+%0A%09%09All+statistical+analysis+was+done+with+SAS%C2%AE%2C+version+9.2.%0A%09%09</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenType</key>
+<val>Tissue+paraffin+block</val>
+</keyval>
+<keyval type="vector">
+<key>MethodDetails</key>
+<val>NA</val>
+</keyval>
+<keyval type="vector">
+<key>ProtocolId</key>
+<val>397</val>
+</keyval>
+<keyval type="vector">
+<key>DatasetId</key>
+<val>urn%3Aedrn%3AGSTP1_Methylation</val>
+</keyval>
+</cas:metadata>

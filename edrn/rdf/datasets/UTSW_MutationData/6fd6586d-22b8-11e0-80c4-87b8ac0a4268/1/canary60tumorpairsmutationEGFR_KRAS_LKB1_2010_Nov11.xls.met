@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>6fd6586d-22b8-11e0-80c4-87b8ac0a4268</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>canary60tumorpairsmutationEGFR_KRAS_LKB1_2010_Nov11.xls</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>UTSW_MutationData</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fcanary%2FUTSW_MutationData%2F07L66</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2011-01-17T20%3A07%3A16.677-08%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>canary60tumorpairsmutationEGFR_KRAS_LKB1_2010_Nov11.xls</val>
+</keyval>
+</cas:metadata>

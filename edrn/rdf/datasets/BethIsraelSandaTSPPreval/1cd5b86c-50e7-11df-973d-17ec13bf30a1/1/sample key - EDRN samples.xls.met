@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>ProductTitle</key>
+<val>Sample+Key</val>
+<val>Sample+Key</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>1cd5b86c-50e7-11df-973d-17ec13bf30a1</val>
+</keyval>
+<keyval type="vector">
+<key>ProductDescription</key>
+<val>Key+to+unblinding+the+analysis+file%3A+patient+ID+linked+to+Validation+ID.%0A++</val>
+<val>Key+to+unblinding+the+analysis+file%3A+patient+ID+linked+to+Validation+ID.%0A++</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>bidc</val>
+</keyval>
+<keyval type="vector">
+<key>DateProductFrozen</key>
+<val>N%2FA</val>
+<val>N%2FA</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>sample+key+-+EDRN+samples.xls</val>
+</keyval>
+<keyval type="vector">
+<key>LabAnalyticMethods</key>
+<val>N%2FA</val>
+<val>N%2FA</val>
+</keyval>
+<keyval type="vector">
+<key>DataStage</key>
+<val>Processed</val>
+<val>Processed</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>sample+key+-+EDRN+samples.xls</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>BethIsraelSandaTSPPreval</val>
+</keyval>
+<keyval type="vector">
+<key>ProductFunction</key>
+<val>Key+to+unblinding+the+analysis+file%3A+patient+ID+linked+to+Validation+ID.%0A++</val>
+<val>Key+to+unblinding+the+analysis+file%3A+patient+ID+linked+to+Validation+ID.%0A++</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fprostatepreval%2Fsamplekey</val>
+</keyval>
+<keyval type="vector">
+<key>InstrumentDetails</key>
+<val>N%2FA</val>
+<val>N%2FA</val>
+</keyval>
+<keyval type="vector">
+<key>MethodDetails</key>
+<val>60+controls+and+63+cases+%28half+with+Gleaason+score+less+than+7+and+half+with+Gleason+score+greater+than+or+equal+to+7%29+%0A++were+obtained+from+five+participating+centers.+TSP+came+in+both+normalized+and+unnormalized+format.++Each+format+had+%0A++duplicate+measures+and+the+average+was+taken.%0A++</val>
+<val>60+controls+and+63+cases+%28half+with+Gleaason+score+less+than+7+and+half+with+Gleason+score+greater+than+or+equal+to+7%29+%0A++were+obtained+from+five+participating+centers.+TSP+came+in+both+normalized+and+unnormalized+format.++Each+format+had+%0A++duplicate+measures+and+the+average+was+taken.%0A++</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2010-04-25T20%3A52%3A19.584-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenType</key>
+<val>Serum</val>
+<val>Serum</val>
+</keyval>
+</cas:metadata>

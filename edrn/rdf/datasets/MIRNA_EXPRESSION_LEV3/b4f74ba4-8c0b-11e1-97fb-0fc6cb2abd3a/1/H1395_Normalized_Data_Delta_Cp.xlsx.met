@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>SPECIMEN_SPECOLL_SOURCE_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_STUDY_PROTOCOL_CCDATACOMMENT_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>sampleId</key>
+<val>H1395+Cell+Line</val>
+</keyval>
+<keyval type="vector">
+<key>collectedId</key>
+<val>H1395+Cell+Line</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>H1395_Normalized_Data_Delta_Cp.xlsx</val>
+</keyval>
+<keyval type="vector">
+<key>collectedDate</key>
+<val>0001-01-01</val>
+</keyval>
+<keyval type="vector">
+<key>LabAnalyticMethods</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>STUDY_PROTOCOL_SPECIMEN-ID-SITE_TEXT</key>
+<val>H1395+Cell+Line</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_EGFRRESULT_CODE</key>
+<val>1.000000</val>
+</keyval>
+<keyval type="vector">
+<key>DataStage</key>
+<val>processed</val>
+</keyval>
+<keyval type="vector">
+<key>PRESENTATION_DATA</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_KRASRESULT_CODE</key>
+<val>1.000000</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_AGE-COLLECTED_VALUE</key>
+<val>56.000000</val>
+</keyval>
+<keyval type="vector">
+<key>InstrumentDetails</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_FREEZE-THAW-VALUE</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2012-04-21T16%3A42%3A50.647-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_TUMORNORMAL_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_STUDY_PROTOCOL_COMMENTS_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>b4f74ba4-8c0b-11e1-97fb-0fc6cb2abd3a</val>
+</keyval>
+<keyval type="vector">
+<key>ProductTitle</key>
+<val>Differential_expression.xlsx</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_STORED_CODE</key>
+<val>45.000000</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_KRASRESULT_TEXT</key>
+<val>Wild+Type</val>
+</keyval>
+<keyval type="vector">
+<key>ProductDescription</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>FHCRC</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_EGFRRESULT_TEXT</key>
+<val>Wild+Type</val>
+</keyval>
+<keyval type="vector">
+<key>banked</key>
+<val>true</val>
+</keyval>
+<keyval type="vector">
+<key>DateProductFrozen</key>
+<val>Aug+20%2C+2010</val>
+</keyval>
+<keyval type="vector">
+<key>subjectId</key>
+<val>282H1395</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>H1395_Normalized_Data_Delta_Cp.xlsx</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_SPECOLL_LABEL2_TEXT</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>MIRNA_EXPRESSION_LEV3</val>
+</keyval>
+<keyval type="vector">
+<key>ProductFunction</key>
+<val>Lists+miRNA+differential+expression+as+explained+in+Methods</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_COLLECTION_DATE</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>STUDY_SITE_SPECIMENREC_ID</key>
+<val>86.000000</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fcanary%2FMIRNA_EXPRESSION_LEV3%2F282H1395</val>
+</keyval>
+<keyval type="vector">
+<key>MethodDetails</key>
+<val>We+compared+normalized+Cp+values+%28from+%22miRNA_normalized_with_geomean.txt%22%29+between+different+categories+%28listed+below%29+for+each+miRNA+using+t-test.+Adjusted+p-values+%28qvalues%29+were+also+calculated.+The+following+categories+were+compared%3A+%0A%0AIn+Entire+Set+of+Cell+Lines%0A-+Never+and+light+smokers+%28n%3D20%29+vs.+heavy+smokers+%28n%3D20%29%0A-EGFR+mutant+%28n%3D10%29+vs.+EGFR+wild-type+%28n%3D30%29%0A-+LKB1+mutant+%28n%3D15%29+vs.+LKB1+wild-type+%28n%3D25%29%0A-+KRAS+mutant+%28n%3D14%29+vs.+KRAS+wild-type+%28n%3D26%29%0A-+TP53+mutant+%28n%3D31%29+vs.+TP53+wild-type+%28n%3D6%29%0A-+Gender+male+vs.+female%0A%0AWithin+never%2Flight+smoker+group%0A-+EGFR+mutant+%28n%3D10%29+vs.+EGFR+wild-type+%28n%3D10%29%0A-+KRAS+mutant+%28n%3D4%29+vs.+KRAS+wild-type+%28n%3D16%29%0A-+LKB1+mutant+%28n%3D10%29+vs.+LKB1+wild-type+%28n%3D10%29%0A-+TP53+not+analyzed+as+mutation+data+available+on+too+few+samples%0A%0AWithin+heavy+smoker+group%0A-+EGFR+no+mutations+so+could+not+analyze%0A-+KRAS+mutant+%28n%3D10%29+vs.+KRAS+wild-type+%28n%3D10%29%0A-+LKB1+mutant+%28n%3D10%29+vs.+LKB1+wild-type+%28n%3D10%29%0A-+TP53+not+analyzed++as+mutation+data+available+on+too+few+samples</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenType</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_TISSUE_TUMORNORMAL_CODE</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_METADATA_MIRNA_EXPRESSION_LEV3</key>
+<val>https%3A%2F%2Fcanary.hosting.genologics.com%2Fbiochronicle-fileupload-s3%2Fs3%2Fmanual-uploads%2F2011-04-07%2FeCASMetadataWorksheetLevel3_for_KG.doc</val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_PROCESS_TIMECOLLECTTOFINAL_CODE</key>
+<val></val>
+</keyval>
+<keyval type="vector">
+<key>SPECIMEN_STORED_CODE_TEXT</key>
+<val>Cell+Line</val>
+</keyval>
+</cas:metadata>

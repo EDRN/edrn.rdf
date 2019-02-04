@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>ProductTitle</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>2921ee4c-d81f-11e0-aeb0-cdb8cf82a2cf</val>
+</keyval>
+<keyval type="vector">
+<key>ProductDescription</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>jhmi</val>
+</keyval>
+<keyval type="vector">
+<key>DateProductFrozen</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>563203-30.tif</val>
+</keyval>
+<keyval type="vector">
+<key>LabAnalyticMethods</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>DataStage</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>563203-30.tif</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>WHIColonJohnsHopkinsMedicalInstitutionChan</val>
+</keyval>
+<keyval type="vector">
+<key>ProductFunction</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Farchive%2Fjhmi%2F110906%2FColon%2FUnknown</val>
+</keyval>
+<keyval type="vector">
+<key>InstrumentDetails</key>
+<val>Unknown</val>
+</keyval>
+<keyval type="vector">
+<key>MethodDetails</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2011-09-05T17%3A28%3A36.680-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenType</key>
+<val>Plasma</val>
+</keyval>
+</cas:metadata>

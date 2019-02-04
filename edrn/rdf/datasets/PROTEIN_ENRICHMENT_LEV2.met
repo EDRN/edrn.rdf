@@ -1,0 +1,114 @@
+<type id="urn:edrn:PROTEIN_ENRICHMENT_LEV2" name="PROTEIN_ENRICHMENT_LEV2">
+  <repository path="file://[EDRN_REPO_HOME]/archive"/>
+  <versioner class="gov.nasa.jpl.edrn.ecas.versioning.EDRNProductVersioner"/>
+  <description>  </description>
+  <metExtractors>
+    <extractor class="org.apache.oodt.cas.filemgr.metadata.extractors.CoreMetExtractor">
+    <configuration>
+      <!-- you can optionally include the envReplace tag to turn on/off environment var replacement -->
+      <property name="nsAware" value="true"  />
+      <property name="elementNs" value="CAS" />
+      <property name="elements"  value="ProductType,ProductReceivedTime,ProductName,ProductId" />
+    </configuration>
+    </extractor>
+  </metExtractors>
+
+  <metadata>
+    <keyval>
+      <key>ProtocolID</key>
+      <val>282</val>
+    </keyval>
+    <keyval>
+      <key>ProtocolName</key>
+      <val>282</val>
+    </keyval>
+    <keyval>
+      <key>DatasetDescription</key>
+      <val></val>
+    </keyval>
+    <keyval>
+      <key>DataSetName</key>
+      <val>PROTEIN_ENRICHMENT_LEV2</val>
+    </keyval>
+    <keyval>
+      <key>DatasetId</key>
+      <val>urn:edrn:PROTEIN_ENRICHMENT_LEV2</val>
+    </keyval>
+    <keyval>
+      <key>DateDatasetFrozen</key>
+      <val></val>
+    </keyval>
+    <keyval>
+      <key>LeadPI</key>
+      <val>Samir Hanash</val>
+    </keyval>
+    <keyval>
+      <key>SiteName</key>
+      <val>151</val>
+    </keyval>
+    <keyval>
+      <key>SiteID</key>
+      <val>151</val>
+    </keyval>
+    <keyval>
+      <key>DataCustodian</key>
+      <val>Samir Hanash</val>
+      <val>Ayumu Taguchi</val>
+    </keyval>
+    <keyval>
+      <key>DataCustodianEmail</key>
+      <val>shanash@fhcrc.org</val>
+      <val>ataguchi@fhcrc.org</val>
+    </keyval>
+    <keyval>
+      <key>OrganSite</key>
+      <val>Lung</val>
+    </keyval>
+    <keyval>
+      <key>CollaborativeGroup</key>
+      <val>Lung and Upper Aerodigestive</val>
+    </keyval>
+    <keyval>
+      <key>PubMedID</key>
+      <val></val>
+    </keyval>
+    <keyval>
+      <key>QAState</key>
+      <val>Under Review</val>
+    </keyval>
+    <keyval>
+      <key>AccessGrantedTo</key>
+      <val>Lung and Upper Aerodigestive</val>
+      <val>Super User</val>
+    </keyval>
+    <keyval>
+      <key>MethodDetails</key>
+      <val>Cell culture
+The lung cancer cells are grown in lysine free media supplemented with 13C6 lysine for 7 passage to insure &gt;90 percent incorporation of isotopic labeled amino acid. 
+
+Secreted or Shed protein
+Media was changed to media with 0.1percent dialyzed FBS and incubated for 48 hours prior to collecting the conditioned media. Cells and debris are removed from media by centrifugation at 5000xg and filtration through a 0.22um filter. The conditioned media is then concentrated with Amicon 3K centrifugal filters. 
+
+Cell surface and membrane proteins
+Cell surface proteins from 2.0x108 cells will be biotinylated with EZ-Link sulfo-NHS-LC-biotin, solubilized in solution containing Igepal CA-630 with cell disruption by sonication followed by centrifugation at 20000xg. Biotinylated proteins are chromatographically isolated by affinity chromatography using 1ml of Ultralink Immobilized NeutrAvidin. Proteins bound to the column are recovered by reduction of the biotinylation reagent with 5ml of a solution containing 65umol of DTT and 1percent octyl-glucoside.
+
+Total cell extracts
+Total cell extracts are obtained by sonication of 2.0x107cells in 1ml of PBS containing 1percent octyl-glucoside and protease inhibitors followed by sonication and centrifugation at 20000xg.  
+
+Conditioned media, cell surface proteins and total cell extract were fractionated by reverse-phase chromatography after reduction and alkylation with iodoacetamide. Each one of the reverse-phase fractions were individually digested in-solution digestion with trypsin and grouped into 24 pools according to chromatographic features. Pools are individually analyzed by LC-MS/MS in a LTQ-ORBITRAP mass spectrometer.
+
+The acquired mass spectrometric data is analyzed by the Computational Proteomics Analysis System (CPAS) analysis pipeline which provides peptide and protein identification. The spectral counting method is used to estimate protein enrichment for each compartment</val>
+    </keyval>
+    <keyval>
+      <key>AnalyticResults</key>
+      <val></val>
+    </keyval>
+    <keyval>
+      <key>DataDisclaimer</key>
+      <val>Data and information released from the National Cancer Institute (NCI) are provided on an &quot;AS IS&quot; basis, without warranty of any kind, including without limitation the warranties of merchantability, fitness for a particular purpose and non-infringement. Availability of this data and information does not constitute scientific publication. Data and/or information may contain errors or be incomplete.
+        NCI and its employees make no representation or warranty, express or implied, including without limitation any warranties of merchantability or fitness for a particular purpose or warranties as to the identity or ownership of data or information, the quality, accuracy or completeness of data or information, or that the use of such data or information will not infringe any patent, intellectual property or proprietary rights of any party.
+        NCI shall not be liable for any claim for any loss, harm, illness or other damage or injury arising from access to or use of data or information, including without limitation any direct, indirect, incidental, exemplary, special or consequential damages, even if advised of the possibility of such damages.
+        In accordance with scientific standards, appropriate acknowledgment of NCI should be made in any publications or other disclosures concerning data or information made available by NCI.</val>
+    </keyval>
+  </metadata>
+</type>

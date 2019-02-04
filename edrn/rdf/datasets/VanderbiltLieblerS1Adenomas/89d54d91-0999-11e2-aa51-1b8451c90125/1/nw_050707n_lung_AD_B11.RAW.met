@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>ProductTitle</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>89d54d91-0999-11e2-aa51-1b8451c90125</val>
+</keyval>
+<keyval type="vector">
+<key>ProductDescription</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>vand</val>
+</keyval>
+<keyval type="vector">
+<key>DateProductFrozen</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>nw_050707n_lung_AD_B11.RAW</val>
+</keyval>
+<keyval type="vector">
+<key>LabAnalyticMethods</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>DataStage</key>
+<val>unprocessed</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>nw_050707n_lung_AD_B11.RAW</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>VanderbiltLieblerS1Adenomas</val>
+</keyval>
+<keyval type="vector">
+<key>ProductFunction</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Farchive%2Fvand%2F120928%2Flung%2FThermo+LTQ-Orbitran</val>
+</keyval>
+<keyval type="vector">
+<key>InstrumentDetails</key>
+<val>Thermo+LTQ-Orbitran</val>
+</keyval>
+<keyval type="vector">
+<key>MethodDetails</key>
+<val>TBD</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2012-09-28T11%3A23%3A02.164-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenType</key>
+<val>Tumor</val>
+</keyval>
+</cas:metadata>

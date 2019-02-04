@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>SpecimenStoredCode</key>
+<val>10.000000</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductId</key>
+<val>1d90e86f-d903-11e0-b3a9-d326bd24c4a7</val>
+</keyval>
+<keyval type="vector">
+<key>SubjectId</key>
+<val>05L7</val>
+</keyval>
+<keyval type="vector">
+<key>CollectedDate</key>
+<val>0001-01-01</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>UTSW</val>
+</keyval>
+<keyval type="vector">
+<key>StudySiteSpecimenRecId</key>
+<val>74.000000</val>
+</keyval>
+<keyval type="vector">
+<key>SampleId</key>
+<val>T5+RNA+Batch1</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenAgeCollectedValue</key>
+<val>72.000000</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenTissueTumorNormalText</key>
+<val>Tumor</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>UTSW%2BTumor%2BBatch1%2BIllumina%2BExpression%2Bprocessed.xlsx</val>
+</keyval>
+<keyval type="vector">
+<key>StudyProtocolSpecimenIdSiteText</key>
+<val>T5+RNA+Batch1</val>
+</keyval>
+<keyval type="vector">
+<key>Banked</key>
+<val>true</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductName</key>
+<val>05L7__UTSW+Tumor+Batch1+Illumina+Expression+processed</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenSpecollLabel2Text</key>
+<val>Batch1</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>UTSW_GeneExpressionAnalyzedData</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Fcanary%2F06.18.2011%2FUTSW_GeneExpressionAnalyzedData%2F05L7</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenCollectionDate</key>
+<val>2005-04-07</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenStoredCodeText</key>
+<val>RNA</val>
+</keyval>
+<keyval type="vector">
+<key>CAS.ProductReceivedTime</key>
+<val>2011-09-06T20%3A40%3A22.529-07%3A00</val>
+</keyval>
+<keyval type="vector">
+<key>CollectedId</key>
+<val>T5+RNA+Batch1</val>
+</keyval>
+</cas:metadata>

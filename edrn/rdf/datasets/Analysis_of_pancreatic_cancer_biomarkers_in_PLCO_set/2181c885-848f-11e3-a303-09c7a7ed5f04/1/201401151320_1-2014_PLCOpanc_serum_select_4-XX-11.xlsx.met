@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cas:metadata xmlns:cas="http://oodt.jpl.nasa.gov/1.0/cas">
+<keyval type="vector">
+<key>ProductTitle</key>
+<val>Early+Biomarkers+of+Pancreatic+Cancer</val>
+</keyval>
+<keyval type="vector">
+<key>ProductDescription</key>
+<val>Early+Biomarkers+of+Pancreatic+Cancer</val>
+</keyval>
+<keyval type="vector">
+<key>SiteShortName</key>
+<val>UPMC</val>
+</keyval>
+<keyval type="vector">
+<key>DateProductFrozen</key>
+<val>Unknown</val>
+</keyval>
+<keyval type="vector">
+<key>Filename</key>
+<val>201401151320_1-2014_PLCOpanc_serum_select_4-XX-11.xlsx</val>
+</keyval>
+<keyval type="vector">
+<key>LabAnalyticMethods</key>
+<val>See+dataset+metadata</val>
+</keyval>
+<keyval type="vector">
+<key>DataStage</key>
+<val>Unprocessed</val>
+</keyval>
+<keyval type="vector">
+<key>ProductType</key>
+<val>Analysis_of_pancreatic_cancer_biomarkers_in_PLCO_set</val>
+</keyval>
+<keyval type="vector">
+<key>ProductFunction</key>
+<val>Analysis</val>
+</keyval>
+<keyval type="vector">
+<key>FileLocation</key>
+<val>%2Fdata%2Fingest%2Falokshin%2FAnalysis_of_pancreatic_cancer_biomarkers_in_PLCO_set</val>
+</keyval>
+<keyval type="vector">
+<key>InstrumentDetails</key>
+<val>Lumiex+100+analyzer%2C+Software%3A+Bio-Plex+Manager+5.0</val>
+</keyval>
+<keyval type="vector">
+<key>SpecimenType</key>
+<val>Serum</val>
+</keyval>
+<keyval type="vector">
+<key>MethodDetails</key>
+<val>See+dataset+metadata</val>
+</keyval>
+</cas:metadata>
