@@ -10,7 +10,7 @@ issue tracker at https://oodt.jpl.nasa.gov/jira/browse/CA.
 --------------
 
 • This release provides an RDF format of LabCAS data from Solr
-
+• CA-1613: Update Labcas science data RDF to use DataSetName
 
 1.3.6 — Involved Logs
 ---------------------
