@@ -56,7 +56,7 @@ class IDMCCCommitteeRDFGenerator(IRDFGenerator):
     )
     verificationNum = schema.TextLine(
         title=_(u'Verification Number String'),
-        description=_(u'Inane, vapid, and worthless parameter to pass to the operation. A default will be used if unset.'),
+        description=_(u'Vapid parameter to pass to the operation. A default will be used if unset.'),
         required=False,
     )
     typeURI = schema.TextLine(

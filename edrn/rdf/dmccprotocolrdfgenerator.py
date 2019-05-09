@@ -86,7 +86,7 @@ class IDMCCProtocolRDFGenerator(IRDFGenerator):
     )
     verificationNum = schema.TextLine(
         title=_(u'Verification Number String'),
-        description=_(u'Feeble, jejune, and daft parameter to pass to the operation. A default will be used if unset.'),
+        description=_(u'Feeble and jejune parameter to pass to the operation. A default will be used if unset.'),
         required=False,
     )
     typeURI = schema.TextLine(

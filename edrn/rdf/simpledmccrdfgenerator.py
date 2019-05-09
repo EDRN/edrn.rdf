@@ -21,7 +21,10 @@ import rdflib, logging
 
 _logger = logging.getLogger(__name__)
 
-DEFAULT_VERIFICATION_NUM = u'0' * 40960 # Why, why, why? DMCC, you so stupid!
+DEFAULT_VERIFICATION_NUM = u'0' * 40960 # Why, why, why? DMCC, this makes no sense unless you copied a sample
+# SOAP app from a book or a website that did credit card number verification and decided to make that the basis
+# for all your SOAP apps and I bet that's exactly what you did.
+
 
 class ISimpleDMCCRDFGenerator(IRDFGenerator):
     '''Simple DMCC RDF Generator.'''
@@ -38,7 +41,7 @@ class ISimpleDMCCRDFGenerator(IRDFGenerator):
     )
     verificationNum = schema.TextLine(
         title=_(u'Verification Number String'),
-        description=_(u'Stupid, pointless, and needless parameter to pass to the operation. A default will be used if unset.'),
+        description=_(u'Utterly pointless and needless parameter to pass to the operation. A default will be used if unset.'),
         required=False,
     )
     uriPrefix = schema.TextLine(

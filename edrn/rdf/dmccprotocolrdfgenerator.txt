@@ -2,7 +2,7 @@ DMCC Protocol RDF Generator
 ===========================
 
 The various SOAP web services that the DMCC provides to describe EDRN's
-protocols are some of the most complicated of all of their bizarrely inept
+protocols are some of the most complicated of all of their 
 offerings.  Aside from using the same, strange,
 quasi-XML-but-otherwise-non-standard-from-anything-in-the-world text format,
 they also encode values-with-values, using a technique they call "slots".

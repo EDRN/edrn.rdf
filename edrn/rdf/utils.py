@@ -9,8 +9,9 @@ EDRN RDF Service: utilities.
 from zope.interface import implements
 import urlparse, re
 
- # Why, why, why? DMCC, you so stupid!
+ # Why, why, why? DMCC, this is utterly pointless.
 DEFAULT_VERIFICATION_NUM = u'0' * 40960
+
 
 # URL schemes we consider "accessible"
 ACCESSIBLE_SCHEMES = frozenset((
