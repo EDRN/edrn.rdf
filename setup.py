@@ -25,13 +25,13 @@ _entryPoints     = {
 }
 _requirements = [
     'collective.autopermission',
-    'mysolr',
+    'pysolr',
     'Pillow',
     'plone.app.dexterity [grok, relations]',
     'plone.app.relationfield',
     'plone.behavior',
     'Products.CMFPlone',
-    'rdflib',
+    'rdflib==4.2.2',
     'setuptools',
     'z3c.relationfield',
     'z3c.suds',
