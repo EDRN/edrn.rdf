@@ -71,7 +71,7 @@ _edrnlabcasPredicates = {
     u'AccessGrantedTo': 'AccessGrantedToPredicateURI',
     u'QAState': 'QAStatePredicateURI',
     u'Organ': 'organPredicateURI',
-    u'site': 'sitePredicateURI' 
+    u'site': 'sitePredicateURI'
 }
 
 _graph_obj_mapping = {
@@ -79,6 +79,7 @@ _graph_obj_mapping = {
     u'InstitutionId': ['sitePredicateURI', 'http://edrn.nci.nih.gov/data/sites/'],
     u'Organ': ['organPredicateURI', 'http://edrn.nci.nih.gov/data/body-systems/']
 }
+
 
 class IEDRNLabcasRDFGenerator(IRDFGenerator):
     '''DMCC Committee RDF Generator.'''
@@ -99,6 +100,7 @@ class IEDRNLabcasRDFGenerator(IRDFGenerator):
         required=True,
     )
 
+
 class EDRNLabcasGraphGenerator(grok.Adapter):
     '''A graph generator that produces statements about EDRN's committees using the DMCC's fatuous web service.'''
     grok.provides(IGraphGenerator)
@@ -115,32 +117,32 @@ class EDRNLabcasGraphGenerator(grok.Adapter):
             if 'sourceurl' not in obj:
                 obj['sourceurl'] = context.uriPrefix + obj.get("id")
             results[obj.get("id")] = obj
-        graph.bind('edrn',ecasURIPrefix)
-        graph.bind('x',edrnURIPrefix)
+        graph.bind('edrn', ecasURIPrefix)
+        graph.bind('x', edrnURIPrefix)
         # Get the mutations
         for datasetid in results.keys():
-            datasetid_friendly = datasetid.replace("(","_").replace(")","_").replace("+","_").replace(",","_").replace(".","").replace("'","").replace('"',"")
+            datasetid_friendly = datasetid.replace("(", "_").replace(")", "_").replace("+", "_").replace(",", "_").replace(".", "").replace("'", "").replace('"', "")
             subjectURI = URIRef(results[datasetid]['sourceurl'])
-            #subjectURI = URIRef(results[datasetid]['sourceurl'])
-            graph.add((subjectURI, rdflib.RDF.type, URIRef("{}{}".format(context.typeURI,datasetid_friendly))))
+            # subjectURI = URIRef(results[datasetid]['sourceurl'])
+            graph.add((subjectURI, rdflib.RDF.type, URIRef("{}{}".format(context.typeURI, datasetid_friendly))))
             for key in results[datasetid].keys():
                 if key not in _edrnlabcasPredicates.keys():
                     continue
                 predicateURI = URIRef(getattr(context, _edrnlabcasPredicates[key]))
                 try:
-                  if isinstance(results[datasetid][key],list):
-                      graph.add((subjectURI, predicateURI, Literal(results[datasetid][key][0].strip())))
-                  elif isinstance(results[datasetid][key],six.string_types):
-                      graph.add((subjectURI, predicateURI, Literal(results[datasetid][key].strip())))
-                  else:
-                      raise Exception("Not sure what type of data this entry is, please adjust code to ingest this type of data: Datasetid: {}, Key {}, Val {}".format(datasetid,key,str(results[datasetid][key])))
-                  if key in _graph_obj_mapping.keys():
-                      predicateURI = URIRef(getattr(context, _graph_obj_mapping[key][0]))
-                      #Watch out for text that isn't equivalent to protocols in labcas
-                      if "No Associated Protocol" not in results[datasetid][key][0].strip():
-                          for item_split in results[datasetid][key][0].strip().split(","):
-                              graph.add((subjectURI, predicateURI, URIRef("{}{}".format(_graph_obj_mapping[key][1],item_split.strip()))))
+                    if isinstance(results[datasetid][key], list):
+                        graph.add((subjectURI, predicateURI, Literal(results[datasetid][key][0].strip())))
+                    elif isinstance(results[datasetid][key], six.string_types):
+                        graph.add((subjectURI, predicateURI, Literal(results[datasetid][key].strip())))
+                    else:
+                        raise Exception("Not sure what type of data this entry is, please adjust code to ingest this type of data: Datasetid: {}, Key {}, Val {}".format(datasetid, key, str(results[datasetid][key])))
+                    if key in _graph_obj_mapping.keys():
+                        predicateURI = URIRef(getattr(context, _graph_obj_mapping[key][0]))
+                        # Watch out for text that isn't equivalent to protocols in labcas
+                        if "No Associated Protocol" not in results[datasetid][key][0].strip():
+                            for item_split in results[datasetid][key][0].strip().split(","):
+                                graph.add((subjectURI, predicateURI, URIRef("{}{}".format(_graph_obj_mapping[key][1], item_split.strip()))))
                 except Exception as e:
-                  print str(e)
+                    print str(e)
         # C'est tout.
         return graph
