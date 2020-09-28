@@ -87,38 +87,44 @@ class IEDRNLabcasRDFGenerator(IRDFGenerator):
         description=_(u'The Uniform Resource Locator to the DMCC SOAP web service.'),
         required=True,
         constraint=validateAccessibleURL,
+        default=u'https://edrn-labcas.jpl.nasa.gov/data-access-api/collections'
     )
     typeURI = schema.TextLine(
         title=_(u'Type URI'),
         description=_(u'Uniform Resource Identifier naming the type of edrnlabcas objects described by this generator.'),
         required=True,
+        default=u'urn:edrn:'
     )
     uriPrefix = schema.TextLine(
         title=_(u'URI Prefix'),
         description=_(u'The Uniform Resource Identifier prepended to all edrnlabcas described by this generator.'),
         required=True,
+        default=u'https://edrn-labcas.jpl.nasa.gov/labcas-ui/c/index.html?collection_id='
     )
     username = schema.TextLine(
         title=_(u'Username'),
-        description=_(u'Username to authenticate with'),
+        description=_(u'Username to authenticate with; use a service account if available'),
         required=True,
+        default=u'service'
     )
     password = schema.TextLine(
         title=_(u'Password'),
-        description=_(u'Password to confirm the identity of the username.'),
+        description=_(u'Password to confirm the identity of the username; this will be visible!'),
         required=True,
     )
 
 
 class EDRNLabcasGraphGenerator(grok.Adapter):
     '''A graph generator that produces statements about EDRN's science data.'''
+
     grok.provides(IGraphGenerator)
     grok.context(IEDRNLabcasRDFGenerator)
+
     def generateGraph(self):
         graph = rdflib.Graph()
         context = aq_inner(self.context)
         solr_conn = Solr(context.webServiceURL, auth=(context.username, context.password))
-        solr_response = solr_conn.search('*:*')
+        solr_response = solr_conn.search('*:*', rows=99999)
         results = {}
         for obj in solr_response:
             if 'sourceurl' not in obj:
@@ -126,7 +132,8 @@ class EDRNLabcasGraphGenerator(grok.Adapter):
             results[obj.get("id")] = obj
         graph.bind('edrn', ecasURIPrefix)
         graph.bind('x', edrnURIPrefix)
-        # Get the datasets
+
+        # Go through each dataset
         for datasetid in results.keys():
             datasetid_friendly = datasetid.replace("(", "_").replace(")", "_").replace("+", "_").replace(",", "_").replace(".", "").replace("'", "").replace('"', "")
             subjectURI = URIRef(results[datasetid]['sourceurl'])
